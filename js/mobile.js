@@ -109,10 +109,6 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') { const k = Object.keys(menus).find(isOpen); if (k) { e.preventDefault(); close(k); menus[k].toggle.focus(); } }
   });
-  // If the Commerce bar scrolls out of view, its menu goes with it
-  window.addEventListener('scroll', () => {
-    if (isOpen('commerce') && menus.commerce.toggle.getBoundingClientRect().bottom <= 0) close('commerce');
-  }, { passive: true });
   const resizeAll = () => Object.values(menus).forEach((m) => size(m.el));
   window.addEventListener('resize', resizeAll);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(resizeAll);
