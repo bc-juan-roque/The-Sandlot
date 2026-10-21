@@ -1,6 +1,6 @@
 # Commerce navigation prototype
 
-Vanilla HTML and CSS, plus about 100 lines of plain JavaScript for open/close behavior. No build step.
+Vanilla HTML and CSS, plus a small amount of plain JavaScript for menus and routing. No build step.
 
 ## Run it
 
@@ -37,7 +37,17 @@ the matching bar: the Commerce bar alone, or the Commerce bar plus that Solution
   sits at the top of the page and scrolls away; the Solution bar stays pinned.
 - Menu links: on hover the text goes medium weight, nudges 4px right, and an arrow fades in.
   Product names (BigCommerce, Feedonomics) show only the arrow.
-- Nav items reveal a Surface/Secondary fill on hover and while their menu is open.
+- Nav items reveal a Surface/Secondary fill on hover and while their menu is open, with 4px between items.
+- Commerce bar menus open under their own nav item. On BigCommerce and Feedonomics pages the
+  Solution bar's first item lines up with the Commerce bar's first item.
+- Focus: hovering (or tabbing to) any menu item quickly dims the other items, then they fade back
+  in after a short pause. A product's header stays lit while one of its features is hovered, and
+  the group titles (Industries, Teams) dim like items. The section labels (Products, Capabilities)
+  stay at full strength. Tune `--focus-dim`, `--focus-return-delay` and `--focus-return-time`.
+- Cards (Surface, Integrations, the AI Labs strip) are one big link: the whole card is clickable,
+  tints on hover, and gets a single focus outline. The strip's duplicate "Learn more" is skipped
+  by keyboard. The Developers and Build blocks hold several links, so they are not whole-card links.
+- Menus don't shift on hover: each link reserves its medium-weight width up front (`js/nav.js`).
 
 ## Files
 
@@ -49,5 +59,6 @@ the matching bar: the Commerce bar alone, or the Commerce bar plus that Solution
 ## Motion
 
 All timing and easing live as variables at the top of `css/styles.css`
-(`--ease`, `--ease-out`, `--ease-soft`, `--t-fill`, `--t-menu`, `--t-scrim`).
+(`--ease`, `--ease-out`, `--ease-soft`, `--t-fill`, `--t-menu`, `--t-scrim`), plus the
+focus timings above. Logo width and the logo-to-nav gap are `--logo-w` and `--nav-gap`.
 `prefers-reduced-motion` turns animation off.
