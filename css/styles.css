@@ -1,0 +1,632 @@
+/* ==========================================================================
+   Commerce navigation prototype
+   Tokens come from the Multi-Brand [DS] library, "Brand" collection, BC mode.
+   ========================================================================== */
+
+:root {
+  --logo-w: 163px;
+  --nav-gap: 40px;
+  /* Type */
+  --font: "Host Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --type-m: 16px;            /* Type/Font Size/Type M  (main nav) */
+  --type-s: 14px;            /* Type/Font Size/Type S  (menus, sub nav) */
+  --lh-m: 22.4px;
+  --lh-s: 19.6px;
+  --w-regular: 400;
+  --w-medium: 500;
+
+  /* Color */
+  --text: #000;                 /* Type/Color/Primary */
+  --text-tertiary: #667085;     /* Type/Color/Tertiary */
+  --text-inverse: #fff;         /* Type/Color/Inverse */
+  --surface: #fff;              /* Surface/Base */
+  --surface-2: #f2f4f7;         /* Surface/Secondary */
+  --surface-inverse: #000;      /* Surface/Inverse */
+  --border: #d0d5dd;           /* Border/UI/Border 200 */
+  --border-strong: #000;        /* Border/UI/Border Black */
+
+  /* Radius */
+  --r-sm: 2px;                  /* button */
+  --r-md: 8px;                  /* nav item fill */
+  --r-lg: 12px;                 /* icon tile */
+  --r-xl: 16px;                 /* menu panel, cards */
+
+  /* Layout */
+  --gutter: 32px;
+  --bar-h: 72px;
+  --sub-h: 53px;
+
+  /* Motion: unhurried, eased-out. Same curve family Lattice uses. */
+  --ease: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.24, 0.64, 0.32, 1);
+  --t-fill: 0.34s;
+  --t-menu: 0.5s;
+  --t-scrim: 0.5s;
+
+  /* Wireframe page (matches Josh's prototype) */
+  --wf: #d9d9de;
+  --wf-light: #f1f1f3;
+  --wf-dark: #2a2a2e;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: auto; }
+
+body {
+  margin: 0;
+  min-width: 1100px;
+  font-family: var(--font);
+  font-size: var(--type-s);
+  line-height: var(--lh-s);
+  font-weight: var(--w-regular);
+  color: var(--text);
+  background: var(--surface);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; margin: 0; padding: 0; }
+p { margin: 0; }
+button { font: inherit; color: inherit; }
+img { display: block; }
+
+:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+
+/* ==========================================================================
+   Scrim
+   ========================================================================== */
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t-scrim) var(--ease);
+}
+body.menu-open .scrim { opacity: 1; pointer-events: auto; }
+
+/* ==========================================================================
+   Bars
+   Commerce bar: sticky on Commerce pages, scrolls away on BigCommerce and
+   Feedonomics pages. The product (Solution) bar is always sticky.
+   ========================================================================== */
+.commerce-bar {
+  position: relative;
+  z-index: 70;
+  background: var(--surface);
+}
+body[data-page="commerce"] .commerce-bar { position: sticky; top: 0; }
+
+.bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: var(--bar-h);
+  padding: 0 var(--gutter);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  font-size: var(--type-m);
+  line-height: var(--lh-m);
+}
+.logo { display: inline-flex; align-items: center; }
+.logo img { height: 24px; width: auto; }
+
+.bar__right { display: contents; }
+/* Nav items sit next to the logo; the button stays on the right */
+.bar__right > .nav { margin-left: var(--nav-gap); }
+.bar__right > .btn { margin-left: auto; }
+/* 4px between items so an active fill and a hover fill never touch */
+.nav { display: flex; align-items: center; gap: 4px; }
+
+/* Sub (Solution) bar */
+.sub-bar {
+  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 60;
+}
+body[data-page="bigcommerce"] .sub-bar[data-brand="bigcommerce"],
+body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"] {
+  display: block;
+  animation: bar-in 0.7s var(--ease-out) both;
+}
+.bar--sub {
+  height: var(--sub-h);
+  padding: 8px var(--gutter);
+  gap: 28px;
+  font-size: var(--type-s);
+  line-height: var(--lh-s);
+}
+/* The label takes the same width as the Commerce logo + gap, so the Solution bar's
+   first item starts exactly where the Commerce bar's first item does */
+.sub-bar__label {
+  flex: none;
+  width: calc(var(--logo-w) + var(--nav-gap) - 28px);
+  font-weight: var(--w-medium);
+  white-space: nowrap;
+}
+.nav--sub { align-items: center; }
+.sub-bar__right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+@keyframes bar-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   Nav items: the container fill is revealed on hover and while open
+   ========================================================================== */
+.nav-item {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 0;
+  background: none;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: inherit;
+  line-height: inherit;
+}
+.nav-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--surface-2);
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity var(--t-fill) var(--ease), transform 0.45s var(--ease-out);
+}
+.nav-item:hover::before,
+.nav-item:focus-visible::before,
+.nav-item[aria-expanded="true"]::before,
+.nav-item[data-current]::before {
+  opacity: 1;
+  transform: scale(1);
+}
+.nav-item__label {
+  transition: font-weight 0.3s var(--ease);
+}
+.nav-item[aria-expanded="true"] .nav-item__label,
+.nav-item[data-current] .nav-item__label { font-weight: var(--w-medium); }
+
+.chev {
+  width: 12px;
+  height: 12px;
+  opacity: 0.5;
+  transition: transform 0.5s var(--ease-out), opacity var(--t-fill) var(--ease);
+}
+.nav-item:hover .chev { opacity: 0.8; }
+.nav-item[aria-expanded="true"] .chev { transform: rotate(180deg); opacity: 0.8; }
+
+.nav-slot { position: relative; }
+
+/* ==========================================================================
+   Buttons (library Button, BC mode)
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  border-radius: var(--r-sm);
+  font-size: var(--type-m);
+  line-height: var(--lh-m);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+.btn--sm { padding: 8px 12px; font-size: var(--type-s); line-height: var(--lh-s); }
+
+.btn--primary { background: var(--surface-inverse); color: var(--text-inverse); }
+.btn--primary:hover { background: #1f1f1f; }
+
+.btn--secondary { border-color: var(--border-strong); color: var(--text); background: transparent; }
+.btn--secondary:hover { background: var(--surface-2); }
+
+.btn--text { padding: 0; border: 0; background: none; color: var(--text); }
+.btn--text svg {
+  width: 11px;
+  height: 11px;
+  transition: transform 0.5s var(--ease-out);
+}
+.btn--text:hover svg { transform: translateX(4px); }
+
+/* ==========================================================================
+   Menus
+   ========================================================================== */
+.menu {
+  position: absolute;
+  z-index: 80;
+  width: max-content;
+  max-width: calc(100vw - 2 * var(--gutter));
+  padding: 24px 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  font-size: var(--type-s);
+  line-height: var(--lh-s);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(var(--shift, 0px), -10px) scale(0.985);
+  transform-origin: 50% 0;
+  transition:
+    opacity 0.38s var(--ease),
+    transform var(--t-menu) var(--ease-out),
+    visibility 0s linear var(--t-menu);
+}
+.menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(var(--shift, 0px), 0) scale(1);
+  transition:
+    opacity 0.45s var(--ease),
+    transform var(--t-menu) var(--ease-out),
+    visibility 0s;
+}
+
+/* Commerce bar menus: left edge lines up with their nav item (set in nav.js), 16px under the bar */
+.menu--end { top: calc(100% + 16px); left: var(--left, 0px); }
+/* Sub bar menus: left-aligned under their trigger, 8px under the bar */
+.menu--sub { top: calc(100% + 16px); left: -10px; }
+
+.menu__cols { display: flex; gap: var(--gap, 48px); align-items: flex-start; }
+.menu__cols > * { flex: none; }
+.menu .link, .menu .btn, .menu p { white-space: nowrap; }
+
+/* Content rises in, one block after another */
+.menu.is-open .reveal {
+  animation: rise 0.7s var(--ease-out) backwards;
+  animation-delay: calc(var(--d, 0) * 70ms + 90ms);
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Labels */
+.eyebrow {
+  color: var(--text-tertiary);
+  margin-bottom: 20px;
+}
+.group__title { font-weight: var(--w-medium); margin-bottom: 16px; }
+
+.group-row { display: flex; gap: var(--gap, 48px); }
+
+/* Lists */
+.list { display: flex; flex-direction: column; gap: 12px; }
+.list--bordered { border-left: 1px solid var(--border); padding-left: 9px; }
+
+/* ----- Sub-nav links: bold + nudge right + arrow (Lattice-style) --------- */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 20px;
+  border-radius: 4px;
+}
+.link__label {
+  display: inline-block;
+  font-weight: var(--w-regular);
+  transition:
+    transform 0.55s var(--ease-out),
+    font-weight 0.4s var(--ease);
+}
+.link__label::after {
+  content: "→";
+  display: inline-block;
+  margin-left: 0.45em;
+  opacity: 0;
+  filter: blur(2px);
+  transform: translateX(-30%);
+  transition:
+    opacity 0.4s var(--ease-soft),
+    filter 0.4s var(--ease-soft),
+    transform 0.6s var(--ease-out);
+}
+.link:hover .link__label,
+.link:focus-visible .link__label {
+  font-weight: var(--w-medium);
+  transform: translateX(4px);
+}
+.link:hover .link__label::after,
+.link:focus-visible .link__label::after {
+  opacity: 0.45;
+  filter: blur(0);
+  transform: none;
+}
+.link--logo img { flex: none; transition: transform 0.55s var(--ease-out); }
+.link--logo:hover img { transform: translateX(4px); }
+
+/* ----- Focus: hovering one dropdown item quietly dims the rest ------------
+   An "item" is a link, a product header, a standalone text button, or a whole
+   card / strip (cards are one big link, so they count as one item).
+   Three timings, so it feels attentive going in and unhurried coming out:
+   1. Dimming the others:      fast, no delay
+   2. The hovered item:        brightens quickly
+   3. Everything returning:    waits a beat (also covers the gap between two
+                               items), then fades back slowly
+   Tune --focus-dim, --focus-return-delay and --focus-return-time to taste. */
+:root {
+  --focus-dim: 0.4;
+  --focus-return-delay: 0.32s;
+  --focus-return-time: 1s;
+}
+
+/* 3. Resting state: the slow, delayed return */
+.menu .link,
+.menu .product__head,
+.menu .btn--text:not([data-in-card]),
+.menu .promo,
+.menu .strip,
+.menu .group__title {
+  transition:
+    opacity var(--focus-return-time) var(--ease-soft) var(--focus-return-delay),
+    background-color 0.45s var(--ease),
+    color 0.35s var(--ease);
+}
+
+/* 1. The others dim right away */
+.menu:has(:is(.link, .product__head, .btn--text:not([data-in-card]), .promo, .strip):is(:hover, :focus-visible, :has(:focus-visible)))
+  :is(.link, .product__head, .btn--text:not([data-in-card]), .promo, .strip, .group__title):not(:is(:hover, :focus-visible, :has(:focus-visible))) {
+  opacity: var(--focus-dim);
+  transition:
+    opacity 0.45s var(--ease) 0s,
+    background-color 0.45s var(--ease),
+    color 0.35s var(--ease);
+}
+
+/* A parent stays lit while one of its own items is focused:
+   BigCommerce / Feedonomics while their features are hovered,
+   Industries / Teams while their links are hovered */
+.menu.menu.menu .product:has(:is(:hover, :focus-visible)) > .product__head,
+.menu.menu.menu .group:has(:is(:hover, :focus-visible)) > .group__title {
+  opacity: 1 !important;
+  transition: opacity 0.3s var(--ease) 0s !important;
+}
+
+/* 2. The hovered item comes up to full strength promptly */
+.menu :is(.link, .product__head, .btn--text:not([data-in-card]), .promo, .strip):is(:hover, :focus-visible, :has(:focus-visible)) {
+  transition:
+    opacity 0.3s var(--ease) 0s,
+    background-color 0.45s var(--ease),
+    color 0.35s var(--ease);
+}
+
+.tag {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--surface-2);
+  color: var(--text-tertiary);
+}
+
+/* ----- Product block (BigCommerce / Feedonomics) ------------------------- */
+.product-row { display: flex; gap: 48px; }
+.product { min-width: 0; }
+.product__head { display: flex; align-items: center; gap: 12px; }
+.tile {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-lg);
+  background: var(--surface-inverse);
+  color: var(--text-inverse);
+  transition: transform 0.6s var(--ease-out);
+}
+.tile svg { width: 20px; height: 20px; }
+.product__text { display: flex; flex-direction: column; gap: 2px; }
+/* Larger items: only the arrow appears. No weight change, no shift. */
+.product__name {
+  font-weight: var(--w-medium);
+}
+.product__name::after {
+  content: "→";
+  display: inline-block;
+  margin-left: 0.5em;
+  opacity: 0;
+  filter: blur(2px);
+  transform: translateX(-30%);
+  transition:
+    opacity 0.4s var(--ease-soft),
+    filter 0.4s var(--ease-soft),
+    transform 0.6s var(--ease-out);
+}
+.product__head:hover .product__name::after,
+.product__head:focus-visible .product__name::after {
+  opacity: 0.45;
+  filter: blur(0);
+  transform: none;
+}
+.product__tag { color: var(--text-tertiary); }
+
+/* Connector tree: a quiet line from the tile down to each feature */
+.tree { display: flex; flex-direction: column; padding-top: 18px; }
+.tree li { position: relative; padding: 7px 0 7px 44px; }
+.tree li::before,
+.tree li::after {
+  content: "";
+  position: absolute;
+  left: 19.25px;
+}
+.tree li::before {
+  top: 0;
+  bottom: 0;
+  border-left: 1.5px solid var(--border);
+}
+.tree li:first-child::before { top: -18px; }
+.tree li:last-child::before { bottom: auto; height: calc(50% - 12px); }
+.tree li:first-child:last-child::before { height: calc(50% - 12px + 18px); }
+.tree li::after {
+  top: calc(50% - 12px);
+  width: 12px;
+  height: 12px;
+  border-left: 1.5px solid var(--border);
+  border-bottom: 1.5px solid var(--border);
+  border-bottom-left-radius: 12px;
+}
+
+/* Strip along the bottom of the Solutions menu */
+.strip {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 28px;
+  padding: 14px 20px;
+  background: var(--surface-2);
+  border-radius: 14px;
+}
+.strip__text { display: flex; align-items: center; gap: 8px; }
+.strip__title { font-weight: var(--w-medium); font-size: 15px; }
+
+/* Cards inside menus */
+.card {
+  background: var(--surface-2);
+  border-radius: var(--r-xl);
+  padding: 20px;
+}
+.promo {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-self: stretch;
+  width: 260px;
+  min-height: 160px;
+  gap: 8px;
+  padding: 20px;
+  background: var(--surface-2);
+  border-radius: var(--r-xl);
+}
+.promo .btn { align-self: flex-start; }
+
+/* Whole-card links: the link's ::after stretches over the entire card */
+.promo .btn--text::after,
+.strip__title::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+.promo:hover,
+.strip:hover { background: #e8ecf2; }
+.promo:hover .btn--text svg,
+.strip:hover .btn--text svg { transform: translateX(4px); }
+.promo a:focus-visible,
+.strip a:focus-visible { outline: none; }
+.promo:has(:focus-visible),
+.strip:has(:focus-visible) { outline: 2px solid var(--text); outline-offset: 2px; }
+.promo__eyebrow { color: var(--text-tertiary); }
+.promo__text { font-weight: var(--w-medium); white-space: normal !important; }
+
+/* ==========================================================================
+   Wireframe page (after Josh's prototype)
+   ========================================================================== */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 56px var(--gutter) 96px;
+}
+.wf-title {
+  margin: 0 0 24px;
+  font-size: 56px;
+  line-height: 1.05;
+  font-weight: var(--w-medium);
+  letter-spacing: -0.01em;
+}
+.wf-line { height: 12px; border-radius: 6px; background: var(--wf); margin: 0 0 12px; }
+.wf-img {
+  min-height: 240px;
+  border: 1.5px solid var(--wf);
+  border-radius: 8px;
+  background: var(--wf-light);
+}
+.wf-img.sm { min-height: 150px; margin-bottom: 18px; }
+.wf-btns { display: flex; gap: 12px; margin-top: 22px; }
+.wf-btns.center { justify-content: center; }
+.wf-btn { width: 132px; height: 42px; border-radius: 6px; background: var(--wf-dark); }
+.wf-btn.ghost { background: none; border: 1.5px solid var(--wf-dark); }
+.wf-hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+.wf-hero .wf-img { min-height: 340px; }
+.wf-logos { display: grid; grid-template-columns: repeat(6, 1fr); gap: 24px; }
+.wf-logo { height: 36px; border-radius: 6px; background: var(--wf); }
+.wf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.wf-card { border: 1.5px solid var(--wf); border-radius: 10px; padding: 20px; background: #fff; }
+.wf-split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.wf-split .wf-img { min-height: 300px; }
+.wf-band {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 24px;
+  border: 1.5px solid var(--wf);
+  border-radius: 12px;
+  background: #fff;
+}
+.wf-band .wf-line { margin-left: auto; margin-right: auto; }
+.wf-footer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  padding-top: 40px;
+  border-top: 1.5px solid var(--wf);
+}
+
+/* Prototype scaffolding: not part of the design */
+.proto-switch {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 90;
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  background: rgba(17, 17, 17, 0.92);
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 16px;
+}
+.proto-switch a {
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: background-color 0.4s var(--ease), color 0.4s var(--ease);
+}
+.proto-switch a:hover { color: #fff; }
+.proto-switch a[aria-current="page"] { background: #fff; color: #000; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+}
