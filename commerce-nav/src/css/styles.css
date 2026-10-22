@@ -394,8 +394,8 @@ body[data-variant="2"] .nav-item[data-menu][aria-expanded="true"]::after {
     transform var(--t-menu) var(--ease-out),
     visibility 0s linear var(--t-menu);
 }
-/* Variation 2: no page-dimming scrim; the dropdowns carry a slightly firmer gray border instead */
-body[data-variant="2"] .scrim { display: none; }
+/* Desktop: no page-dimming scrim in either variation. Variation 2 also gives the dropdowns a slightly firmer gray border. */
+.scrim { display: none; }
 body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
 
 /* Variation 2, switching menus: the old dropdown's box hands over to the new one (nav.js);

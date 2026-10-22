@@ -58,7 +58,7 @@ Deep links: `#desktop-1`, `#mobile-2`, and a page after the variation, for examp
 **Pages.** Every nav and sub-nav item has its own page, titled with the item's label. Routes are generated from the links in `desktop.html`, so adding a link gives it a page. Items that appear in more than one menu share a page.
 
 **Behavior.**
-- Menus open on click; Esc, clicking outside, or the dimmed page closes them.
+- Menus open on click; Esc or clicking outside closes them. The page is not dimmed on desktop.
 - Desktop menus stay inside the window: they are positioned from layout so they never run past either side, their columns wrap onto further rows in a narrow window, and a menu taller than the space under it scrolls inside itself.
 - Desktop variation 2 only: menus open on hover (after a short hover intent) and close about 200ms after the pointer leaves the buttons and the menu. Hovering another menu button switches to it: the dropdown box glides and resizes from the old menu to the new one, while the old contents fade out toward where you came from and the new contents fade in from the side you are heading. A mouse click on an open button keeps it open; touch still taps to open and close. The menu buttons have no active fill (neither for an open menu nor for the current page) and no chevron flip in this variation (hover still shows the fill). The gear has controls for the hover timings, glide duration, slide distance and fade-out.
 - On load the Commerce bar's logo, nav items and Contact sales fade in one after another, with the same motion as the Solution bar's contents.

@@ -20,7 +20,7 @@
       mode: 'desktop',
       variations: {
         1: {
-          status: 'Commerce bar plus a Solution bar for BigCommerce and Feedonomics. Menus open and close on click.',
+          status: 'Commerce bar plus a Solution bar for BigCommerce and Feedonomics. Menus open and close on click, with no page scrim.',
           notes: DESKTOP_NOTES,
         },
         2: {
