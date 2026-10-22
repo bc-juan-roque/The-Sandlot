@@ -4,6 +4,7 @@
    ========================================================================== */
 
 :root {
+  --label-gap: 32px;            /* space under a dropdown column label (Industries, Start & Build...) */
   --hover-delay: 90ms;
   --hover-close: 200ms;
   --switch-slide: 18px;
@@ -445,7 +446,7 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
   color: var(--text-tertiary);
   margin-bottom: 20px;
 }
-.group__title { font-weight: var(--w-medium); margin-bottom: 16px; }
+.group__title { font-weight: var(--w-medium); margin-bottom: var(--label-gap); }
 
 .group-row { display: flex; flex-wrap: wrap; gap: 28px var(--gap, 48px); }
 
