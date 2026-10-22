@@ -556,7 +556,29 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
   border-left: 1.5px solid var(--border);
   border-bottom: 1.5px solid var(--border);
   border-bottom-left-radius: 12px;
+  transition: border-color 0.35s var(--ease);
 }
+
+/* Hovering (or focusing) a sub-item lights its connector: the curve turns #000 and a #000 gradient runs
+   up the line from the curve, fading into the usual line color. */
+.tree { --tree-glow: 64px; clip-path: inset(0 -24px -24px -24px); }   /* the glow stops where the line starts */
+.tree .link::before {
+  content: "";
+  position: absolute;                 /* the link isn't positioned, so this sits in the list item */
+  left: 19.25px;
+  top: calc(50% - 12px - var(--tree-glow));
+  width: 1.5px;
+  height: var(--tree-glow);
+  background: linear-gradient(to top, #000, var(--border));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease);
+}
+.tree li:has(> .link:is(:hover, :focus-visible))::after {
+  border-left-color: #000;
+  border-bottom-color: #000;
+}
+.tree li:has(> .link:is(:hover, :focus-visible)) .link::before { opacity: 1; }
 
 /* Strip along the bottom of the Solutions menu */
 .strip {
