@@ -6,6 +6,13 @@
   const frame = $('#frame');
   const stage = $('#stage');
 
+  const DESKTOP_NOTES = [
+    ['Menu buttons have no click-through', 'Solutions, Learning, Product Features, Integrations and Resources only open their menu. Their own pages exist (for example #desktop-1/commerce/learning) but nothing links to them. Consider an Overview link at the top of each menu.'],
+    ['Customers, Company and Partners are Commerce-bar only', 'On BigCommerce and Feedonomics pages the Commerce bar scrolls away, so these three are reachable only at the top of the page.'],
+    ['Teams sits beside Industries', 'Teams (Marketing, Developers, Ecommerce, IT & Security) is an audience grouping inside Capabilities. Confirm it belongs there.'],
+    ['Interaction states are proposed', 'Hover, focus-dim and card states for menu items and buttons are not in the design system file yet. Confirm or replace them.'],
+  ];
+
   /* ---- What can be reviewed ------------------------------------------------ */
   const VERSIONS = {
     desktop: {
@@ -13,13 +20,16 @@
       mode: 'desktop',
       variations: {
         1: {
-          status: 'Commerce bar plus a Solution bar for BigCommerce and Feedonomics. Menus open on click.',
+          status: 'Commerce bar plus a Solution bar for BigCommerce and Feedonomics. Menus open and close on click.',
+          notes: DESKTOP_NOTES,
+        },
+        2: {
+          status: 'Same as 1, plus: once a menu is open, hovering another menu button switches to it with a slide and cross-fade.',
           notes: [
-            ['Menu buttons have no click-through', 'Solutions, Learning, Product Features, Integrations and Resources only open their menu. Their own pages exist (for example #desktop-1/commerce/learning) but nothing links to them. Consider an Overview link at the top of each menu.'],
-            ['Customers, Company and Partners are Commerce-bar only', 'On BigCommerce and Feedonomics pages the Commerce bar scrolls away, so these three are reachable only at the top of the page.'],
-            ['Teams sits beside Industries', 'Teams (Marketing, Developers, Ecommerce, IT & Security) is an audience grouping inside Capabilities. Confirm it belongs there.'],
-            ['Interaction states are proposed', 'Hover, focus-dim and card states for menu items and buttons are not in the design system file yet. Confirm or replace them.'],
-          ],
+            ['Menus slide and cross-fade, they do not morph', 'Each menu is its own panel, so switching slides the old one out and the new one in from the direction you are heading. A single panel that resizes between them is possible if this does not feel right.'],
+            ['Hover only switches once a menu is open', 'Hovering a menu button with nothing open does nothing; the first open is still a click. Confirm that is wanted, or whether hover alone should open.'],
+            ['Switching works across both bars', 'Hovering a Solution bar button while a Commerce bar menu is open switches to it, and the other way round.'],
+          ].concat(DESKTOP_NOTES),
         },
       },
     },
@@ -53,9 +63,9 @@
     { id: 'showPage', label: 'Show in-page placeholder content', type: 'toggle', value: true, group: 'Content' },
     { id: 'tMenu',    label: 'Desktop menu animation',    type: 'range', value: 500,  min: 0, max: 1200, step: 20, unit: 'ms', group: 'Animation', vars: (v) => ({ '--t-menu': `${v / 1000}s` }) },
     { id: 'mDur',     label: 'Mobile menu animation',     type: 'range', value: 600,  min: 0, max: 1200, step: 20, unit: 'ms', group: 'Animation', vars: (v) => ({ '--m-dur': `${v / 1000}s` }) },
-    { id: 'hoverDelay', label: 'Desktop menu switch: hover delay', type: 'range', value: 90, min: 0, max: 400, step: 10, unit: 'ms', group: 'Menu switching', vars: (v) => ({ '--hover-delay': `${v}ms` }) },
-    { id: 'slide',    label: 'Desktop menu switch: slide distance', type: 'range', value: 18, min: 0, max: 60, step: 2, unit: 'px', group: 'Menu switching', vars: (v) => ({ '--switch-slide': `${v}px` }) },
-    { id: 'outFade',  label: 'Desktop menu switch: old menu fade-out', type: 'range', value: 220, min: 0, max: 600, step: 20, unit: 'ms', group: 'Menu switching', vars: (v) => ({ '--switch-out': `${v / 1000}s` }) },
+    { id: 'hoverDelay', label: 'Desktop var 2, menu switch: hover delay', type: 'range', value: 90, min: 0, max: 400, step: 10, unit: 'ms', group: 'Menu switching', vars: (v) => ({ '--hover-delay': `${v}ms` }) },
+    { id: 'slide',    label: 'Desktop var 2, menu switch: slide distance', type: 'range', value: 18, min: 0, max: 60, step: 2, unit: 'px', group: 'Menu switching', vars: (v) => ({ '--switch-slide': `${v}px` }) },
+    { id: 'outFade',  label: 'Desktop var 2, menu switch: old menu fade-out', type: 'range', value: 220, min: 0, max: 600, step: 20, unit: 'ms', group: 'Menu switching', vars: (v) => ({ '--switch-out': `${v / 1000}s` }) },
     { id: 'dim',      label: 'Desktop focus: dimmed items', type: 'range', value: 0.4, min: 0, max: 1, step: 0.05, unit: '', group: 'Hover focus', vars: (v) => ({ '--focus-dim': String(v) }) },
     { id: 'delay',    label: 'Desktop focus: wait before fading back', type: 'range', value: 320, min: 0, max: 1000, step: 20, unit: 'ms', group: 'Hover focus', vars: (v) => ({ '--focus-return-delay': `${v / 1000}s` }) },
     { id: 'back',     label: 'Desktop focus: fade-back time', type: 'range', value: 1000, min: 100, max: 2000, step: 50, unit: 'ms', group: 'Hover focus', vars: (v) => ({ '--focus-return-time': `${v / 1000}s` }) },

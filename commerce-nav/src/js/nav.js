@@ -12,6 +12,10 @@
   if (window.__BOOT && window.__BOOT.hash) location.hash = window.__BOOT.hash;
 
   const body = document.body;
+  // Variation 1: click only. Variation 2: once a menu is open, hovering another menu button switches to it.
+  // The review shell picks the variation; opened on its own the page is variation 1.
+  body.dataset.variant = (window.__BOOT && window.__BOOT.v) === '2' ? '2' : '1';
+  window.__navSetVariant = (v) => { close(); body.dataset.variant = v === '2' ? '2' : '1'; };
   const triggers = [...document.querySelectorAll('[data-menu]')];
   const switchLinks = [...document.querySelectorAll('.proto-switch a')];
   const heading = document.querySelector('[data-page-title]');
@@ -139,7 +143,12 @@
     // Moving from one open menu to another: the old one slides out toward where we came from,
     // the new one slides in from the direction we are heading.
     let enter = 0;
-    if (prev) {
+    const slide = body.dataset.variant === '2';
+    if (prev && !slide) {
+      // Variation 1: a plain cross-fade
+      prev.setAttribute('aria-expanded', 'false');
+      panelOf(prev).classList.remove('is-open');
+    } else if (prev) {
       const dx = Math.sign(trigger.getBoundingClientRect().left - prev.getBoundingClientRect().left) || 1;
       const dist = cssNum('--switch-slide', 18);
       const prevPanel = panelOf(prev);
@@ -168,7 +177,7 @@
   let hoverTimer = null;
   triggers.forEach((t) => {
     t.addEventListener('pointerenter', (e) => {
-      if (e.pointerType === 'touch' || !openTrigger || openTrigger === t) return;
+      if (body.dataset.variant !== '2' || e.pointerType === 'touch' || !openTrigger || openTrigger === t) return;
       clearTimeout(hoverTimer);
       hoverTimer = setTimeout(() => { if (openTrigger && openTrigger !== t) open(t); }, cssNum('--hover-delay', 90));
     });
