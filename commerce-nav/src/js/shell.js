@@ -24,7 +24,7 @@
           notes: DESKTOP_NOTES,
         },
         2: {
-          status: 'Menus open on hover and close when the pointer leaves. Moving to another menu button glides the dropdown across while the contents fade in and out from the sides.',
+          status: 'Menus open on hover and close when the pointer leaves. No page scrim, and the dropdowns have a gray border. Moving to another menu button glides the dropdown across while the contents fade in and out from the sides.',
           notes: [
             ['The dropdown glides between menus', 'The box moves and resizes from the old menu to the new one while the contents fade out and in from the sides, in the manner of Linear. It is built from each menu keeping its own panel, so check the handover mid-way, especially between the widest and narrowest menus.'],
             ['Hover opens and leaving closes', 'There is no click to open. The menu closes about 200ms after the pointer leaves the buttons and the menu, so the pointer can cross the gap. A mouse click on an open button keeps it open. Touch still taps to open and close. Confirm whether keeping click as an option matters.'],
