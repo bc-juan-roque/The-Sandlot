@@ -325,7 +325,7 @@ body:not([data-page="commerce"]) #m-commerce-menu .m-actions { display: none; }
 .m-view__body .link:hover .link__label { font-weight: var(--w-regular); transform: none; }
 .m-view__body .link__label::after { display: none; }
 .m-view__body .link::after { display: none; }
-.m-view__body .link--logo:hover img { transform: none; }
+.m-view__body .link--logo:hover .logo { transform: none; }
 .m-view__body .btn--text { min-height: 44px; }
 .m-view__body .product__head { min-height: 44px; }
 .m-view__body .tree li { padding-top: 2px; padding-bottom: 2px; }
