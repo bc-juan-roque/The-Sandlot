@@ -215,6 +215,25 @@ body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"] .sub-bar__right
   white-space: nowrap;
 }
 .nav--sub { align-items: center; }
+/* Commerce bar, on load: logo, nav items, then Contact sales fade in one after another (same motion as the
+   Solution bar's contents). Only `from` is given, so each item settles on whatever its own style is. */
+.commerce-bar .logo,
+.commerce-bar .nav > li,
+.commerce-bar .bar__right > .btn {
+  animation: bar-item-in 0.55s var(--ease-out) backwards;
+  animation-delay: calc(var(--load-delay, 120ms) + var(--i, 0) * var(--sub-stagger, 60ms));
+}
+.commerce-bar .logo { --i: 0; }
+.commerce-bar .nav > li:nth-child(1) { --i: 1; }
+.commerce-bar .nav > li:nth-child(2) { --i: 2; }
+.commerce-bar .nav > li:nth-child(3) { --i: 3; }
+.commerce-bar .nav > li:nth-child(4) { --i: 4; }
+.commerce-bar .nav > li:nth-child(5) { --i: 5; }
+.commerce-bar .bar__right > .btn { --i: 6; }
+@keyframes bar-item-in {
+  from { opacity: 0; transform: translateY(-5px); }
+}
+
 .sub-bar__right {
   margin-left: auto;
   display: flex;
