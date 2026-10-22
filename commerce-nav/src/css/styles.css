@@ -436,7 +436,7 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
 :root {
   --focus-dim: 0.4;
   --focus-return-delay: 0.32s;
-  --focus-return-time: 1s;
+  --focus-return-time: 0.7s;
   --focus-active-time: 0.15s;   /* the hovered item (and its parent) coming up to full strength */
 }
 
