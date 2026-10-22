@@ -218,7 +218,7 @@ body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"] {
 .nav-item[aria-expanded="true"] .chev { transform: rotate(180deg); opacity: 0.8; }
 
 /* Variation 2: no "open" look on the button (container fill and chevron); hover still shows the fill */
-body[data-variant="2"] .nav-item[aria-expanded="true"]:not(:hover):not(:focus-visible):not([data-current])::before {
+body[data-variant="2"] .nav-item:is([aria-expanded="true"], [data-current]):not(:hover):not(:focus-visible)::before {
   opacity: 0;
   transform: scale(0.94);
 }
