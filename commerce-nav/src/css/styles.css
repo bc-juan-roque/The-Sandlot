@@ -352,8 +352,9 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
 /* Sub bar menus: left-aligned under their trigger, 8px under the bar */
 .menu--sub { top: calc(100% + 16px); left: -10px; }
 
-.menu__cols { display: flex; gap: var(--gap, 48px); align-items: flex-start; }
-.menu__cols > * { flex: none; }
+/* Columns wrap onto further rows when the window is too narrow to hold them side by side */
+.menu__cols { display: flex; flex-wrap: wrap; gap: 28px var(--gap, 48px); align-items: flex-start; }
+.menu__cols > * { flex: none; max-width: 100%; }
 .menu .link, .menu .btn, .menu p { white-space: nowrap; }
 
 /* Content rises in, one block after another */
@@ -373,7 +374,7 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
 }
 .group__title { font-weight: var(--w-medium); margin-bottom: 16px; }
 
-.group-row { display: flex; gap: var(--gap, 48px); }
+.group-row { display: flex; flex-wrap: wrap; gap: 28px var(--gap, 48px); }
 
 /* Lists */
 .list { display: flex; flex-direction: column; gap: 12px; }
@@ -485,7 +486,7 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
 }
 
 /* ----- Product block (BigCommerce / Feedonomics) ------------------------- */
-.product-row { display: flex; gap: 48px; }
+.product-row { display: flex; flex-wrap: wrap; gap: 28px 48px; }
 .product { min-width: 0; }
 .product__head { display: flex; align-items: center; gap: 12px; }
 .tile {

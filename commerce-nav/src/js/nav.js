@@ -87,9 +87,10 @@
   let openTrigger = null;
   const panelOf = (t) => document.getElementById(t.dataset.menu);
 
-  /* Keep a menu at least 32px from either edge of the viewport */
+  /* Keep a menu at least 32px from either edge of the viewport.
+     Position is read from layout (offsetLeft / offsetWidth), not from getBoundingClientRect, so a
+     transform or transition that is still running, or the previous shift, can't throw it off. */
   function fit(panel) {
-    panel.style.setProperty('--shift', '0px');
     // Commerce bar menus line up with their nav item (same 10px overhang as the Solution bar menus)
     if (panel.classList.contains('menu--end')) {
       const trigger = document.querySelector(`[data-menu="${panel.id}"]`);
@@ -98,12 +99,14 @@
         panel.style.setProperty('--left', `${Math.round(trigger.getBoundingClientRect().left - bar.getBoundingClientRect().left - 10)}px`);
       }
     }
-    const r = panel.getBoundingClientRect();
+    const parent = panel.offsetParent;
+    const left = (parent ? parent.getBoundingClientRect().left : 0) + panel.offsetLeft;
+    const right = left + panel.offsetWidth;
     const vw = document.documentElement.clientWidth;
     const margin = 32;
     let shift = 0;
-    if (r.right > vw - margin) shift = vw - margin - r.right;
-    if (r.left + shift < margin) shift = margin - r.left;
+    if (right > vw - margin) shift = vw - margin - right;
+    if (left + shift < margin) shift = margin - left;
     panel.style.setProperty('--shift', `${Math.round(shift)}px`);
     fitHeight(panel);
   }
