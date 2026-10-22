@@ -730,6 +730,15 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
   border-radius: var(--r-xl);
   padding: 20px;
 }
+/* In a dropdown the card is a flush side panel: it runs to the top, right and bottom edges of the dropdown
+   (the dropdown's rounded corners clip it), and its label lines up with the other columns' labels.
+   Promo cards (Feedonomics Surface, Integrations) keep their floating look. */
+.menu .card {
+  align-self: stretch;
+  margin: -24px -28px -24px 0;           /* cancels the dropdown's padding on three sides */
+  padding: 24px 28px 24px 24px;          /* same top and right inset as the dropdown itself */
+  border-radius: 0;
+}
 .promo {
   position: relative;
   cursor: pointer;
