@@ -159,8 +159,30 @@ body:not([data-page="commerce"]) .commerce-bar .bar__right > .btn {
 body[data-page="bigcommerce"] .sub-bar[data-brand="bigcommerce"],
 body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"] {
   display: block;
-  animation: bar-in 0.7s var(--ease-out) both;
+  /* The bar extends down out of the Commerce bar (clipped, with the page below easing down to make room).
+     `backwards` only, so nothing stays clipped once it has finished and the menus can hang below it. */
+  animation: sub-extend var(--sub-extend, 0.75s) var(--ease-out) backwards;
 }
+/* Its contents then fade in one after another: label, nav items, then the buttons */
+body[data-page="bigcommerce"] .sub-bar[data-brand="bigcommerce"] .bar--sub > .sub-bar__label,
+body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"] .bar--sub > .sub-bar__label,
+body[data-page="bigcommerce"] .sub-bar[data-brand="bigcommerce"] .nav--sub > li,
+body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"] .nav--sub > li,
+body[data-page="bigcommerce"] .sub-bar[data-brand="bigcommerce"] .sub-bar__right > *,
+body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"] .sub-bar__right > * {
+  animation: sub-item-in 0.55s var(--ease-out) backwards;
+  animation-delay: calc(var(--sub-delay, 280ms) + var(--i, 0) * var(--sub-stagger, 60ms));
+}
+.sub-bar__label { --i: 0; }
+.nav--sub > li:nth-child(1) { --i: 1; }
+.nav--sub > li:nth-child(2) { --i: 2; }
+.nav--sub > li:nth-child(3) { --i: 3; }
+.nav--sub > li:nth-child(4) { --i: 4; }
+.nav--sub > li:nth-child(5) { --i: 5; }
+.nav--sub > li:nth-child(6) { --i: 6; }
+.sub-bar__right > :nth-child(1) { --i: 6; }
+.sub-bar__right > :nth-child(2) { --i: 7; }
+.sub-bar__right > :nth-child(3) { --i: 8; }
 .bar--sub {
   height: var(--sub-h);
   padding: 8px var(--gutter);
@@ -184,6 +206,14 @@ body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"] {
   gap: 16px;
 }
 
+@keyframes sub-extend {
+  from { clip-path: inset(0 0 100% 0); margin-bottom: calc(var(--sub-h) * -1); }
+  to   { clip-path: inset(0 0 0 0);    margin-bottom: 0; }
+}
+@keyframes sub-item-in {
+  from { opacity: 0; transform: translateY(-5px); }
+  to   { opacity: 1; transform: none; }
+}
 @keyframes bar-in {
   from { opacity: 0; transform: translateY(-6px); }
   to   { opacity: 1; transform: none; }
