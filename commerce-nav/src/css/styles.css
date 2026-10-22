@@ -480,7 +480,7 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
 }
 
 /* AI star (Figma "Vector 2134"): a small BC Mauve sparkle after, or in front of, a label */
-.ai-star { --ai-star-size: 13px; display: inline-block; width: var(--ai-star-size); height: var(--ai-star-size); margin-left: 0.4em; vertical-align: -0.04em; color: var(--bc-mauve); }
+.ai-star { --ai-star-size: 13px; display: inline-block; width: var(--ai-star-size); height: var(--ai-star-size); margin-left: 0.4em; vertical-align: -0.17em; color: var(--bc-mauve); }
 .strip__title .ai-star { margin: 0 0.45em 0 0; }
 
 .tag {
