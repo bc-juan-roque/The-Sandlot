@@ -561,15 +561,17 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
 
 /* Hovering (or focusing) a sub-item lights its connector: the curve turns #000 and a #000 gradient runs
    up the line from the curve, fading into the usual line color. */
-.tree { --tree-glow: 64px; clip-path: inset(0 -24px -24px -24px); }   /* the glow stops where the line starts */
+.tree { --tree-glow: 20px; clip-path: inset(0 -24px -24px -24px); }   /* the glow stops where the line starts */
 .tree .link::before {
   content: "";
   position: absolute;                 /* the link isn't positioned, so this sits in the list item */
   left: 19.25px;
   top: calc(50% - 12px - var(--tree-glow));
-  width: 1.5px;
+  width: 0;
   height: var(--tree-glow);
-  background: linear-gradient(to top, #000, var(--border));
+  /* Drawn as a border, like the line it sits on, so it snaps to the same pixels and keeps the same width */
+  border-left: 1.5px solid var(--border);
+  border-image: linear-gradient(to top, #000, var(--border)) 1;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s var(--ease);
