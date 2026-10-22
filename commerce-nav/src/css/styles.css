@@ -606,11 +606,23 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
   width: 40px;
   height: 40px;
   border-radius: var(--r-lg);
-  background: var(--surface-inverse);
-  color: var(--text-inverse);
-  transition: transform 0.6s var(--ease-out);
+  /* At rest: a subtle gray container with a slightly darker border and a black icon.
+     On hover or focus of the link it turns black with a white icon. */
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: #000;
+  transition:
+    transform 0.6s var(--ease-out),
+    background-color 0.35s var(--ease),
+    border-color 0.35s var(--ease),
+    color 0.35s var(--ease);
 }
 .tile svg { width: 20px; height: 20px; }
+.product__head:is(:hover, :focus-visible) .tile {
+  background: var(--surface-inverse);
+  border-color: var(--surface-inverse);
+  color: var(--text-inverse);
+}
 .product__text { display: flex; flex-direction: column; gap: 2px; }
 /* Larger items: only the arrow appears. No weight change, no shift. */
 .product__name {
