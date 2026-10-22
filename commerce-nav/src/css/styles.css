@@ -26,7 +26,7 @@
   --text-inverse: #fff;         /* Type/Color/Inverse */
   --surface: #fff;              /* Surface/Base */
   --surface-2: #f2f4f7;         /* Surface/Secondary */
-  --surface-bar: #f9fafb;       /* the product (Solution) bar: the subtlest gray, lighter than Surface/Secondary */
+  --surface-bar: #fcfcfd;       /* the product (Solution) bar: a whisper of gray, lighter than Surface/Secondary */
   --ai-star-from: #0d52ff;      /* AI star gradient, top left */
   --ai-star-to: #ffb4dc;        /* AI star gradient, bottom right (a lighter pink) */
   --surface-inverse: #000;      /* Surface/Inverse */
