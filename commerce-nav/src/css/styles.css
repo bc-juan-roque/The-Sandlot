@@ -123,6 +123,8 @@ body[data-page="commerce"] .commerce-bar { position: sticky; top: 0; }
 /* Nav items sit next to the logo; the button stays on the right */
 .bar__right > .nav { margin-left: var(--nav-gap); }
 .bar__right > .btn { margin-left: auto; }
+/* On BigCommerce and Feedonomics pages the Solution bar carries the calls to action, so Contact sales steps aside */
+body:not([data-page="commerce"]) .commerce-bar .bar__right > .btn { display: none; }
 /* 4px between items so an active fill and a hover fill never touch */
 .nav { display: flex; align-items: center; gap: 4px; }
 

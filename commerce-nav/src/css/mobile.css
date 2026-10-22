@@ -231,6 +231,8 @@ body.m-scrim-on .m-scrim { opacity: 1; pointer-events: auto; }
 .m-row[data-current] { font-weight: var(--w-medium); background: var(--surface-2); }
 .m-row svg { flex: none; width: 12px; height: 12px; color: var(--text-tertiary); transform: rotate(-90deg); }
 
+/* Same on mobile: no Contact sales in the Commerce menu on BigCommerce and Feedonomics pages */
+body:not([data-page="commerce"]) #m-commerce-menu .m-actions { display: none; }
 .m-actions { display: flex; flex-direction: column; gap: 12px; padding: 20px 0 0; }
 .m-actions .btn { width: 100%; }
 .btn--text-row {
