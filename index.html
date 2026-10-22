@@ -3,464 +3,63 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Commerce · Navigation prototype</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
+  <title>Commerce Navigation Prototypes</title>
+  <link rel="stylesheet" href="css/shell.css">
 </head>
-<body data-page="commerce">
-
-  <!-- Icon sprite -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="i-chevron" viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-arrow" viewBox="0 0 12 11"><path d="M11.2217 5.0166C11.4167 5.21188 11.4169 5.52845 11.2217 5.72363L6.20508 10.7402L5.85156 10.3857L5.49805 10.0322L9.66211 5.86719H0V4.86719H9.6582L5.49805 0.707031L6.20508 0L11.2217 5.0166Z" fill="currentColor"/></symbol>
-    <symbol id="i-bc" viewBox="0 0 20 20"><path d="M14.2929 4.7071C14.9229 4.07714 16 4.52331 16 5.41421V16C16 16.5523 15.5523 17 15 17H4.41421C3.52331 17 3.07714 15.9229 3.70711 15.2929L14.2929 4.7071Z" fill="currentColor"/></symbol>
-    <symbol id="i-fdx" viewBox="0 0 20 20"><path d="M8.58579 3.41407C9.36684 2.63302 10.6332 2.63302 11.4142 3.41407L16.5859 8.58572C17.3669 9.36677 17.3669 10.6331 16.5859 11.4141L10 18L1.99993 9.99993L8.58579 3.41407Z" fill="currentColor"/></symbol>
-  </svg>
-
-  <div class="scrim" data-scrim></div>
-
-  <!-- ============ COMMERCE BAR (global) ============ -->
-  <header class="commerce-bar">
-    <nav class="bar" aria-label="Commerce">
-      <a class="logo" href="#/commerce" data-route="commerce" aria-label="Commerce home">
-        <img src="assets/commerce-black.svg" alt="Commerce" width="163" height="24">
-      </a>
-
-      <div class="bar__right">
-        <ul class="nav">
-          <li class="nav-slot">
-            <button class="nav-item" type="button" aria-expanded="false" aria-controls="menu-solutions" data-menu="menu-solutions">
-              <span class="nav-item__label">Solutions</span>
-              <svg class="chev" aria-hidden="true"><use href="#i-chevron"/></svg>
-            </button>
-          </li>
-          <li class="nav-slot">
-            <button class="nav-item" type="button" aria-expanded="false" aria-controls="menu-learning" data-menu="menu-learning">
-              <span class="nav-item__label">Learning</span>
-              <svg class="chev" aria-hidden="true"><use href="#i-chevron"/></svg>
-            </button>
-          </li>
-          <li><a class="nav-item" href="#"><span class="nav-item__label">Customers</span></a></li>
-          <li><a class="nav-item" href="#"><span class="nav-item__label">Company</span></a></li>
-          <li><a class="nav-item" href="#"><span class="nav-item__label">Partners</span></a></li>
-        </ul>
-        <a class="btn btn--secondary" href="#"><span>Contact sales</span></a>
-      </div>
-
-      <!-- Solutions menu -->
-      <div class="menu menu--end menu--lg" id="menu-solutions" style="--w:989px" role="region" aria-label="Solutions">
-        <div class="menu__cols" style="--gap:72px">
-          <section class="reveal" style="--d:0">
-            <p class="eyebrow">Products</p>
-            <div class="product-row">
-              <div class="product" data-section="bigcommerce">
-                <a class="product__head" href="#/bigcommerce" data-route="bigcommerce">
-                  <span class="tile"><svg aria-hidden="true"><use href="#i-bc"/></svg></span>
-                  <span class="product__text">
-                    <span class="product__name">BigCommerce</span>
-                    <span class="product__tag">Ecommerce platform for B2C and B2B</span>
-                  </span>
-                </a>
-                <ul class="tree">
-                  <li><a class="link" href="#"><span class="link__label">B2B Commerce</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Headless Commerce</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Payments</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Agentic Commerce ✦</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Multi-Storefront</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Checkout</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Apps &amp; Integrations</span></a></li>
-                </ul>
-              </div>
-              <div class="product" data-section="feedonomics">
-                <a class="product__head" href="#/feedonomics" data-route="feedonomics">
-                  <span class="tile"><svg aria-hidden="true"><use href="#i-fdx"/></svg></span>
-                  <span class="product__text">
-                    <span class="product__name">Feedonomics</span>
-                    <span class="product__tag">Product feed management</span>
-                  </span>
-                </a>
-                <ul class="tree">
-                  <li><a class="link" href="#"><span class="link__label">AI Data Enrichment ✦</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Agentic Commerce ✦</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Ecommerce Platform Sync</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Advertising</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Marketplaces</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Order Orchestration</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Integrations</span></a></li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          <section class="reveal" style="--d:1">
-            <p class="eyebrow">Capabilities</p>
-            <div class="group-row" style="--gap:64px">
-              <div class="group">
-                <p class="group__title">Industries</p>
-                <ul class="list list--bordered">
-                  <li><a class="link" href="#"><span class="link__label">Automotive</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">B2B &amp; Wholesale</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Health &amp; Beauty</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Home &amp; Garden</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Sports &amp; Outdoors</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Fashion &amp; Apparel</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Food &amp; Beverage</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Manufacturing</span></a></li>
-                </ul>
-              </div>
-              <div class="group">
-                <p class="group__title">Teams</p>
-                <ul class="list list--bordered">
-                  <li><a class="link" href="#"><span class="link__label">Marketing</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Developers</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Ecommerce</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">IT &amp; Security</span></a></li>
-                </ul>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <div class="strip reveal" style="--d:2">
-          <div class="strip__text">
-            <a class="strip__title" href="#" data-title="AI Labs">✦ Visit our AI Labs</a>
-            <span class="strip__dot" aria-hidden="true">•</span>
-            <span>Experiments and early access to what we’re building in agentic commerce.</span>
-          </div>
-          <a class="btn btn--text btn--sm" href="#" data-title="AI Labs" data-in-card aria-hidden="true" tabindex="-1"><span>Learn more</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        </div>
-      </div>
-
-      <!-- Learning menu -->
-      <div class="menu menu--end" id="menu-learning" style="--w:700px" role="region" aria-label="Learning">
-        <div class="menu__cols" style="--gap:48px">
-          <div class="group reveal" style="--d:0">
-            <p class="group__title">Learning Resources</p>
-            <ul class="list">
-              <li><a class="link" href="#"><span class="link__label">Commerce Growth</span></a></li>
-              <li><a class="link" href="#"><span class="link__label">B2B Ecommerce</span></a></li>
-              <li><a class="link" href="#"><span class="link__label">Agentic Commerce</span><span class="tag">New</span></a></li>
-              <li><a class="link" href="#"><span class="link__label">Channels &amp; Marketplaces</span></a></li>
-              <li><a class="link" href="#"><span class="link__label">Commerce Trends</span></a></li>
-              <li><a class="link" href="#"><span class="link__label">Holiday Commerce</span></a></li>
-              <li><a class="link" href="#"><span class="link__label">Developer Blog</span></a></li>
-            </ul>
-          </div>
-          <div class="group reveal" style="--d:1">
-            <p class="group__title">Browse by Type</p>
-            <ul class="list">
-              <li><a class="link" href="#"><span class="link__label">All Resources</span></a></li>
-              <li><a class="link" href="#"><span class="link__label">Articles</span></a></li>
-              <li><a class="link" href="#"><span class="link__label">Blog</span></a></li>
-              <li><a class="link" href="#"><span class="link__label">Guides</span></a></li>
-              <li><a class="link" href="#"><span class="link__label">Podcasts</span></a></li>
-              <li><a class="link" href="#"><span class="link__label">Reports</span></a></li>
-              <li><a class="link" href="#"><span class="link__label">Webinars</span></a></li>
-              <li><a class="link" href="#"><span class="link__label">Events</span></a></li>
-            </ul>
-          </div>
-          <div class="group reveal" style="--d:2">
-            <p class="group__title">Press</p>
-            <ul class="list">
-              <li><a class="link" href="#"><span class="link__label">Press Releases</span></a></li>
-              <li><a class="link" href="#"><span class="link__label">News</span></a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
-
-  <!-- ============ BIGCOMMERCE SUB BAR (sticky) ============ -->
-  <div class="sub-bar" data-brand="bigcommerce">
-    <nav class="bar bar--sub" aria-label="BigCommerce">
-      <span class="sub-bar__label">Solution / BigCommerce</span>
-      <ul class="nav nav--sub">
-        <li class="nav-slot">
-          <button class="nav-item" type="button" aria-expanded="false" aria-controls="menu-bc-features" data-menu="menu-bc-features">
-            <span class="nav-item__label">Product Features</span>
-            <svg class="chev" aria-hidden="true"><use href="#i-chevron"/></svg>
-          </button>
-          <div class="menu menu--sub" id="menu-bc-features" style="--w:1040px" role="region" aria-label="Product Features">
-            <div class="menu__cols" style="--gap:28px">
-              <div class="group reveal" style="--d:0">
-                <p class="group__title">Start &amp; Build</p>
-                <ul class="list">
-                  <li><a class="link" href="#"><span class="link__label">Product Overview</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Agentic Commerce ✦</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Design Your Store</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Apps &amp; Integrations</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Migrate to BigCommerce</span></a></li>
-                </ul>
-              </div>
-              <div class="group reveal" style="--d:1">
-                <p class="group__title">Sell Your Way</p>
-                <ul class="list">
-                  <li><a class="link" href="#"><span class="link__label">B2B Commerce</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Channels &amp; Advertising</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Product Feed Management</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Multi-Storefront</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Headless Commerce</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">International Commerce</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Data &amp; Analytics</span></a></li>
-                </ul>
-              </div>
-              <div class="group reveal" style="--d:2">
-                <p class="group__title">Run Your Business</p>
-                <ul class="list">
-                  <li><a class="link" href="#"><span class="link__label">Checkout</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Payments</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Inventory</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Shipping</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Promotions</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Companion ✦</span></a></li>
-                </ul>
-              </div>
-              <div class="card reveal" style="--d:3">
-                <div class="group">
-                  <p class="group__title">Developers</p>
-                  <ul class="list">
-                    <li><a class="link" href="#"><span class="link__label">Developer Docs</span></a></li>
-                    <li><a class="link" href="#"><span class="link__label">MCP Toolkit ✦</span></a></li>
-                    <li><a class="link" href="#"><span class="link__label">Security &amp; Compliance</span></a></li>
-                    <li><a class="link" href="#"><span class="link__label">Hosting &amp; Performance</span></a></li>
-                    <li><a class="link" href="#"><span class="link__label">Staging Pro</span></a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li><a class="nav-item" href="#"><span class="nav-item__label">Services</span></a></li>
-        <li><a class="nav-item" href="#"><span class="nav-item__label">Integrations</span></a></li>
-        <li><a class="nav-item" href="#"><span class="nav-item__label">Pricing</span></a></li>
-        <li class="nav-slot">
-          <button class="nav-item" type="button" aria-expanded="false" aria-controls="menu-bc-resources" data-menu="menu-bc-resources">
-            <span class="nav-item__label">Resources</span>
-            <svg class="chev" aria-hidden="true"><use href="#i-chevron"/></svg>
-          </button>
-          <div class="menu menu--sub" id="menu-bc-resources" style="--w:760px" role="region" aria-label="Resources">
-            <div class="menu__cols" style="--gap:28px">
-              <div class="group reveal" style="--d:0">
-                <p class="group__title">Product Info</p>
-                <ul class="list">
-                  <li><a class="link" href="#"><span class="link__label">Basics of BigCommerce</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Product Releases</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Help Center</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">BigCommerce University</span></a></li>
-                </ul>
-              </div>
-              <div class="group reveal" style="--d:1">
-                <p class="group__title">Community</p>
-                <ul class="list">
-                  <li><a class="link" href="#"><span class="link__label">Case Studies</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Customer Showcase</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Community Q&amp;A</span></a></li>
-                </ul>
-              </div>
-              <div class="card reveal" style="--d:2">
-                <div class="group">
-                  <p class="group__title">Build</p>
-                  <ul class="list">
-                    <li><a class="link" href="#"><span class="link__label">Developer Docs</span></a></li>
-                    <li><a class="link" href="#"><span class="link__label">API Reference</span></a></li>
-                    <li><a class="link" href="#"><span class="link__label">MCP Toolkit ✦</span></a></li>
-                    <li><a class="link" href="#"><span class="link__label">Apps Marketplace</span></a></li>
-                    <li><a class="link" href="#"><span class="link__label">Partner Directory</span></a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <div class="sub-bar__right">
-        <a class="nav-item" href="#"><span class="nav-item__label">Login</span></a>
-        <a class="btn btn--secondary btn--sm" href="#"><span>Free trial</span></a>
-        <a class="btn btn--primary btn--sm" href="#"><span>Get a demo</span></a>
-      </div>
-    </nav>
+<body>
+  <!-- Review shell: faux browser bar + the prototype in a frame + version/variation switcher.
+       Links look like  #mobile-2/bigcommerce/pricing  (version-variation/page). -->
+  <div class="addr" id="addr">
+    <button type="button" data-nav="back" aria-label="Back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
+    <button type="button" data-nav="forward" aria-label="Forward"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    <div class="url">
+      <svg class="lock" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+      <span class="host">commerce.com</span><span class="path" id="path">/</span>
+    </div>
   </div>
 
-  <!-- ============ FEEDONOMICS SUB BAR (sticky) ============ -->
-  <div class="sub-bar" data-brand="feedonomics">
-    <nav class="bar bar--sub" aria-label="Feedonomics">
-      <span class="sub-bar__label">Solution / Feedonomics</span>
-      <ul class="nav nav--sub">
-        <li class="nav-slot">
-          <button class="nav-item" type="button" aria-expanded="false" aria-controls="menu-fdx-features" data-menu="menu-fdx-features">
-            <span class="nav-item__label">Product Features</span>
-            <svg class="chev" aria-hidden="true"><use href="#i-chevron"/></svg>
-          </button>
-          <div class="menu menu--sub" id="menu-fdx-features" style="--w:760px" role="region" aria-label="Product Features">
-            <div class="menu__cols" style="--gap:28px">
-              <div class="group reveal" style="--d:0">
-                <p class="group__title">Overview</p>
-                <ul class="list">
-                  <li><a class="link" href="#"><span class="link__label">Product Overview</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">How It Works</span></a></li>
-                </ul>
-              </div>
-              <div class="group reveal" style="--d:1">
-                <p class="group__title">Products</p>
-                <ul class="list">
-                  <li><a class="link" href="#"><span class="link__label">Advertising</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">AI Data Enrichment ✦</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Marketplaces</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Agentic Commerce ✦</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Order Orchestration</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Ecommerce Platform Sync</span></a></li>
-                </ul>
-              </div>
-              <div class="promo reveal" style="--d:2">
-                <span class="promo__eyebrow">Feedonomics Surface</span>
-                <p class="promo__text">Install on BigCommerce. Free and ready in minutes.</p>
-                <a class="btn btn--text btn--sm" href="#" data-in-card><span>Explore Surface</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li class="nav-slot">
-          <button class="nav-item" type="button" aria-expanded="false" aria-controls="menu-fdx-integrations" data-menu="menu-fdx-integrations">
-            <span class="nav-item__label">Integrations</span>
-            <svg class="chev" aria-hidden="true"><use href="#i-chevron"/></svg>
-          </button>
-          <div class="menu menu--sub" id="menu-fdx-integrations" style="--w:860px" role="region" aria-label="Integrations">
-            <div class="menu__cols" style="--gap:28px">
-              <div class="group reveal" style="--d:0">
-                <p class="group__title">Overview</p>
-                <ul class="list">
-                  <li><a class="link" href="#"><span class="link__label">Supported Channels</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Supported Platforms</span></a></li>
-                  <li><a class="btn btn--text btn--sm" href="#"><span>View all integrations</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-                </ul>
-              </div>
-              <div class="group reveal" style="--d:1">
-                <p class="group__title">Supported Platforms</p>
-                <ul class="list">
-                  <li><a class="link link--logo" href="#"><img src="assets/platforms/shopify.svg" alt="" width="20" height="20"><span class="link__label">Shopify</span></a></li>
-                  <li><a class="link link--logo" href="#"><img src="assets/platforms/bigcommerce.svg" alt="" width="20" height="20"><span class="link__label">BigCommerce</span></a></li>
-                  <li><a class="link link--logo" href="#"><img src="assets/platforms/oracle-netsuite.svg" alt="" width="20" height="20"><span class="link__label">Oracle NetSuite</span></a></li>
-                  <li><a class="link link--logo" href="#"><img src="assets/platforms/oracle-commerce.svg" alt="" width="20" height="20"><span class="link__label">Oracle Commerce</span></a></li>
-                  <li><a class="link link--logo" href="#"><img src="assets/platforms/salesforce-commerce-cloud.svg" alt="" width="20" height="20"><span class="link__label">Salesforce Commerce Cloud</span></a></li>
-                  <li><a class="link link--logo" href="#"><img src="assets/platforms/adobe-commerce-magento.svg" alt="" width="20" height="20"><span class="link__label">Adobe Commerce / Magento</span></a></li>
-                  <li><a class="link link--logo" href="#"><img src="assets/platforms/woocommerce.svg" alt="" width="20" height="20"><span class="link__label">WooCommerce</span></a></li>
-                  <li><a class="link link--logo" href="#"><img src="assets/platforms/custom.svg" alt="" width="20" height="20"><span class="link__label">Custom</span></a></li>
-                </ul>
-              </div>
-              <div class="promo reveal" style="--d:2">
-                <span class="promo__eyebrow">Integrations</span>
-                <p class="promo__text">Your stack, upgraded. Connect the dots so your systems move like one engine.</p>
-                <a class="btn btn--text btn--sm" href="#" data-in-card><span>Get my plan</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li><a class="nav-item" href="#"><span class="nav-item__label">Services</span></a></li>
-        <li><a class="nav-item" href="#"><span class="nav-item__label">Pricing</span></a></li>
-        <li class="nav-slot">
-          <button class="nav-item" type="button" aria-expanded="false" aria-controls="menu-fdx-resources" data-menu="menu-fdx-resources">
-            <span class="nav-item__label">Resources</span>
-            <svg class="chev" aria-hidden="true"><use href="#i-chevron"/></svg>
-          </button>
-          <div class="menu menu--sub" id="menu-fdx-resources" style="--w:700px" role="region" aria-label="Resources">
-            <div class="menu__cols" style="--gap:48px">
-              <div class="group reveal" style="--d:0">
-                <p class="group__title">Learn</p>
-                <ul class="list">
-                  <li><a class="link" href="#"><span class="link__label">Feed Management Guides</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Case Studies</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Webinars</span></a></li>
-                </ul>
-              </div>
-              <div class="group reveal" style="--d:1">
-                <p class="group__title">Get Help</p>
-                <ul class="list">
-                  <li><a class="link" href="#"><span class="link__label">FeedSupport™</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Help Center</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Contact</span></a></li>
-                </ul>
-              </div>
-              <div class="group reveal" style="--d:2">
-                <p class="group__title">Build</p>
-                <ul class="list">
-                  <li><a class="link" href="#"><span class="link__label">Developer Docs</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">API Reference</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Supported Integrations</span></a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <div class="sub-bar__right">
-        <a class="nav-item" href="#"><span class="nav-item__label">Login</span></a>
-        <a class="btn btn--primary btn--sm" href="#"><span>Get a demo</span></a>
-      </div>
-    </nav>
-  </div>
-
-  <!-- ============ PAGE (wireframe, like Josh's prototype) ============ -->
-  <main class="page" id="page">
-    <section class="wf-hero">
-      <div>
-        <h1 class="wf-title" data-page-title>Commerce</h1>
-        <div class="wf-line" style="width:90%"></div>
-        <div class="wf-line" style="width:75%"></div>
-        <div class="wf-line" style="width:60%"></div>
-        <div class="wf-btns"><div class="wf-btn"></div><div class="wf-btn ghost"></div></div>
-      </div>
-      <div class="wf-img"></div>
-    </section>
-    <section class="wf-logos">
-      <div class="wf-logo"></div><div class="wf-logo"></div><div class="wf-logo"></div>
-      <div class="wf-logo"></div><div class="wf-logo"></div><div class="wf-logo"></div>
-    </section>
-    <section class="wf-grid">
-      <div class="wf-card"><div class="wf-img sm"></div><div class="wf-line" style="width:70%"></div><div class="wf-line" style="width:100%"></div><div class="wf-line" style="width:85%"></div></div>
-      <div class="wf-card"><div class="wf-img sm"></div><div class="wf-line" style="width:70%"></div><div class="wf-line" style="width:100%"></div><div class="wf-line" style="width:85%"></div></div>
-      <div class="wf-card"><div class="wf-img sm"></div><div class="wf-line" style="width:70%"></div><div class="wf-line" style="width:100%"></div><div class="wf-line" style="width:85%"></div></div>
-    </section>
-    <section class="wf-split">
-      <div class="wf-img"></div>
-      <div>
-        <div class="wf-line" style="width:45%"></div><div class="wf-line" style="width:100%"></div><div class="wf-line" style="width:95%"></div><div class="wf-line" style="width:70%"></div>
-        <div class="wf-btns"><div class="wf-btn"></div></div>
-      </div>
-    </section>
-    <section class="wf-split rev">
-      <div>
-        <div class="wf-line" style="width:45%"></div><div class="wf-line" style="width:100%"></div><div class="wf-line" style="width:95%"></div><div class="wf-line" style="width:70%"></div>
-        <div class="wf-btns"><div class="wf-btn"></div></div>
-      </div>
-      <div class="wf-img"></div>
-    </section>
-    <section class="wf-grid">
-      <div class="wf-card"><div class="wf-img sm"></div><div class="wf-line" style="width:70%"></div><div class="wf-line" style="width:100%"></div><div class="wf-line" style="width:85%"></div></div>
-      <div class="wf-card"><div class="wf-img sm"></div><div class="wf-line" style="width:70%"></div><div class="wf-line" style="width:100%"></div><div class="wf-line" style="width:85%"></div></div>
-      <div class="wf-card"><div class="wf-img sm"></div><div class="wf-line" style="width:70%"></div><div class="wf-line" style="width:100%"></div><div class="wf-line" style="width:85%"></div></div>
-    </section>
-    <section class="wf-band">
-      <div class="wf-line" style="width:40%"></div><div class="wf-line" style="width:60%"></div>
-      <div class="wf-btns center"><div class="wf-btn"></div></div>
-    </section>
-    <footer class="wf-footer">
-      <div><div class="wf-line" style="width:50%"></div><div class="wf-line" style="width:70%"></div><div class="wf-line" style="width:60%"></div><div class="wf-line" style="width:65%"></div><div class="wf-line" style="width:55%"></div></div>
-      <div><div class="wf-line" style="width:50%"></div><div class="wf-line" style="width:70%"></div><div class="wf-line" style="width:60%"></div><div class="wf-line" style="width:65%"></div><div class="wf-line" style="width:55%"></div></div>
-      <div><div class="wf-line" style="width:50%"></div><div class="wf-line" style="width:70%"></div><div class="wf-line" style="width:60%"></div><div class="wf-line" style="width:65%"></div><div class="wf-line" style="width:55%"></div></div>
-      <div><div class="wf-line" style="width:50%"></div><div class="wf-line" style="width:70%"></div><div class="wf-line" style="width:60%"></div><div class="wf-line" style="width:65%"></div><div class="wf-line" style="width:55%"></div></div>
-    </footer>
+  <main class="stage" id="stage" data-mode="desktop">
+    <div class="device" id="device">
+      <iframe id="frame" title="Navigation prototype"></iframe>
+    </div>
   </main>
 
-  <!-- Prototype scaffolding: jump between page states -->
-  <div class="proto-switch" role="group" aria-label="Prototype page">
-    <a href="#/commerce" data-route="commerce">Commerce</a>
-    <a href="#/bigcommerce" data-route="bigcommerce">BigCommerce</a>
-    <a href="#/feedonomics" data-route="feedonomics">Feedonomics</a>
+  <div class="rv-legend" id="legend" hidden></div>
+
+  <div class="proto" id="proto">
+    <div class="proto-row">
+      <span class="proto-label">Version</span>
+      <select class="proto-sel" id="ver" aria-label="Version"></select>
+      <span class="proto-label">Variation</span>
+      <div class="seg" id="vari" role="group" aria-label="Variation"></div>
+      <button type="button" class="rv-toggle" id="review" aria-pressed="false">Review</button>
+    </div>
+    <div class="proto-row">
+      <span class="proto-label">Page</span>
+      <div class="seg" id="pages" role="group" aria-label="Page">
+        <button type="button" data-page="commerce">Commerce</button>
+        <button type="button" data-page="bigcommerce">BigCommerce</button>
+        <button type="button" data-page="feedonomics">Feedonomics</button>
+      </div>
+    </div>
+    <div class="status" id="status"></div>
   </div>
 
-  <script src="js/nav.js"></script>
+  <div class="acp-root" id="acp">
+    <button type="button" class="acp-tab" id="acp-tab" aria-label="Open controls" aria-expanded="false">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      <span class="acp-badge" id="acp-badge" hidden></span>
+    </button>
+    <aside class="acp-panel" id="acp-panel" hidden aria-label="Controls">
+      <div class="acp-head"><h2 class="acp-title">Controls</h2><button type="button" class="acp-x" id="acp-x" aria-label="Close controls">&times;</button></div>
+      <div class="acp-body" id="acp-body"></div>
+      <div class="acp-foot">
+        <button type="button" class="acp-copy" id="acp-copy" disabled>No changes yet</button>
+        <button type="button" class="acp-resetall" id="acp-reset" disabled>Reset all</button>
+      </div>
+    </aside>
+  </div>
+
+  <script src="js/shell.js"></script>
 </body>
 </html>

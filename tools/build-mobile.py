@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Builds mobile.html from the menus in index.html, so the mobile prototype
+"""Builds mobile.html from the menus in desktop.html, so the mobile prototype
 always uses the same links and content as desktop.   python3 tools/build-mobile.py"""
 import re, pathlib
 
 root = pathlib.Path(__file__).resolve().parent.parent
-src = (root / "index.html").read_text()
+src = (root / "desktop.html").read_text()
 
 def menu_inner(menu_id):
     idx = src.index(f'id="{menu_id}"')
@@ -156,6 +156,7 @@ html = f'''<!doctype html>
   </div>
 
   <script src="js/mobile.js"></script>
+  <script src="js/embed.js"></script>
 </body>
 </html>
 '''

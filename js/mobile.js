@@ -134,6 +134,8 @@
     }
   }
   variantBtns.forEach((b) => b.addEventListener('click', () => setVariant(b.dataset.variant)));
+  // The review shell (index.html) switches options through this
+  window.__navSetVariant = (v) => setVariant(v === '2' ? '2' : '1', { push: false });
 
   /* ---- Routing ---------------------------------------------------------- */
   let lastHash = null;
