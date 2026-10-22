@@ -62,6 +62,6 @@ Deep links: `#desktop-1`, `#mobile-2`, and a page after the variation, for examp
 - The Commerce bar is sticky on Commerce pages. On BigCommerce and Feedonomics pages it scrolls away and the Solution bar stays pinned.
 - Menu links go medium weight, nudge 4px right and show an arrow on hover. Hovering a menu item dims the others, then they fade back after a short pause.
 - Cards (Surface, Integrations, the AI Labs strip) are one big link.
-- On mobile, rows with a chevron drill into a panel with a Back row.
+- On mobile, rows with a chevron drill into a panel with a Back row, and a scrim dims the page while any menu is open (tap it to close).
 
 Motion timing and easing are variables at the top of `css/styles.css` and `css/mobile.css`; `prefers-reduced-motion` turns animation off.

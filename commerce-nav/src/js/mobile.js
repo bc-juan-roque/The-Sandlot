@@ -64,7 +64,7 @@
     size(el);
   }
   function syncScrim() {
-    body.classList.toggle('m-scrim-on', variant() === '2' && isOpen('commerce'));
+    body.classList.toggle('m-scrim-on', Object.keys(menus).some(isOpen));
   }
 
   function open(k) {
@@ -112,7 +112,7 @@
 
   // Choosing anything closes the menus (the hash change does the rest)
   $$('.m-menu a').forEach((a) => a.addEventListener('click', () => closeAll()));
-  $('[data-scrim]').addEventListener('click', () => close('commerce'));
+  $('[data-scrim]').addEventListener('click', closeAll);
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') { const k = Object.keys(menus).find(isOpen); if (k) { e.preventDefault(); close(k); menus[k].toggle.focus(); } }
   });

@@ -163,7 +163,7 @@ body[data-page="feedonomics"] .m-product[data-brand="feedonomics"] {
 }
 .m-anchor .m-menu__inner { overflow: visible; }
 
-/* Scrim (floating option only) */
+/* Scrim: dims the page while any menu is open (the bars and menus sit above it) */
 .m-scrim {
   position: fixed;
   top: 0;
