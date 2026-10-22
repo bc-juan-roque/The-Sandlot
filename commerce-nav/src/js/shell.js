@@ -65,7 +65,7 @@
     { id: 'mDur',     label: 'Mobile menu animation',     type: 'range', value: 600,  min: 0, max: 1200, step: 20, unit: 'ms', group: 'Animation', vars: (v) => ({ '--m-dur': `${v / 1000}s` }) },
     { id: 'loadDelay', label: 'Commerce bar on load: first item starts after', type: 'range', value: 120, min: 0, max: 800, step: 20, unit: 'ms', group: 'Solution bar entrance', vars: (v) => ({ '--load-delay': `${v}ms` }) },
     { id: 'subExtend', label: 'Solution bar: extend-down duration', type: 'range', value: 750, min: 100, max: 1500, step: 50, unit: 'ms', group: 'Solution bar entrance', vars: (v) => ({ '--sub-extend': `${v}ms` }) },
-    { id: 'subDelay',  label: 'Solution bar: first item starts after', type: 'range', value: 280, min: 0, max: 800, step: 20, unit: 'ms', group: 'Solution bar entrance', vars: (v) => ({ '--sub-delay': `${v}ms` }) },
+    { id: 'subDelay',  label: 'Solution bar: first item starts after', type: 'range', value: 180, min: 0, max: 800, step: 20, unit: 'ms', group: 'Solution bar entrance', vars: (v) => ({ '--sub-delay': `${v}ms` }) },
     { id: 'subStagger', label: 'Bars: gap between items (Commerce on load, Solution on arrival)', type: 'range', value: 60, min: 0, max: 200, step: 10, unit: 'ms', group: 'Solution bar entrance', vars: (v) => ({ '--sub-stagger': `${v}ms` }) },
     { id: 'hoverClose', label: 'Desktop var 2, menu switch: wait before closing on leave', type: 'range', value: 200, min: 0, max: 600, step: 20, unit: 'ms', group: 'Menu switching', vars: (v) => ({ '--hover-close': `${v}ms` }) },
     { id: 'hoverDelay', label: 'Desktop var 2, hover intent before opening or switching', type: 'range', value: 90, min: 0, max: 400, step: 10, unit: 'ms', group: 'Menu switching', vars: (v) => ({ '--hover-delay': `${v}ms` }) },

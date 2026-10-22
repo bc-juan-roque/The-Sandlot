@@ -188,7 +188,7 @@ body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"] .nav--sub > li,
 body[data-page="bigcommerce"] .sub-bar[data-brand="bigcommerce"] .sub-bar__right > *,
 body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"] .sub-bar__right > * {
   animation: sub-item-in 0.55s var(--ease-out) backwards;
-  animation-delay: calc(var(--sub-delay, 280ms) + var(--i, 0) * var(--sub-stagger, 60ms));
+  animation-delay: calc(var(--sub-delay, 180ms) + var(--i, 0) * var(--sub-stagger, 60ms));
 }
 .sub-bar__label { --i: 0; }
 .nav--sub > li:nth-child(1) { --i: 1; }

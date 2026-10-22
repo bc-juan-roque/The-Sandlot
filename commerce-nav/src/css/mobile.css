@@ -130,7 +130,7 @@ body[data-page="feedonomics"] .m-product[data-brand="feedonomics"] .m-productbar
 body[data-page="bigcommerce"] .m-product[data-brand="bigcommerce"] .m-productbar > svg,
 body[data-page="feedonomics"] .m-product[data-brand="feedonomics"] .m-productbar > svg {
   animation: bar-item-in 0.55s var(--ease-out) backwards;
-  animation-delay: calc(var(--sub-delay, 280ms) + var(--i, 0) * var(--sub-stagger, 60ms));
+  animation-delay: calc(var(--sub-delay, 180ms) + var(--i, 0) * var(--sub-stagger, 60ms));
 }
 .m-productbar__name { --i: 0; }
 .m-productbar > svg { --i: 1; }
