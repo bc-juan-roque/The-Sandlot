@@ -26,6 +26,7 @@
   --text-inverse: #fff;         /* Type/Color/Inverse */
   --surface: #fff;              /* Surface/Base */
   --surface-2: #f2f4f7;         /* Surface/Secondary */
+  --surface-bar: #f9fafb;       /* the product (Solution) bar: the subtlest gray, lighter than Surface/Secondary */
   --ai-star-from: #0d52ff;      /* AI star gradient, top left */
   --ai-star-to: #ffb4dc;        /* AI star gradient, bottom right (a lighter pink) */
   --surface-inverse: #000;      /* Surface/Inverse */
@@ -201,6 +202,7 @@ body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"] .sub-bar__right
 .sub-bar__right > :nth-child(3) { --i: 8; }
 .bar--sub {
   height: var(--sub-h);
+  background: var(--surface-bar);
   padding: 8px var(--gutter);
   gap: 28px;
   font-size: var(--type-s);

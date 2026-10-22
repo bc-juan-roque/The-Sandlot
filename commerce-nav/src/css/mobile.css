@@ -111,7 +111,7 @@ body[data-page="feedonomics"] .m-product[data-brand="feedonomics"] {
   padding: 0 16px;
   border: 0;
   border-bottom: 1px solid var(--border);
-  background: var(--surface);
+  background: var(--surface-bar);
   color: var(--text);
   font: inherit;
   font-size: var(--type-s);
