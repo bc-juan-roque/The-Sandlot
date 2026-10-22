@@ -25,6 +25,17 @@
     }
   });
 
+  // The page lives in a srcdoc frame, where a plain "#/..." link resolves against the shell's URL and
+  // would load the shell inside the frame. Handle in-page links here instead.
+  document.addEventListener('click', (e) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    e.preventDefault();
+    const h = a.getAttribute('href');
+    if (h && h.length > 1) location.hash = h;
+  });
+
   window.addEventListener('hashchange', () => post({ type: 'route', hash: location.hash }));
   post({ type: 'ready', hash: location.hash });
 })();

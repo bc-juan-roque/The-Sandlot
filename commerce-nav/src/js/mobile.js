@@ -28,7 +28,10 @@
   const pages = new Map();
   const register = (section, label, owner, slugOverride) => {
     const key = `${section}/${slugOverride || slugify(label)}`;
-    if (!pages.has(key)) pages.set(key, { title: clean(label), owner });
+    const existing = pages.get(key);
+    if (!existing) pages.set(key, { title: clean(label), owner });
+    // Prefer the more specific parent: a product menu row over the Commerce menu's Solutions row
+    else if (owner && owner !== drillRowFor('v-solutions') && (!existing.owner || existing.owner === drillRowFor('v-solutions'))) existing.owner = owner;
     return key;
   };
 
