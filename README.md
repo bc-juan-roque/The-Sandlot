@@ -34,7 +34,7 @@ Routes live in the URL hash: `#/<section>` for a home page and
 Sections are `commerce`, `bigcommerce` and `feedonomics`, and a page opens with
 the matching bar: the Commerce bar alone, or the Commerce bar plus that Solution's bar.
 
-- Routes are generated in `js/nav.js` from the links in `index.html`, so adding a
+- Routes are generated in `js/nav.js` from the links in `desktop.html`, so adding a
   link to the markup gives it a page automatically.
 - Items that appear in more than one menu share one page.
 - Menu buttons (Solutions, Learning, Product Features, Integrations, Resources) open
