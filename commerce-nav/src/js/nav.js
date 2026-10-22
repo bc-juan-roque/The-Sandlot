@@ -118,21 +118,43 @@
     const t = openTrigger;
     openTrigger = null;
     t.setAttribute('aria-expanded', 'false');
+    panelOf(t).style.setProperty('--enter-x', '0px');
     panelOf(t).classList.remove('is-open');
     body.classList.remove('menu-open');
     if (restoreFocus) t.focus();
   }
 
+  const cssNum = (name, fallback) => {
+    const v = parseFloat(getComputedStyle(document.documentElement).getPropertyValue(name));
+    return Number.isNaN(v) ? fallback : v;
+  };
+  // Change a property with no transition (set, force a reflow, hand transitions back)
+  const instantly = (el, fn) => { el.style.transition = 'none'; fn(); void el.offsetWidth; el.style.transition = ''; };
+
   function open(trigger, { focusFirst = false } = {}) {
     if (openTrigger === trigger) return;
-    // Hand over from the previous menu so the two cross-fade
-    if (openTrigger) {
-      openTrigger.setAttribute('aria-expanded', 'false');
-      panelOf(openTrigger).classList.remove('is-open');
-    }
+    const prev = openTrigger;
     const panel = panelOf(trigger);
+
+    // Moving from one open menu to another: the old one slides out toward where we came from,
+    // the new one slides in from the direction we are heading.
+    let enter = 0;
+    if (prev) {
+      const dx = Math.sign(trigger.getBoundingClientRect().left - prev.getBoundingClientRect().left) || 1;
+      const dist = cssNum('--switch-slide', 18);
+      const prevPanel = panelOf(prev);
+      prev.setAttribute('aria-expanded', 'false');
+      prevPanel.classList.add('is-leaving');
+      prevPanel.style.setProperty('--enter-x', `${-dx * dist}px`);
+      prevPanel.classList.remove('is-open');
+      setTimeout(() => { if (!prevPanel.classList.contains('is-open')) prevPanel.classList.remove('is-leaving'); }, 900);
+      enter = dx * dist;
+    }
+
+    instantly(panel, () => panel.style.setProperty('--enter-x', '0px'));
     trigger.setAttribute('aria-expanded', 'true');
-    fit(panel);
+    fit(panel);                      // measure with no sideways offset
+    instantly(panel, () => panel.style.setProperty('--enter-x', `${enter}px`));
     panel.classList.add('is-open');
     body.classList.add('menu-open');
     openTrigger = trigger;
@@ -141,6 +163,17 @@
       if (first) setTimeout(() => first.focus({ preventScroll: true }), 60);
     }
   }
+
+  // Once a menu is open, hovering another menu button switches to it (after a short hover intent)
+  let hoverTimer = null;
+  triggers.forEach((t) => {
+    t.addEventListener('pointerenter', (e) => {
+      if (e.pointerType === 'touch' || !openTrigger || openTrigger === t) return;
+      clearTimeout(hoverTimer);
+      hoverTimer = setTimeout(() => { if (openTrigger && openTrigger !== t) open(t); }, cssNum('--hover-delay', 90));
+    });
+    t.addEventListener('pointerleave', () => clearTimeout(hoverTimer));
+  });
 
   triggers.forEach((t) => {
     t.addEventListener('click', (e) => {
