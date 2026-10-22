@@ -159,9 +159,25 @@ body:not([data-page="commerce"]) .commerce-bar .bar__right > .btn {
 body[data-page="bigcommerce"] .sub-bar[data-brand="bigcommerce"],
 body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"] {
   display: block;
-  /* The bar extends down out of the Commerce bar (clipped, with the page below easing down to make room).
-     `backwards` only, so nothing stays clipped once it has finished and the menus can hang below it. */
+  /* The bar grows down out of the Commerce bar: its bottom line starts at the Commerce bar's line and travels
+     down, with the page below moving with it. `backwards` only, so nothing stays clipped once it has finished
+     and the menus can hang below it. */
   animation: sub-extend var(--sub-extend, 0.75s) var(--ease-out) backwards;
+}
+.sub-bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--border);
+  opacity: 0;
+  pointer-events: none;
+}
+body[data-page="bigcommerce"] .sub-bar[data-brand="bigcommerce"]::after,
+body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"]::after {
+  animation: sub-line var(--sub-extend, 0.75s) var(--ease-out) backwards;
 }
 /* Its contents then fade in one after another: label, nav items, then the buttons */
 body[data-page="bigcommerce"] .sub-bar[data-brand="bigcommerce"] .bar--sub > .sub-bar__label,
@@ -207,8 +223,12 @@ body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"] .sub-bar__right
 }
 
 @keyframes sub-extend {
-  from { clip-path: inset(0 0 100% 0); margin-bottom: calc(var(--sub-h) * -1); }
-  to   { clip-path: inset(0 0 0 0);    margin-bottom: 0; }
+  from { height: 0; overflow: hidden; }
+  to   { height: var(--sub-h); overflow: hidden; }
+}
+/* The bar's bottom line, riding the moving edge while it extends (the real border takes over at the end) */
+@keyframes sub-line {
+  from, to { opacity: 1; }
 }
 @keyframes sub-item-in {
   from { opacity: 0; transform: translateY(-5px); }
