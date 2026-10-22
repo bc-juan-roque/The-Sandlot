@@ -314,7 +314,8 @@ body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"] {
 
 /* Lists */
 .list { display: flex; flex-direction: column; gap: 12px; }
-.list--bordered { border-left: 1px solid var(--border); padding-left: 9px; }
+/* Capabilities lists (Industries, Teams): plain lists, no side border */
+.list--bordered { border-left: 0; padding-left: 0; }
 
 /* ----- Sub-nav links: bold + nudge right + arrow (Lattice-style) --------- */
 .link {
