@@ -8,6 +8,9 @@
    where section is commerce, bigcommerce or feedonomics.
 */
 (() => {
+  // Review shell: start on the page it asks for
+  if (window.__BOOT && window.__BOOT.hash) location.hash = window.__BOOT.hash;
+
   const body = document.body;
   const triggers = [...document.querySelectorAll('[data-menu]')];
   const switchLinks = [...document.querySelectorAll('.proto-switch a')];

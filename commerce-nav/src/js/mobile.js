@@ -4,6 +4,9 @@
    - Same routes as desktop: #/<section>  or  #/<section>/<item>
 */
 (() => {
+  // Review shell: start on the page and option it asks for
+  if (window.__BOOT && window.__BOOT.hash) location.hash = window.__BOOT.hash;
+
   const body = document.body;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -173,7 +176,8 @@
   }
   window.addEventListener('hashchange', route);
 
-  const start = new URLSearchParams(location.search).get('v') === '2' ? '2' : '1';
+  const wanted = window.__BOOT ? window.__BOOT.v : new URLSearchParams(location.search).get('v');
+  const start = wanted === '2' ? '2' : '1';
   setVariant(start, { push: false });
   route();
 })();

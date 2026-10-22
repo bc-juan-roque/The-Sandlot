@@ -1,65 +1,25 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Commerce Navigation Prototypes</title>
-  <link rel="stylesheet" href="css/shell.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Sandlot</title>
+<style>
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,sans-serif;background:#f3f3f5;color:#1a1a1a;-webkit-font-smoothing:antialiased}
+main{max-width:720px;margin:0 auto;padding:72px 24px}
+h1{font-size:28px;letter-spacing:-.02em;margin:0 0 6px}
+p.sub{color:#666;margin:0 0 36px}
+a.card{display:block;background:#fff;border:1px solid #e3e3e8;border-radius:10px;padding:18px 20px;margin-bottom:12px;text-decoration:none;color:inherit}
+a.card:hover{border-color:#1a1a1a}
+a.card b{display:block;font-size:16px;margin-bottom:4px}
+a.card span{color:#666;font-size:13.5px}
+</style>
 </head>
 <body>
-  <!-- Review shell: faux browser bar + the prototype in a frame + version/variation switcher.
-       Links look like  #mobile-2/bigcommerce/pricing  (version-variation/page). -->
-  <div class="addr" id="addr">
-    <button type="button" data-nav="back" aria-label="Back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
-    <button type="button" data-nav="forward" aria-label="Forward"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
-    <div class="url">
-      <svg class="lock" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-      <span class="host">commerce.com</span><span class="path" id="path">/</span>
-    </div>
-  </div>
-
-  <main class="stage" id="stage" data-mode="desktop">
-    <div class="device" id="device">
-      <iframe id="frame" title="Navigation prototype"></iframe>
-    </div>
-  </main>
-
-  <div class="rv-legend" id="legend" hidden></div>
-
-  <div class="proto" id="proto">
-    <div class="proto-row">
-      <span class="proto-label">Version</span>
-      <select class="proto-sel" id="ver" aria-label="Version"></select>
-      <span class="proto-label">Variation</span>
-      <div class="seg" id="vari" role="group" aria-label="Variation"></div>
-      <button type="button" class="rv-toggle" id="review" aria-pressed="false">Review</button>
-    </div>
-    <div class="proto-row">
-      <span class="proto-label">Page</span>
-      <div class="seg" id="pages" role="group" aria-label="Page">
-        <button type="button" data-page="commerce">Commerce</button>
-        <button type="button" data-page="bigcommerce">BigCommerce</button>
-        <button type="button" data-page="feedonomics">Feedonomics</button>
-      </div>
-    </div>
-    <div class="status" id="status"></div>
-  </div>
-
-  <div class="acp-root" id="acp">
-    <button type="button" class="acp-tab" id="acp-tab" aria-label="Open controls" aria-expanded="false">
-      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-      <span class="acp-badge" id="acp-badge" hidden></span>
-    </button>
-    <aside class="acp-panel" id="acp-panel" hidden aria-label="Controls">
-      <div class="acp-head"><h2 class="acp-title">Controls</h2><button type="button" class="acp-x" id="acp-x" aria-label="Close controls">&times;</button></div>
-      <div class="acp-body" id="acp-body"></div>
-      <div class="acp-foot">
-        <button type="button" class="acp-copy" id="acp-copy" disabled>No changes yet</button>
-        <button type="button" class="acp-resetall" id="acp-reset" disabled>Reset all</button>
-      </div>
-    </aside>
-  </div>
-
-  <script src="js/shell.js"></script>
+<main>
+  <h1>The Sandlot</h1>
+  <p class="sub">Interactive concepts for review. Each one is a single self-contained page.</p>
+  <a class="card" href="commerce-nav/"><b>Commerce navigation</b><span>Commerce bar plus BigCommerce / Feedonomics Solution bars · Desktop and Mobile (push down vs. floating menu) · Review toggle lists open questions · control panel via the gear icon</span></a>
+</main>
 </body>
 </html>

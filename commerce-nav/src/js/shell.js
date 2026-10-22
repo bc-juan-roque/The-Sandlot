@@ -10,7 +10,6 @@
   const VERSIONS = {
     desktop: {
       label: 'Desktop',
-      file: 'desktop.html',
       mode: 'desktop',
       variations: {
         1: {
@@ -26,7 +25,6 @@
     },
     mobile: {
       label: 'Mobile',
-      file: 'mobile.html',
       mode: 'mobile',
       variations: {
         1: {
@@ -88,9 +86,10 @@
 
   function loadFrame() {
     const v = VERSIONS[state.ver];
-    const q = state.ver === 'mobile' ? `?v=${state.vari}` : '';
     stage.dataset.mode = v.mode;
-    frame.src = `${v.file}${q}${innerHash()}`;
+    // The prototype pages are embedded in this file. The marker tells the page where to start.
+    const boot = JSON.stringify({ hash: innerHash(), v: state.vari }).replace(/</g, '\\u003c');
+    frame.srcdoc = window.__PAGES[state.ver].replace('<!--BOOT-->', '<scr' + 'ipt>window.__BOOT=' + boot + '</scr' + 'ipt>');
   }
 
   function render() {
