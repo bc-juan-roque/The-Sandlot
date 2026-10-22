@@ -17,6 +17,9 @@
     <symbol id="i-arrow" viewBox="0 0 12 11"><path d="M11.2217 5.0166C11.4167 5.21188 11.4169 5.52845 11.2217 5.72363L6.20508 10.7402L5.85156 10.3857L5.49805 10.0322L9.66211 5.86719H0V4.86719H9.6582L5.49805 0.707031L6.20508 0L11.2217 5.0166Z" fill="currentColor"/></symbol>
     <symbol id="i-bc" viewBox="0 0 20 20"><path d="M14.2929 4.7071C14.9229 4.07714 16 4.52331 16 5.41421V16C16 16.5523 15.5523 17 15 17H4.41421C3.52331 17 3.07714 15.9229 3.70711 15.2929L14.2929 4.7071Z" fill="currentColor"/></symbol>
     <symbol id="i-fdx" viewBox="0 0 20 20"><path d="M8.58579 3.41407C9.36684 2.63302 10.6332 2.63302 11.4142 3.41407L16.5859 8.58572C17.3669 9.36677 17.3669 10.6331 16.5859 11.4141L10 18L1.99993 9.99993L8.58579 3.41407Z" fill="currentColor"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.94434 15.0002C11.8411 15.0002 15 11.8414 15 7.94458C15 4.04785 11.8411 0.888916 7.94434 0.888916C4.0476 0.888916 0.888672 4.04785 0.888672 7.94458C0.888672 11.8414 4.0476 15.0002 7.94434 15.0002Z"/><path d="M0.888672 7.94458H15"/><path d="M10.6584 7.94458C10.5251 10.5248 9.57473 12.9957 7.94467 15.0002C6.31462 12.9957 5.36425 10.5248 5.23096 7.94458C5.36425 5.36439 6.31462 2.89343 7.94467 0.888916C9.57473 2.89343 10.5251 5.36439 10.6584 7.94458Z"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.4064 2H1.53625C1.24009 2 1 2.24497 1 2.54715V11.3015C1 11.6037 1.24009 11.8487 1.53625 11.8487H14.4064C14.7025 11.8487 14.9426 11.6037 14.9426 11.3015V2.54715C14.9426 2.24497 14.7025 2 14.4064 2Z"/><path d="M6.89868 11.8488L5.82617 14.5845"/><path d="M9.04395 11.8488L10.1165 14.5845"/><path d="M4.75391 14.5844H11.189"/></symbol>
+    <symbol id="i-fpo" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="14" height="14" rx="3"/><path d="M3.5 3.5 16.5 16.5M16.5 3.5 3.5 16.5"/></symbol>
     <defs>
       <!-- AI star: blue to a lighter pink, diagonally (colors are --ai-star-from / --ai-star-to in styles.css) -->
       <linearGradient id="ai-star-fill" x1="0" y1="0" x2="1" y2="1">
@@ -336,27 +339,46 @@
             <svg class="chev" aria-hidden="true"><use href="#i-chevron"/></svg>
           </button>
           <div class="menu menu--sub" id="menu-fdx-integrations" style="--w:860px" role="region" aria-label="Integrations">
-            <div class="menu__cols" style="--gap:28px">
-              <div class="group reveal" style="--d:0">
-                <p class="group__title">Overview</p>
-                <ul class="list">
-                  <li><a class="link" href="#"><span class="link__label">Supported Channels</span></a></li>
-                  <li><a class="link" href="#"><span class="link__label">Supported Platforms</span></a></li>
-                  <li><a class="btn btn--text btn--sm" href="#"><span>View all integrations</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></li>
-                </ul>
-              </div>
-              <div class="group reveal" style="--d:1">
-                <p class="group__title">Supported Platforms</p>
-                <ul class="list">
-                  <li><a class="link link--logo" href="#"><span class="logo" aria-hidden="true"><img class="logo__bw" src="assets/platforms/shopify.svg" alt="" width="20" height="20"><img class="logo__color" src="assets/platforms/shopify-color.svg" alt="" width="20" height="20"></span><span class="link__label">Shopify</span></a></li>
-                  <li><a class="link link--logo" href="#"><span class="logo" aria-hidden="true"><img class="logo__bw" src="assets/platforms/bigcommerce.svg" alt="" width="20" height="20"><img class="logo__color" src="assets/platforms/bigcommerce-color.svg" alt="" width="20" height="20"></span><span class="link__label">BigCommerce</span></a></li>
-                  <li><a class="link link--logo" href="#"><span class="logo" aria-hidden="true"><img class="logo__bw" src="assets/platforms/oracle-netsuite.svg" alt="" width="20" height="20"><img class="logo__color" src="assets/platforms/oracle-netsuite-color.svg" alt="" width="20" height="20"></span><span class="link__label">Oracle NetSuite</span></a></li>
-                  <li><a class="link link--logo" href="#"><span class="logo" aria-hidden="true"><img class="logo__bw" src="assets/platforms/oracle-commerce.svg" alt="" width="20" height="20"><img class="logo__color" src="assets/platforms/oracle-commerce-color.svg" alt="" width="20" height="20"></span><span class="link__label">Oracle Commerce</span></a></li>
-                  <li><a class="link link--logo" href="#"><span class="logo" aria-hidden="true"><img class="logo__bw" src="assets/platforms/salesforce-commerce-cloud.svg" alt="" width="20" height="20"><img class="logo__color" src="assets/platforms/salesforce-commerce-cloud-color.svg" alt="" width="20" height="20"></span><span class="link__label">Salesforce Commerce Cloud</span></a></li>
-                  <li><a class="link link--logo" href="#"><span class="logo" aria-hidden="true"><img class="logo__bw" src="assets/platforms/adobe-commerce-magento.svg" alt="" width="20" height="20"><img class="logo__color" src="assets/platforms/adobe-commerce-magento-color.svg" alt="" width="20" height="20"></span><span class="link__label">Adobe Commerce / Magento</span></a></li>
-                  <li><a class="link link--logo" href="#"><span class="logo" aria-hidden="true"><img class="logo__bw" src="assets/platforms/woocommerce.svg" alt="" width="20" height="20"><img class="logo__color" src="assets/platforms/woocommerce-color.svg" alt="" width="20" height="20"></span><span class="link__label">WooCommerce</span></a></li>
-                  <li><a class="link link--logo" href="#"><span class="logo" aria-hidden="true"><img class="logo__bw" src="assets/platforms/custom.svg" alt="" width="20" height="20"><img class="logo__color" src="assets/platforms/custom-color.svg" alt="" width="20" height="20"></span><span class="link__label">Custom</span></a></li>
-                </ul>
+            <div class="menu__cols" style="--gap:48px">
+              <div class="product-row">
+                <div class="product">
+                  <a class="product__head" href="#" data-title="Supported Channels">
+                    <span class="tile"><svg aria-hidden="true"><use href="#i-globe"/></svg></span>
+                    <span class="product__text">
+                      <span class="product__name">Supported Channels</span>
+                      <span class="product__tag">Sell on thousands of ad channels, marketplaces, and AI surfaces.</span>
+                    </span>
+                  </a>
+                  <ul class="tree">
+                    <li><a class="link link--logo" href="#"><span class="logo logo--fpo" aria-hidden="true"><svg><use href="#i-fpo"/></svg></span><span class="link__label">Google Shopping</span></a></li>
+                    <li><a class="link link--logo" href="#"><span class="logo logo--fpo" aria-hidden="true"><svg><use href="#i-fpo"/></svg></span><span class="link__label">Facebook</span></a></li>
+                    <li><a class="link link--logo" href="#"><span class="logo logo--fpo" aria-hidden="true"><svg><use href="#i-fpo"/></svg></span><span class="link__label">Microsoft Advertising</span></a></li>
+                    <li><a class="link link--logo" href="#"><span class="logo logo--fpo" aria-hidden="true"><svg><use href="#i-fpo"/></svg></span><span class="link__label">CJ Affiliate</span></a></li>
+                    <li><a class="link link--logo" href="#"><span class="logo logo--fpo" aria-hidden="true"><svg><use href="#i-fpo"/></svg></span><span class="link__label">Amazon</span></a></li>
+                    <li><a class="link link--logo" href="#"><span class="logo logo--fpo" aria-hidden="true"><svg><use href="#i-fpo"/></svg></span><span class="link__label">Walmart</span></a></li>
+                    <li><a class="link link--logo" href="#"><span class="logo logo--fpo" aria-hidden="true"><svg><use href="#i-fpo"/></svg></span><span class="link__label">Snapchat</span></a></li>
+                    <li><a class="link link--logo" href="#"><span class="logo logo--fpo" aria-hidden="true"><svg><use href="#i-fpo"/></svg></span><span class="link__label">TikTok Shop</span></a></li>
+                  </ul>
+                </div>
+                <div class="product">
+                  <a class="product__head" href="#" data-title="Supported Platforms">
+                    <span class="tile"><svg aria-hidden="true"><use href="#i-monitor"/></svg></span>
+                    <span class="product__text">
+                      <span class="product__name">Supported Platforms</span>
+                      <span class="product__tag">Unify your stack and grow faster with better feed management.</span>
+                    </span>
+                  </a>
+                  <ul class="tree">
+                    <li><a class="link link--logo" href="#"><span class="logo" aria-hidden="true"><img class="logo__bw" src="assets/platforms/shopify.svg" alt="" width="20" height="20"><img class="logo__color" src="assets/platforms/shopify-color.svg" alt="" width="20" height="20"></span><span class="link__label">Shopify</span></a></li>
+                    <li><a class="link link--logo" href="#"><span class="logo" aria-hidden="true"><img class="logo__bw" src="assets/platforms/bigcommerce.svg" alt="" width="20" height="20"><img class="logo__color" src="assets/platforms/bigcommerce-color.svg" alt="" width="20" height="20"></span><span class="link__label">BigCommerce</span></a></li>
+                    <li><a class="link link--logo" href="#"><span class="logo" aria-hidden="true"><img class="logo__bw" src="assets/platforms/oracle-netsuite.svg" alt="" width="20" height="20"><img class="logo__color" src="assets/platforms/oracle-netsuite-color.svg" alt="" width="20" height="20"></span><span class="link__label">Oracle NetSuite</span></a></li>
+                    <li><a class="link link--logo" href="#"><span class="logo" aria-hidden="true"><img class="logo__bw" src="assets/platforms/oracle-commerce.svg" alt="" width="20" height="20"><img class="logo__color" src="assets/platforms/oracle-commerce-color.svg" alt="" width="20" height="20"></span><span class="link__label">Oracle Commerce</span></a></li>
+                    <li><a class="link link--logo" href="#"><span class="logo" aria-hidden="true"><img class="logo__bw" src="assets/platforms/salesforce-commerce-cloud.svg" alt="" width="20" height="20"><img class="logo__color" src="assets/platforms/salesforce-commerce-cloud-color.svg" alt="" width="20" height="20"></span><span class="link__label">Salesforce Commerce Cloud</span></a></li>
+                    <li><a class="link link--logo" href="#"><span class="logo" aria-hidden="true"><img class="logo__bw" src="assets/platforms/adobe-commerce-magento.svg" alt="" width="20" height="20"><img class="logo__color" src="assets/platforms/adobe-commerce-magento-color.svg" alt="" width="20" height="20"></span><span class="link__label">Adobe Commerce / Magento</span></a></li>
+                    <li><a class="link link--logo" href="#"><span class="logo" aria-hidden="true"><img class="logo__bw" src="assets/platforms/woocommerce.svg" alt="" width="20" height="20"><img class="logo__color" src="assets/platforms/woocommerce-color.svg" alt="" width="20" height="20"></span><span class="link__label">WooCommerce</span></a></li>
+                    <li><a class="link link--logo" href="#"><span class="logo" aria-hidden="true"><img class="logo__bw" src="assets/platforms/custom.svg" alt="" width="20" height="20"><img class="logo__color" src="assets/platforms/custom-color.svg" alt="" width="20" height="20"></span><span class="link__label">Custom</span></a></li>
+                  </ul>
+                </div>
               </div>
               <div class="promo reveal" style="--d:2">
                 <span class="promo__eyebrow">Integrations</span>
