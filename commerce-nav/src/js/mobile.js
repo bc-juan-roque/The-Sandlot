@@ -69,8 +69,9 @@
 
   function open(k) {
     const m = menus[k];
-    // Option 1: one menu at a time, the other collapses
-    if (variant() === '1') Object.keys(menus).forEach((o) => { if (o !== k && isOpen(o)) close(o); });
+    // Option 1: one menu at a time, the other collapses.
+    // Option 2: opening the Commerce menu hides the product menu; the product menu can still open above it.
+    if (variant() === '1' || k === 'commerce') Object.keys(menus).forEach((o) => { if (o !== k && isOpen(o)) close(o); });
     size(m.el);
     m.el.classList.add('is-open');
     m.toggle.setAttribute('aria-expanded', 'true');

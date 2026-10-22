@@ -36,9 +36,9 @@
           ],
         },
         2: {
-          status: 'Floating: the Commerce menu is a card below the product bar. The product menu expands in place and pushes the card down.',
+          status: 'Floating: the Commerce menu is a card below the product bar. Opening it hides the product menu. The product menu can then be opened above it and pushes the card down.',
           notes: [
-            ['Both menus can be open', 'The product menu and the floating Commerce menu are independent. Confirm that is wanted, or whether opening one should dim or close the other.'],
+            ['Opening Commerce hides the product menu', 'Opening the Commerce menu collapses the product menu, as in option 1. Opening the product menu does not close the Commerce card; it expands above it and pushes it down. Confirm that asymmetry is wanted.'],
             ['The card moves', 'When the product menu expands, the card is pushed down and may sit mostly below the fold. It scrolls inside itself.'],
             ['Commerce menu needs the top of the page', 'On BigCommerce and Feedonomics pages the Commerce bar scrolls away, so its menu cannot be reopened until the page is back at the top.'],
           ],
@@ -107,6 +107,10 @@
       b.addEventListener('click', () => select(state.ver, k));
       vari.appendChild(b);
     });
+    // One variation means nothing to switch between, so hide the control
+    const many = Object.keys(v.variations).length > 1;
+    $('#vari-label').hidden = !many;
+    vari.hidden = !many;
     $('#status').textContent = v.variations[state.vari].status;
     renderPages();
     renderNotes();

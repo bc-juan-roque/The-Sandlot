@@ -3,7 +3,8 @@
    and menu components (links, product tree, cards).
    Option 1: the Commerce menu pushes the product bar down. Opening one menu
              collapses the other.
-   Option 2: the Commerce menu floats below the product bar. The product menu
+   Option 2: the Commerce menu floats below the product bar. Opening it hides the
+             product menu; the product menu can still open above it. The product menu
              expands in place and pushes the floating menu down.
    ========================================================================== */
 :root {
@@ -141,7 +142,7 @@ body[data-page="feedonomics"] .m-product[data-brand="feedonomics"] {
 .m-anchor .m-menu {
   display: block;
   position: absolute;
-  top: 8px;
+  top: 12px;
   left: 12px;
   right: 12px;
   max-height: calc(100dvh - 148px);

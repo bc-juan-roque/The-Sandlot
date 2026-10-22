@@ -43,12 +43,12 @@ The gear at the bottom right opens a control panel for animation timing, hover-f
 placeholder content. "Copy changes" lists what you changed so it can be applied back to the source;
 "Reset all" restores the defaults. Defaults live in the `CONTROLS` list in `js/shell.js`.
 
-**Versions and variations.** The bottom-left toolbar has a Version dropdown, Variation buttons and a Page switcher. Versions are defined in the `VERSIONS` object in `js/shell.js`; each holds numbered variations.
+**Versions and variations.** The bottom-left toolbar has a Version dropdown, Variation buttons (hidden when a version has only one) and a Page switcher. Versions are defined in the `VERSIONS` object in `js/shell.js`; each holds numbered variations.
 
 | Version | Variations | What it is |
 |---|---|---|
 | Desktop | 1 | Commerce bar plus a Solution bar for BigCommerce and Feedonomics. Menus open on click |
-| Mobile | 1–2 | Var 1 = push down: the Commerce menu expands under its bar and pushes the product bar down, one menu open at a time. Var 2 = floating: the Commerce menu is a card below the product bar; the product menu expands in place and pushes the card down |
+| Mobile | 1–2 | Var 1 = push down: the Commerce menu expands under its bar and pushes the product bar down, one menu open at a time. Var 2 = floating: the Commerce menu is a card below the product bar, and opening it hides the product menu; the product menu can then expand above the card and push it down |
 
 Deep links: `#desktop-1`, `#mobile-2`, and a page after the variation, for example
 `#mobile-2/bigcommerce/pricing`. The address bar and URL follow the page you are on.
