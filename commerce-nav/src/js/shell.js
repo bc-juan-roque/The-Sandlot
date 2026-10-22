@@ -24,9 +24,9 @@
           notes: DESKTOP_NOTES,
         },
         2: {
-          status: 'Same as 1, plus: once a menu is open, hovering another menu button switches to it with a slide and cross-fade.',
+          status: 'Same as 1, plus: once a menu is open, hovering another menu button glides the dropdown to the new menu while the contents fade in and out from the sides.',
           notes: [
-            ['Menus slide and cross-fade, they do not morph', 'Each menu is its own panel, so switching slides the old one out and the new one in from the direction you are heading. A single panel that resizes between them is possible if this does not feel right.'],
+            ['The dropdown glides between menus', 'The box moves and resizes from the old menu to the new one while the contents fade out and in from the sides, in the manner of Linear. It is built from each menu keeping its own panel, so check the handover mid-way, especially between the widest and narrowest menus.'],
             ['Hover only switches once a menu is open', 'Hovering a menu button with nothing open does nothing; the first open is still a click. Confirm that is wanted, or whether hover alone should open.'],
             ['Switching works across both bars', 'Hovering a Solution bar button while a Commerce bar menu is open switches to it, and the other way round.'],
           ].concat(DESKTOP_NOTES),
@@ -64,8 +64,9 @@
     { id: 'tMenu',    label: 'Desktop menu animation',    type: 'range', value: 500,  min: 0, max: 1200, step: 20, unit: 'ms', group: 'Animation', vars: (v) => ({ '--t-menu': `${v / 1000}s` }) },
     { id: 'mDur',     label: 'Mobile menu animation',     type: 'range', value: 600,  min: 0, max: 1200, step: 20, unit: 'ms', group: 'Animation', vars: (v) => ({ '--m-dur': `${v / 1000}s` }) },
     { id: 'hoverDelay', label: 'Desktop var 2, menu switch: hover delay', type: 'range', value: 90, min: 0, max: 400, step: 10, unit: 'ms', group: 'Menu switching', vars: (v) => ({ '--hover-delay': `${v}ms` }) },
-    { id: 'slide',    label: 'Desktop var 2, menu switch: slide distance', type: 'range', value: 18, min: 0, max: 60, step: 2, unit: 'px', group: 'Menu switching', vars: (v) => ({ '--switch-slide': `${v}px` }) },
-    { id: 'outFade',  label: 'Desktop var 2, menu switch: old menu fade-out', type: 'range', value: 220, min: 0, max: 600, step: 20, unit: 'ms', group: 'Menu switching', vars: (v) => ({ '--switch-out': `${v / 1000}s` }) },
+    { id: 'morph',    label: 'Desktop var 2, menu switch: glide duration', type: 'range', value: 420, min: 100, max: 1000, step: 20, unit: 'ms', group: 'Menu switching', vars: (v) => ({ '--switch-morph': `${v}ms` }) },
+    { id: 'slide',    label: 'Desktop var 2, menu switch: contents slide distance', type: 'range', value: 18, min: 0, max: 60, step: 2, unit: 'px', group: 'Menu switching', vars: (v) => ({ '--switch-slide': `${v}px` }) },
+    { id: 'outFade',  label: 'Desktop var 2, menu switch: old contents fade-out', type: 'range', value: 220, min: 0, max: 600, step: 20, unit: 'ms', group: 'Menu switching', vars: (v) => ({ '--switch-out': `${v / 1000}s` }) },
     { id: 'dim',      label: 'Desktop focus: dimmed items', type: 'range', value: 0.4, min: 0, max: 1, step: 0.05, unit: '', group: 'Hover focus', vars: (v) => ({ '--focus-dim': String(v) }) },
     { id: 'delay',    label: 'Desktop focus: wait before fading back', type: 'range', value: 320, min: 0, max: 1000, step: 20, unit: 'ms', group: 'Hover focus', vars: (v) => ({ '--focus-return-delay': `${v / 1000}s` }) },
     { id: 'back',     label: 'Desktop focus: fade-back time', type: 'range', value: 1000, min: 100, max: 2000, step: 50, unit: 'ms', group: 'Hover focus', vars: (v) => ({ '--focus-return-time': `${v / 1000}s` }) },

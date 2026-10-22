@@ -122,7 +122,6 @@
     const t = openTrigger;
     openTrigger = null;
     t.setAttribute('aria-expanded', 'false');
-    panelOf(t).style.setProperty('--enter-x', '0px');
     panelOf(t).classList.remove('is-open');
     body.classList.remove('menu-open');
     if (restoreFocus) t.focus();
@@ -134,37 +133,87 @@
   };
   // Change a property with no transition (set, force a reflow, hand transitions back)
   const instantly = (el, fn) => { el.style.transition = 'none'; fn(); void el.offsetWidth; el.style.transition = ''; };
+  const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Variation 2: moving between two open menus. The dropdown itself glides and resizes from the
+     old menu's box to the new one's, while the old contents fade out toward where you came from
+     and the new contents fade in from the direction you are heading. */
+  function morphSwitch(prev, trigger, panel) {
+    const prevPanel = panelOf(prev);
+    const dx = Math.sign(trigger.getBoundingClientRect().left - prev.getBoundingClientRect().left) || 1;
+    const dist = cssNum('--switch-slide', 18);
+    const morph = cssNum('--switch-morph', 420);
+    const out = cssNum('--switch-out', 0.22) * 1000;
+
+    const from = prevPanel.getBoundingClientRect();            // where the dropdown is now
+
+    // Put the new menu in its resting open state to find out where and how big it is
+    panel.style.transition = 'none';
+    fit(panel);
+    panel.classList.add('is-open');
+    const to = panel.getBoundingClientRect();
+    const shift = parseFloat(panel.style.getPropertyValue('--shift')) || 0;
+    void panel.offsetWidth;
+
+    // Old menu: its box disappears (the new menu's box takes over from the same spot), its contents fade out
+    prev.setAttribute('aria-expanded', 'false');
+    prevPanel.classList.add('is-morph-out');
+    const prevCols = prevPanel.querySelector('.menu__cols');
+    const fadeOut = prevCols.animate(
+      [{ opacity: 1, transform: 'translateX(0)' }, { opacity: 0, transform: `translateX(${-dx * dist}px)` }],
+      { duration: out, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' }
+    );
+    setTimeout(() => {
+      if (openTrigger === prev) return;                        // it was reopened in the meantime
+      instantly(prevPanel, () => prevPanel.classList.remove('is-open', 'is-morph-out'));
+      fadeOut.cancel();
+    }, out + 30);
+
+    // New menu: glide and resize from the old box, with its contents fading in from the side
+    panel.style.zIndex = '81';
+    panel.style.overflow = 'hidden';
+    const ease = 'cubic-bezier(.22, 1, .36, 1)';
+    const box = panel.animate([
+      { transform: `translate(${shift + from.left - to.left}px, ${from.top - to.top}px)`, width: `${from.width}px`, height: `${from.height}px` },
+      { transform: `translate(${shift}px, 0px)`, width: `${to.width}px`, height: `${to.height}px` },
+    ], { duration: morph, easing: ease });
+    const cols = panel.querySelector('.menu__cols');
+    const fadeIn = cols.animate(
+      [{ opacity: 0, transform: `translateX(${dx * dist}px)` }, { opacity: 1, transform: 'translateX(0)' }],
+      { duration: morph * 0.75, delay: out * 0.45, easing: ease, fill: 'backwards' }
+    );
+    const done = () => {
+      panel.style.overflow = '';
+      panel.style.zIndex = '';
+      panel.style.transition = '';
+    };
+    box.addEventListener('finish', done);
+    box.addEventListener('cancel', done);
+    setTimeout(done, morph + 80);     // in case the finish event never arrives (background tab)
+    void fadeIn;
+  }
 
   function open(trigger, { focusFirst = false } = {}) {
     if (openTrigger === trigger) return;
     const prev = openTrigger;
     const panel = panelOf(trigger);
 
-    // Moving from one open menu to another: the old one slides out toward where we came from,
-    // the new one slides in from the direction we are heading.
-    let enter = 0;
-    const slide = body.dataset.variant === '2';
-    if (prev && !slide) {
-      // Variation 1: a plain cross-fade
-      prev.setAttribute('aria-expanded', 'false');
-      panelOf(prev).classList.remove('is-open');
-    } else if (prev) {
-      const dx = Math.sign(trigger.getBoundingClientRect().left - prev.getBoundingClientRect().left) || 1;
-      const dist = cssNum('--switch-slide', 18);
-      const prevPanel = panelOf(prev);
-      prev.setAttribute('aria-expanded', 'false');
-      prevPanel.classList.add('is-leaving');
-      prevPanel.style.setProperty('--enter-x', `${-dx * dist}px`);
-      prevPanel.classList.remove('is-open');
-      setTimeout(() => { if (!prevPanel.classList.contains('is-open')) prevPanel.classList.remove('is-leaving'); }, 900);
-      enter = dx * dist;
-    }
+    // If this menu was only just handed over from and is still fading, bring it fully back
+    panel.classList.remove('is-morph-out');
+    panel.querySelector('.menu__cols').getAnimations().forEach((a) => a.cancel());
 
-    instantly(panel, () => panel.style.setProperty('--enter-x', '0px'));
     trigger.setAttribute('aria-expanded', 'true');
-    fit(panel);                      // measure with no sideways offset
-    instantly(panel, () => panel.style.setProperty('--enter-x', `${enter}px`));
-    panel.classList.add('is-open');
+    if (prev && body.dataset.variant === '2' && !reduceMotion() && panel.animate) {
+      morphSwitch(prev, trigger, panel);
+    } else {
+      // Variation 1: a plain cross-fade between the two menus
+      if (prev) {
+        prev.setAttribute('aria-expanded', 'false');
+        panelOf(prev).classList.remove('is-open');
+      }
+      fit(panel);
+      panel.classList.add('is-open');
+    }
     body.classList.add('menu-open');
     openTrigger = trigger;
     if (focusFirst) {

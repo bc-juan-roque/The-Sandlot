@@ -7,6 +7,7 @@
   --hover-delay: 90ms;
   --switch-slide: 18px;
   --switch-out: 0.22s;
+  --switch-morph: 420ms;
   --logo-w: 163px;
   --nav-gap: 40px;
   /* Type */
@@ -274,20 +275,24 @@ body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"] {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translate(calc(var(--shift, 0px) + var(--enter-x, 0px)), -10px) scale(0.985);
+  transform: translate(var(--shift, 0px), -10px) scale(0.985);
   transform-origin: 50% 0;
   transition:
     opacity 0.38s var(--ease),
     transform var(--t-menu) var(--ease-out),
     visibility 0s linear var(--t-menu);
 }
-/* Switching between open menus: the one leaving fades out quickly so the two don't pile up */
-.menu.is-leaving {
-  transition:
-    opacity var(--switch-out) var(--ease),
-    transform 0.5s var(--ease-out),
-    visibility 0s linear 0.5s;
+/* Variation 2, switching menus: the old dropdown's box hands over to the new one (nav.js);
+   only its contents fade out */
+.menu.is-morph-out {
+  z-index: 79;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  pointer-events: none;
+  transition: none !important;
 }
+
 .menu.is-open {
   opacity: 1;
   visibility: visible;
