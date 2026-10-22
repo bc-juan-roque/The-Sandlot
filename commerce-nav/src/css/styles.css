@@ -255,6 +255,11 @@ body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"] {
   z-index: 80;
   width: max-content;
   max-width: calc(100vw - 2 * var(--gutter));
+  max-height: var(--max-h, none);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
   padding: 24px 28px;
   background: var(--surface);
   border: 1px solid var(--border);

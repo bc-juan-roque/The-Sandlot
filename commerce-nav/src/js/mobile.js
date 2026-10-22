@@ -54,6 +54,15 @@
   const isOpen = (k) => menus[k].el.classList.contains('is-open');
   const variant = () => body.dataset.variant;
 
+  // Keep the floating card 24px clear of the bottom of the window; it scrolls inside itself past that
+  function fitFloat() {
+    const card = menus.commerce.el;
+    const anchor = card.offsetParent;
+    if (variant() !== '2' || !anchor) { card.style.removeProperty('--float-max'); return; }
+    const top = anchor.getBoundingClientRect().top + card.offsetTop;
+    card.style.setProperty('--float-max', `${Math.max(160, Math.floor(window.innerHeight - top - 24))}px`);
+  }
+
   function size(el) {
     const views = $('.m-views', el);
     const active = $('.m-view.is-active', el);
@@ -76,6 +85,7 @@
     m.el.classList.add('is-open');
     m.toggle.setAttribute('aria-expanded', 'true');
     syncScrim();
+    fitFloat();
   }
   function close(k) {
     const m = menus[k];
@@ -116,8 +126,11 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') { const k = Object.keys(menus).find(isOpen); if (k) { e.preventDefault(); close(k); menus[k].toggle.focus(); } }
   });
-  const resizeAll = () => Object.values(menus).forEach((m) => size(m.el));
+  const resizeAll = () => { Object.values(menus).forEach((m) => size(m.el)); fitFloat(); };
   window.addEventListener('resize', resizeAll);
+  window.addEventListener('scroll', fitFloat, { passive: true });
+  // The card sits under the product menu, so follow it while that expands or collapses
+  if (window.ResizeObserver) { const ro = new ResizeObserver(fitFloat); $$('.m-product, .m-commerce').forEach((e) => ro.observe(e)); }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(resizeAll);
 
   /* ---- Option 1 / Option 2 ---------------------------------------------- */

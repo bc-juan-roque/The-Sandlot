@@ -145,7 +145,7 @@ body[data-page="feedonomics"] .m-product[data-brand="feedonomics"] {
   top: 12px;
   left: 12px;
   right: 12px;
-  max-height: calc(100dvh - 148px);
+  max-height: var(--float-max, calc(100dvh - 148px));
   overflow-y: auto;
   overscroll-behavior: contain;
   border: 1px solid var(--border);

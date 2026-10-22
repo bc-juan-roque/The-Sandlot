@@ -101,6 +101,16 @@
     if (r.right > vw - margin) shift = vw - margin - r.right;
     if (r.left + shift < margin) shift = margin - r.left;
     panel.style.setProperty('--shift', `${Math.round(shift)}px`);
+    fitHeight(panel);
+  }
+
+  /* Keep a menu 24px clear of the bottom of the window. If it is taller than that
+     it scrolls inside itself, so the last item can always be reached. */
+  function fitHeight(panel) {
+    const parent = panel.offsetParent;
+    const top = (parent ? parent.getBoundingClientRect().top : 0) + panel.offsetTop;
+    const room = Math.floor(window.innerHeight - top - 24);
+    panel.style.setProperty('--max-h', `${Math.max(160, room)}px`);
   }
 
   function close({ restoreFocus = false } = {}) {
@@ -160,7 +170,8 @@
   /* If the bar that owns the open menu scrolls out of view, close the menu */
   window.addEventListener('scroll', () => {
     if (!openTrigger) return;
-    if (openTrigger.getBoundingClientRect().bottom <= 0) close();
+    if (openTrigger.getBoundingClientRect().bottom <= 0) { close(); return; }
+    fitHeight(panelOf(openTrigger));
   }, { passive: true });
 
   window.addEventListener('resize', () => {
