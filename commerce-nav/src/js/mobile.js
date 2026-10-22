@@ -63,6 +63,16 @@
     card.style.setProperty('--float-max', `${Math.max(160, Math.floor(window.innerHeight - top - 24))}px`);
   }
 
+  // The pinned product block scrolls inside itself. Size it to the room left under its top edge,
+  // otherwise its bottom sits below the window and the last items can't be reached.
+  function fitProduct() {
+    $$('.m-product').forEach((el) => {
+      if (getComputedStyle(el).display === 'none') return;
+      const top = Math.max(0, el.getBoundingClientRect().top);
+      el.style.setProperty('--prod-max', `${Math.max(200, Math.floor(window.innerHeight - top))}px`);
+    });
+  }
+
   function size(el) {
     const views = $('.m-views', el);
     const active = $('.m-view.is-active', el);
@@ -86,6 +96,7 @@
     m.toggle.setAttribute('aria-expanded', 'true');
     syncScrim();
     fitFloat();
+    fitProduct();
   }
   function close(k) {
     const m = menus[k];
@@ -126,11 +137,11 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') { const k = Object.keys(menus).find(isOpen); if (k) { e.preventDefault(); close(k); menus[k].toggle.focus(); } }
   });
-  const resizeAll = () => { Object.values(menus).forEach((m) => size(m.el)); fitFloat(); };
+  const resizeAll = () => { Object.values(menus).forEach((m) => size(m.el)); fitFloat(); fitProduct(); };
   window.addEventListener('resize', resizeAll);
-  window.addEventListener('scroll', fitFloat, { passive: true });
+  window.addEventListener('scroll', () => { fitFloat(); fitProduct(); }, { passive: true });
   // The card sits under the product menu, so follow it while that expands or collapses
-  if (window.ResizeObserver) { const ro = new ResizeObserver(fitFloat); $$('.m-product, .m-commerce').forEach((e) => ro.observe(e)); }
+  if (window.ResizeObserver) { const ro = new ResizeObserver(() => { fitFloat(); fitProduct(); }); $$('.m-product, .m-commerce').forEach((e) => ro.observe(e)); }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(resizeAll);
 
   /* ---- Option 1 / Option 2 ---------------------------------------------- */
@@ -190,6 +201,7 @@
 
     if (lastHash !== null && lastHash !== location.hash) window.scrollTo({ top: 0, behavior: 'smooth' });
     lastHash = location.hash;
+    fitProduct();
   }
   window.addEventListener('hashchange', route);
 

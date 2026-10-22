@@ -85,7 +85,7 @@ body[data-variant="1"][data-page="commerce"] .m-head { max-height: 100dvh; overf
   position: sticky;
   top: 0;
   z-index: 70;
-  max-height: 100dvh;
+  max-height: var(--prod-max, 100dvh);
   overflow-y: auto;
   overscroll-behavior: contain;
   background: var(--surface);
