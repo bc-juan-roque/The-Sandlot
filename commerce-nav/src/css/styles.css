@@ -26,7 +26,8 @@
   --text-inverse: #fff;         /* Type/Color/Inverse */
   --surface: #fff;              /* Surface/Base */
   --surface-2: #f2f4f7;         /* Surface/Secondary */
-  --ai-star: #0d52ff;           /* AI star */
+  --ai-star-from: #0d52ff;      /* AI star gradient, top left */
+  --ai-star-to: #ffb4dc;        /* AI star gradient, bottom right (a lighter pink) */
   --surface-inverse: #000;      /* Surface/Inverse */
   --border: #d0d5dd;           /* Border/UI/Border 200 */
   --border-strong: #000;        /* Border/UI/Border Black */
@@ -479,8 +480,8 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
     color 0.35s var(--ease);
 }
 
-/* AI star (Figma "Vector 2134"): a small blue sparkle after, or in front of, a label */
-.ai-star { --ai-star-size: 13px; display: inline-block; width: var(--ai-star-size); height: var(--ai-star-size); margin-left: 0.4em; vertical-align: -0.17em; color: var(--ai-star); }
+/* AI star (Figma "Vector 2134"): a small blue-to-pink gradient sparkle after, or in front of, a label */
+.ai-star { --ai-star-size: 13px; display: inline-block; width: var(--ai-star-size); height: var(--ai-star-size); margin-left: 0.4em; vertical-align: -0.17em; }
 .strip__title .ai-star { margin: 0 0.45em 0 0; }
 
 .tag {
