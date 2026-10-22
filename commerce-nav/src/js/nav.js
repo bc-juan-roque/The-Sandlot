@@ -143,7 +143,7 @@
     const dx = Math.sign(trigger.getBoundingClientRect().left - prev.getBoundingClientRect().left) || 1;
     const dist = cssNum('--switch-slide', 18);
     const morph = cssNum('--switch-morph', 420);
-    const out = cssNum('--switch-out', 0.22) * 1000;
+    const out = cssNum('--switch-out', 0.14) * 1000;
 
     const from = prevPanel.getBoundingClientRect();            // where the dropdown is now
 
@@ -163,16 +163,27 @@
       [{ opacity: 1, transform: 'translateX(0)' }, { opacity: 0, transform: `translateX(${-dx * dist}px)` }],
       { duration: out, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' }
     );
+    // The old box follows the new one (clipping its contents) so nothing is left hanging outside it
+    const m = new DOMMatrix(getComputedStyle(prevPanel).transform);
+    prevPanel.style.overflow = 'hidden';
+    const ease = 'cubic-bezier(.22, 1, .36, 1)';
+    const prevBox = prevPanel.animate([
+      { transform: `translate(${m.e}px, ${m.f}px)`, width: `${from.width}px`, height: `${from.height}px` },
+      { transform: `translate(${m.e + to.left - from.left}px, ${m.f + to.top - from.top}px)`, width: `${to.width}px`, height: `${to.height}px` },
+    ], { duration: morph, easing: ease, fill: 'forwards' });
     setTimeout(() => {
       if (openTrigger === prev) return;                        // it was reopened in the meantime
-      instantly(prevPanel, () => prevPanel.classList.remove('is-open', 'is-morph-out'));
+      instantly(prevPanel, () => {
+        prevPanel.classList.remove('is-open', 'is-morph-out');
+        prevPanel.style.overflow = '';
+      });
       fadeOut.cancel();
+      prevBox.cancel();
     }, out + 30);
 
     // New menu: glide and resize from the old box, with its contents fading in from the side
     panel.style.zIndex = '81';
     panel.style.overflow = 'hidden';
-    const ease = 'cubic-bezier(.22, 1, .36, 1)';
     const box = panel.animate([
       { transform: `translate(${shift + from.left - to.left}px, ${from.top - to.top}px)`, width: `${from.width}px`, height: `${from.height}px` },
       { transform: `translate(${shift}px, 0px)`, width: `${to.width}px`, height: `${to.height}px` },
@@ -200,6 +211,8 @@
 
     // If this menu was only just handed over from and is still fading, bring it fully back
     panel.classList.remove('is-morph-out');
+    panel.style.overflow = '';
+    panel.getAnimations().forEach((a) => a.cancel());
     panel.querySelector('.menu__cols').getAnimations().forEach((a) => a.cancel());
 
     trigger.setAttribute('aria-expanded', 'true');

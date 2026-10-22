@@ -59,7 +59,7 @@ Deep links: `#desktop-1`, `#mobile-2`, and a page after the variation, for examp
 
 **Behavior.**
 - Menus open on click; Esc, clicking outside, or the dimmed page closes them.
-- Desktop variation 2 only: once a menu is open, hovering another menu button (after a short hover intent) switches to it. The dropdown box glides and resizes from the old menu to the new one, while the old contents fade out toward where you came from and the new contents fade in from the side you are heading. The gear has controls for the hover delay, glide duration, slide distance and fade-out.
+- Desktop variation 2 only: once a menu is open, hovering another menu button (after a short hover intent) switches to it. The dropdown box glides and resizes from the old menu to the new one, while the old contents fade out toward where you came from and the new contents fade in from the side you are heading. The menu button has no open-state fill or chevron flip in this variation (hover still shows the fill). The gear has controls for the hover delay, glide duration, slide distance and fade-out.
 - The Commerce bar is sticky on Commerce pages. On BigCommerce and Feedonomics pages it scrolls away and the Solution bar stays pinned.
 - Menu links go medium weight, nudge 4px right and show an arrow on hover. Hovering a menu item dims the others, then they fade back after a short pause.
 - Cards (Surface, Integrations, the AI Labs strip) are one big link.

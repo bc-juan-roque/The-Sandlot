@@ -6,7 +6,7 @@
 :root {
   --hover-delay: 90ms;
   --switch-slide: 18px;
-  --switch-out: 0.22s;
+  --switch-out: 0.14s;
   --switch-morph: 420ms;
   --logo-w: 163px;
   --nav-gap: 40px;
@@ -215,6 +215,14 @@ body[data-page="feedonomics"] .sub-bar[data-brand="feedonomics"] {
 }
 .nav-item:hover .chev { opacity: 0.8; }
 .nav-item[aria-expanded="true"] .chev { transform: rotate(180deg); opacity: 0.8; }
+
+/* Variation 2: no "open" look on the button (container fill and chevron); hover still shows the fill */
+body[data-variant="2"] .nav-item[aria-expanded="true"]:not(:hover):not(:focus-visible):not([data-current])::before {
+  opacity: 0;
+  transform: scale(0.94);
+}
+body[data-variant="2"] .nav-item[aria-expanded="true"] .chev { transform: none; opacity: 0.5; }
+body[data-variant="2"] .nav-item[aria-expanded="true"]:hover .chev { opacity: 0.8; }
 
 .nav-slot { position: relative; }
 
