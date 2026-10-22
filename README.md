@@ -65,7 +65,7 @@ Deep links: `#desktop-1`, `#mobile-2`, and a page after the variation, for examp
 - Arriving on a BigCommerce or Feedonomics page, the Solution bar grows down out of the Commerce bar, its bottom line starting at the Commerce bar's line and travelling down (the page below moves with it), then its label, nav items and buttons fade in one after another. The gear has controls for the extend time, the first delay and the gap between items.
 - The Commerce bar is sticky on Commerce pages. On BigCommerce and Feedonomics pages it scrolls away and the Solution bar stays pinned.
 - Contact sales appears only on Commerce pages (desktop bar and mobile menu). On BigCommerce and Feedonomics pages the Solution bar carries the calls to action: on desktop the button fades down and out as that bar arrives, and fades back up when you return.
-- Menu links go medium weight, nudge 4px right and show an arrow on hover. Hovering a menu item dims the others, brings the hovered item up quickly, then the others fade back after a short pause.
+- Menu links go medium weight, nudge 4px right and show an arrow on hover. On a link with a badge (Learning > Agentic Commerce, New) the badge sits close to the text, moves with it, and the arrow comes after the badge. Hovering a menu item dims the others, brings the hovered item up quickly, then the others fade back after a short pause.
 - Hovering a product sub-item under Solutions lights its connector: the curve turns black and a black gradient runs up the line from it, fading into the usual line color.
 - Cards (Surface, Integrations, the AI Labs strip) are one big link.
 - On mobile, rows with a chevron drill into a panel with a Back row, and a scrim dims the page while any menu is open (tap it to close).
