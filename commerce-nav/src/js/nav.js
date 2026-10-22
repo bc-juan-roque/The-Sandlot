@@ -235,20 +235,41 @@
     }
   }
 
-  // Once a menu is open, hovering another menu button switches to it (after a short hover intent)
+  /* Variation 2: menus open on hover. Hovering a button opens its menu (after a short hover intent),
+     hovering another button glides to that one, and leaving the buttons and the menu closes it after a
+     short grace period, long enough to cross the gap between a button and its menu. */
+  const hoverMode = (e) => body.dataset.variant === '2' && e.pointerType !== 'touch';
   let hoverTimer = null;
+  let closeTimer = null;
+  const keepOpen = () => clearTimeout(closeTimer);
+  const scheduleClose = () => {
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(() => { if (openTrigger) close(); }, cssNum('--hover-close', 200));
+  };
   triggers.forEach((t) => {
     t.addEventListener('pointerenter', (e) => {
-      if (body.dataset.variant !== '2' || e.pointerType === 'touch' || !openTrigger || openTrigger === t) return;
+      if (!hoverMode(e)) return;
+      keepOpen();
+      if (openTrigger === t) return;
       clearTimeout(hoverTimer);
-      hoverTimer = setTimeout(() => { if (openTrigger && openTrigger !== t) open(t); }, cssNum('--hover-delay', 90));
+      hoverTimer = setTimeout(() => { if (openTrigger !== t) open(t); }, cssNum('--hover-delay', 90));
     });
-    t.addEventListener('pointerleave', () => clearTimeout(hoverTimer));
+    t.addEventListener('pointerleave', (e) => {
+      clearTimeout(hoverTimer);
+      if (hoverMode(e)) scheduleClose();
+    });
+  });
+  document.querySelectorAll('.menu').forEach((m) => {
+    m.addEventListener('pointerenter', (e) => { if (hoverMode(e)) keepOpen(); });
+    m.addEventListener('pointerleave', (e) => { if (hoverMode(e)) scheduleClose(); });
   });
 
   triggers.forEach((t) => {
     t.addEventListener('click', (e) => {
       e.preventDefault();
+      clearTimeout(hoverTimer);
+      // Variation 2: with a mouse the menu is already open from hovering, so a click keeps it open
+      if (openTrigger === t && body.dataset.variant === '2' && e.pointerType === 'mouse') return;
       if (openTrigger === t) { close(); return; }
       // detail === 0 means the click came from the keyboard
       open(t, { focusFirst: e.detail === 0 });

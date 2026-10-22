@@ -5,6 +5,7 @@
 
 :root {
   --hover-delay: 90ms;
+  --hover-close: 200ms;
   --switch-slide: 18px;
   --switch-out: 0.14s;
   --switch-morph: 420ms;
@@ -223,6 +224,15 @@ body[data-variant="2"] .nav-item[aria-expanded="true"]:not(:hover):not(:focus-vi
 }
 body[data-variant="2"] .nav-item[aria-expanded="true"] .chev { transform: none; opacity: 0.5; }
 body[data-variant="2"] .nav-item[aria-expanded="true"]:hover .chev { opacity: 0.8; }
+/* Variation 2: while a menu is open, its button reaches down toward the menu so the pointer can cross the gap */
+body[data-variant="2"] .nav-item[data-menu][aria-expanded="true"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 40px;
+}
 
 .nav-slot { position: relative; }
 

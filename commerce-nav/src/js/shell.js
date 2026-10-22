@@ -24,10 +24,10 @@
           notes: DESKTOP_NOTES,
         },
         2: {
-          status: 'Same as 1, plus: once a menu is open, hovering another menu button glides the dropdown to the new menu while the contents fade in and out from the sides.',
+          status: 'Menus open on hover and close when the pointer leaves. Moving to another menu button glides the dropdown across while the contents fade in and out from the sides.',
           notes: [
             ['The dropdown glides between menus', 'The box moves and resizes from the old menu to the new one while the contents fade out and in from the sides, in the manner of Linear. It is built from each menu keeping its own panel, so check the handover mid-way, especially between the widest and narrowest menus.'],
-            ['Hover only switches once a menu is open', 'Hovering a menu button with nothing open does nothing; the first open is still a click. Confirm that is wanted, or whether hover alone should open.'],
+            ['Hover opens and leaving closes', 'There is no click to open. The menu closes about 200ms after the pointer leaves the buttons and the menu, so the pointer can cross the gap. A mouse click on an open button keeps it open. Touch still taps to open and close. Confirm whether keeping click as an option matters.'],
             ['Switching works across both bars', 'Hovering a Solution bar button while a Commerce bar menu is open switches to it, and the other way round.'],
           ].concat(DESKTOP_NOTES),
         },
@@ -63,7 +63,8 @@
     { id: 'showPage', label: 'Show in-page placeholder content', type: 'toggle', value: true, group: 'Content' },
     { id: 'tMenu',    label: 'Desktop menu animation',    type: 'range', value: 500,  min: 0, max: 1200, step: 20, unit: 'ms', group: 'Animation', vars: (v) => ({ '--t-menu': `${v / 1000}s` }) },
     { id: 'mDur',     label: 'Mobile menu animation',     type: 'range', value: 600,  min: 0, max: 1200, step: 20, unit: 'ms', group: 'Animation', vars: (v) => ({ '--m-dur': `${v / 1000}s` }) },
-    { id: 'hoverDelay', label: 'Desktop var 2, menu switch: hover delay', type: 'range', value: 90, min: 0, max: 400, step: 10, unit: 'ms', group: 'Menu switching', vars: (v) => ({ '--hover-delay': `${v}ms` }) },
+    { id: 'hoverClose', label: 'Desktop var 2, menu switch: wait before closing on leave', type: 'range', value: 200, min: 0, max: 600, step: 20, unit: 'ms', group: 'Menu switching', vars: (v) => ({ '--hover-close': `${v}ms` }) },
+    { id: 'hoverDelay', label: 'Desktop var 2, hover intent before opening or switching', type: 'range', value: 90, min: 0, max: 400, step: 10, unit: 'ms', group: 'Menu switching', vars: (v) => ({ '--hover-delay': `${v}ms` }) },
     { id: 'morph',    label: 'Desktop var 2, menu switch: glide duration', type: 'range', value: 420, min: 100, max: 1000, step: 20, unit: 'ms', group: 'Menu switching', vars: (v) => ({ '--switch-morph': `${v}ms` }) },
     { id: 'slide',    label: 'Desktop var 2, menu switch: contents slide distance', type: 'range', value: 18, min: 0, max: 60, step: 2, unit: 'px', group: 'Menu switching', vars: (v) => ({ '--switch-slide': `${v}px` }) },
     { id: 'outFade',  label: 'Desktop var 2, menu switch: old contents fade-out', type: 'range', value: 140, min: 0, max: 600, step: 20, unit: 'ms', group: 'Menu switching', vars: (v) => ({ '--switch-out': `${v / 1000}s` }) },
