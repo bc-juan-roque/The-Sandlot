@@ -413,6 +413,7 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
   --focus-dim: 0.4;
   --focus-return-delay: 0.32s;
   --focus-return-time: 1s;
+  --focus-active-time: 0.15s;   /* the hovered item (and its parent) coming up to full strength */
 }
 
 /* 3. Resting state: the slow, delayed return */
@@ -444,13 +445,13 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
 .menu.menu.menu .product:has(:is(:hover, :focus-visible)) > .product__head,
 .menu.menu.menu .group:has(:is(:hover, :focus-visible)) > .group__title {
   opacity: 1 !important;
-  transition: opacity 0.3s var(--ease) 0s !important;
+  transition: opacity var(--focus-active-time) var(--ease) 0s !important;
 }
 
 /* 2. The hovered item comes up to full strength promptly */
 .menu :is(.link, .product__head, .btn--text:not([data-in-card]), .promo, .strip):is(:hover, :focus-visible, :has(:focus-visible)) {
   transition:
-    opacity 0.3s var(--ease) 0s,
+    opacity var(--focus-active-time) var(--ease) 0s,
     background-color 0.45s var(--ease),
     color 0.35s var(--ease);
 }

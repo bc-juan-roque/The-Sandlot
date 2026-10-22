@@ -69,6 +69,7 @@
     { id: 'slide',    label: 'Desktop var 2, menu switch: contents slide distance', type: 'range', value: 18, min: 0, max: 60, step: 2, unit: 'px', group: 'Menu switching', vars: (v) => ({ '--switch-slide': `${v}px` }) },
     { id: 'outFade',  label: 'Desktop var 2, menu switch: old contents fade-out', type: 'range', value: 140, min: 0, max: 600, step: 20, unit: 'ms', group: 'Menu switching', vars: (v) => ({ '--switch-out': `${v / 1000}s` }) },
     { id: 'dim',      label: 'Desktop focus: dimmed items', type: 'range', value: 0.4, min: 0, max: 1, step: 0.05, unit: '', group: 'Hover focus', vars: (v) => ({ '--focus-dim': String(v) }) },
+    { id: 'activeIn',  label: 'Desktop focus: hovered item fade-in', type: 'range', value: 150, min: 0, max: 600, step: 10, unit: 'ms', group: 'Hover focus', vars: (v) => ({ '--focus-active-time': `${v / 1000}s` }) },
     { id: 'delay',    label: 'Desktop focus: wait before fading back', type: 'range', value: 320, min: 0, max: 1000, step: 20, unit: 'ms', group: 'Hover focus', vars: (v) => ({ '--focus-return-delay': `${v / 1000}s` }) },
     { id: 'back',     label: 'Desktop focus: fade-back time', type: 'range', value: 1000, min: 100, max: 2000, step: 50, unit: 'ms', group: 'Hover focus', vars: (v) => ({ '--focus-return-time': `${v / 1000}s` }) },
   ];
