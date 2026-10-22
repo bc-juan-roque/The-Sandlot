@@ -550,14 +550,24 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
 .tree li:last-child::before { bottom: auto; height: calc(50% - 12px); }
 .tree li:first-child:last-child::before { height: calc(50% - 12px + 18px); }
 .tree li::after {
+  /* The curve is drawn as a stroked path with round ends (a mask over a fill), so the tail end is rounded.
+     The stroke matches the 1.5px line: whole device pixels, 1px on standard screens. */
   top: calc(50% - 12px);
-  width: 12px;
+  width: 12.75px;
   height: 12px;
-  border-left: 1.5px solid var(--border);
-  border-bottom: 1.5px solid var(--border);
-  border-bottom-left-radius: 12px;
-  transition: border-color 0.35s var(--ease);
+  background-color: var(--border);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2012.75%2012'%3E%3Cpath%20d='M0.5%200A11.5%2011.5%200%200%200%2012%2011.5'%20fill='none'%20stroke='%23000'%20stroke-width='1'%20stroke-linecap='round'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2012.75%2012'%3E%3Cpath%20d='M0.5%200A11.5%2011.5%200%200%200%2012%2011.5'%20fill='none'%20stroke='%23000'%20stroke-width='1'%20stroke-linecap='round'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat;
+  transition: background-color 0.35s var(--ease);
 }
+@media (min-resolution: 1.5dppx) {
+  .tree li::after {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2012.75%2012'%3E%3Cpath%20d='M0.75%200A11.25%2011.25%200%200%200%2012%2011.25'%20fill='none'%20stroke='%23000'%20stroke-width='1.5'%20stroke-linecap='round'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2012.75%2012'%3E%3Cpath%20d='M0.75%200A11.25%2011.25%200%200%200%2012%2011.25'%20fill='none'%20stroke='%23000'%20stroke-width='1.5'%20stroke-linecap='round'/%3E%3C/svg%3E");
+  }
+}
+/* The top of the line is rounded too */
+.tree li:first-child::before { border-top-left-radius: 1px; border-top-right-radius: 1px; }
 
 /* Hovering (or focusing) a sub-item lights its connector: the curve turns #000 and a #000 gradient runs
    up the line from the curve, fading into the usual line color. */
@@ -579,10 +589,7 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
   pointer-events: none;
   transition: opacity 0.4s var(--ease);
 }
-.tree li:has(> .link:is(:hover, :focus-visible))::after {
-  border-left-color: #000;
-  border-bottom-color: #000;
-}
+.tree li:has(> .link:is(:hover, :focus-visible))::after { background-color: #000; }
 .tree li:has(> .link:is(:hover, :focus-visible)) .link::before { opacity: 1; }
 
 /* Strip along the bottom of the Solutions menu */
