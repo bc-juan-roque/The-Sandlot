@@ -738,6 +738,27 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
   margin: -24px -28px -24px 0;           /* cancels the dropdown's padding on three sides */
   padding: 24px 28px 24px 24px;          /* same top and right inset as the dropdown itself */
   border-radius: 0;
+  position: relative;
+  --card-corner: 24px;
+}
+/* Where the white meets the gray panel the white has rounded corners (as on clay.com), not a straight edge.
+   Two small pieces of gray fill the corner outside each arc, so the white looks like a card laid over the panel. */
+.menu .card::before,
+.menu .card::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--card-corner) * -1);
+  width: var(--card-corner);
+  height: var(--card-corner);
+  pointer-events: none;
+}
+.menu .card::before {
+  top: 0;
+  background: radial-gradient(circle at 0 100%, transparent calc(var(--card-corner) - 0.5px), var(--surface-2) calc(var(--card-corner) + 0.5px));
+}
+.menu .card::after {
+  bottom: 0;
+  background: radial-gradient(circle at 0 0, transparent calc(var(--card-corner) - 0.5px), var(--surface-2) calc(var(--card-corner) + 0.5px));
 }
 .promo {
   position: relative;

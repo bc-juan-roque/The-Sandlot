@@ -335,6 +335,7 @@ body:not([data-page="commerce"]) #m-commerce-menu .m-actions { display: none; }
 .m-view__body .strip__text { flex-wrap: wrap; }
 .m-view__body .strip__dot { display: none; }
 .m-view__body .card { margin: 0; padding: 16px; border-radius: var(--r-xl); align-self: auto; }
+.m-view__body .card::before, .m-view__body .card::after { display: none; }
 .m-view__body p { white-space: normal; }
 
 /* ----- Page (wireframe) --------------------------------------------------- */
