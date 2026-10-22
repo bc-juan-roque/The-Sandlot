@@ -571,7 +571,19 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
   height: var(--tree-glow);
   /* Drawn as a border, like the line it sits on, so it snaps to the same pixels and keeps the same width */
   border-left: 1.5px solid var(--border);
-  border-image: linear-gradient(to top, #000, var(--border)) 1;
+  /* Eased: black at the curve, then a slow taper into the line color (quadratic), so there is no visible step at the top */
+  border-image: linear-gradient(to top,
+    color-mix(in srgb, #000 100%, var(--border)) 0%,
+    color-mix(in srgb, #000 81%, var(--border)) 10%,
+    color-mix(in srgb, #000 64%, var(--border)) 20%,
+    color-mix(in srgb, #000 49%, var(--border)) 30%,
+    color-mix(in srgb, #000 36%, var(--border)) 40%,
+    color-mix(in srgb, #000 25%, var(--border)) 50%,
+    color-mix(in srgb, #000 16%, var(--border)) 60%,
+    color-mix(in srgb, #000 9%, var(--border)) 70%,
+    color-mix(in srgb, #000 4%, var(--border)) 80%,
+    color-mix(in srgb, #000 1%, var(--border)) 90%,
+    color-mix(in srgb, #000 0%, var(--border)) 100%) 1;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s var(--ease);
