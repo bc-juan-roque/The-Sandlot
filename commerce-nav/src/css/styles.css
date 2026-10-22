@@ -478,6 +478,10 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
     color 0.35s var(--ease);
 }
 
+/* AI star (Figma "Vector 2134"): a small gradient sparkle after, or in front of, a label */
+.ai-star { display: inline-block; width: 10px; height: 10px; margin-left: 0.4em; vertical-align: 0.06em; }
+.strip__title .ai-star { margin: 0 0.45em 0 0; }
+
 .tag {
   padding: 1px 6px;
   border-radius: 4px;
