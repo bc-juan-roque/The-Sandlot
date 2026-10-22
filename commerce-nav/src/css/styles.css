@@ -124,7 +124,26 @@ body[data-page="commerce"] .commerce-bar { position: sticky; top: 0; }
 .bar__right > .nav { margin-left: var(--nav-gap); }
 .bar__right > .btn { margin-left: auto; }
 /* On BigCommerce and Feedonomics pages the Solution bar carries the calls to action, so Contact sales steps aside */
-body:not([data-page="commerce"]) .commerce-bar .bar__right > .btn { display: none; }
+/* It fades down and out as the Solution bar arrives, and back up when you return to Commerce */
+.commerce-bar .bar__right > .btn {
+  transition:
+    opacity 0.5s var(--ease),
+    transform 0.6s var(--ease-out),
+    visibility 0s,
+    background-color 0.35s var(--ease),
+    color 0.35s var(--ease),
+    border-color 0.35s var(--ease);
+}
+body:not([data-page="commerce"]) .commerce-bar .bar__right > .btn {
+  opacity: 0;
+  transform: translateY(8px);
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.4s var(--ease),
+    transform 0.55s var(--ease-out),
+    visibility 0s linear 0.55s;
+}
 /* 4px between items so an active fill and a hover fill never touch */
 .nav { display: flex; align-items: center; gap: 4px; }
 
