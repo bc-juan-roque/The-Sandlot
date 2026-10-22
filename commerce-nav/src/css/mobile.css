@@ -42,7 +42,8 @@ body[data-variant="1"][data-page="commerce"] .m-head { max-height: 100dvh; overf
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: var(--m-bar);
+  /* 56px of content plus the 1px rule, so the 44px toggle centers on a whole pixel */
+  height: calc(var(--m-bar) + 1px);
   padding: 0 16px;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
@@ -64,20 +65,26 @@ body[data-variant="1"][data-page="commerce"] .m-head { max-height: 100dvh; overf
   transition: background-color 0.35s var(--ease);
 }
 .m-toggle:active { background: var(--surface-2); }
-.m-toggle__bars { position: relative; width: 20px; height: 14px; }
+.m-toggle__bars { position: relative; width: 20px; height: 16px; }
+/* Two 2px strokes on whole pixels. Only transform animates, and the layer is promoted up front,
+   so the strokes look the same before, during and after the animation. */
 .m-toggle__bars i {
   position: absolute;
+  top: 7px;
   left: 0;
-  right: 0;
-  height: 1.5px;
+  width: 20px;
+  height: 2px;
   border-radius: 1px;
   background: currentColor;
-  transition: transform 0.6s var(--ease-out), top 0.6s var(--ease-out);
+  will-change: transform;
+  transition: transform 0.6s var(--ease-out);
 }
-.m-toggle__bars i:nth-child(1) { top: 3px; }
-.m-toggle__bars i:nth-child(2) { top: 10px; }
-.m-toggle[aria-expanded="true"] i:nth-child(1) { top: 6px; transform: rotate(45deg); }
-.m-toggle[aria-expanded="true"] i:nth-child(2) { top: 6px; transform: rotate(-45deg); }
+/* Same function list in every state (translate, then rotate), so the strokes tween straight
+   to the X instead of swinging through a blended matrix */
+.m-toggle__bars i:nth-child(1) { transform: translateY(-4px) rotate(0deg); }
+.m-toggle__bars i:nth-child(2) { transform: translateY(4px) rotate(0deg); }
+.m-toggle[aria-expanded="true"] i:nth-child(1) { transform: translateY(0) rotate(45deg); }
+.m-toggle[aria-expanded="true"] i:nth-child(2) { transform: translateY(0) rotate(-45deg); }
 
 /* ----- Product bar -------------------------------------------------------- */
 .m-product {
