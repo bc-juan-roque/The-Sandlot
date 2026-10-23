@@ -932,8 +932,8 @@ body.modal-open { overflow: hidden; }
 .modal__title {
   margin: 0;
   padding-right: 32px;
-  font-size: 36px;
-  line-height: 44px;
+  font-size: 28px;
+  line-height: 36px;
   font-weight: var(--w-medium);
   letter-spacing: -0.01em;
 }
@@ -950,13 +950,29 @@ body.modal-open { overflow: hidden; }
 
 /* Products inside the modal reuse the dropdown's head and connector tree; the head arrow is always showing */
 .modal .product { min-width: 0; display: flex; flex-direction: column; gap: 8px; }
-.modal .product__name::after { opacity: 0.45; filter: none; transform: none; }
 .modal .tree { padding-top: 10px; }
 .modal .tree li { padding: 10px 0 10px 44px; }
 .modal .tree li:first-child::before { top: -12px; }
 .modal .link--act { display: flex; flex-direction: column; gap: 2px; min-height: 44px; align-items: flex-start; }
 .act__title { font-size: 16px; line-height: 22px; font-weight: var(--w-medium); color: var(--text); }
 .act__cap { font-size: 14px; line-height: 20px; color: var(--text-tertiary); }
+/* Same focus behavior as the dropdowns: hovering one item dims the rest, the hovered one comes up quickly,
+   and a product stays lit while one of its own actions is hovered */
+.modal :is(.product__head, .link--act) {
+  transition: opacity var(--focus-return-time) var(--ease-soft) var(--focus-return-delay);
+}
+.modal__cols:has(:is(.product__head, .link--act):is(:hover, :focus-visible))
+  :is(.product__head, .link--act):not(:is(:hover, :focus-visible)) {
+  opacity: var(--focus-dim);
+  transition: opacity 0.45s var(--ease) 0s;
+}
+.modal :is(.product__head, .link--act):is(:hover, :focus-visible) {
+  transition: opacity var(--focus-active-time) var(--ease) 0s;
+}
+.modal.modal .product:has(.link--act:is(:hover, :focus-visible)) > .product__head {
+  opacity: 1;
+  transition: opacity var(--focus-active-time) var(--ease) 0s;
+}
 .link--act .act__title,
 .link--act .act__cap { transition: transform 0.55s var(--ease-out); }
 .link--act:is(:hover, :focus-visible) .act__title,
@@ -976,11 +992,9 @@ body.modal-open { overflow: hidden; }
   display: flex;
   flex-direction: column;
   gap: 4px;
-  font-size: 18px;
-  line-height: 26px;
-  font-weight: var(--w-medium);
 }
-.modal__bar-text span:last-child { color: #8a94a7; }
+.modal__bar-text span:first-child { font-size: 22px; line-height: 30px; font-weight: var(--w-medium); }
+.modal__bar-text span:last-child { font-size: 18px; line-height: 26px; font-weight: var(--w-regular); color: #8a94a7; }
 .btn--inverse { background: #fff; color: #000; }
 .btn--inverse:hover { background: #e8ecf2; }
 .btn--inverse svg { width: 14px; height: 13px; }
@@ -988,7 +1002,7 @@ body.modal-open { overflow: hidden; }
 @media (max-width: 640px) {
   .modal-root { padding: 12px; }
   .modal__top { padding: 28px 20px; gap: 24px; }
-  .modal__title { font-size: 28px; line-height: 34px; }
+  .modal__title { font-size: 24px; line-height: 30px; }
   .modal__intro { font-size: 16px; line-height: 24px; }
   .modal__cols { grid-template-columns: 1fr; gap: 28px; }
   .modal__bar { flex-direction: column; padding: 24px 20px; }
