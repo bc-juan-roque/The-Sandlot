@@ -15,6 +15,7 @@
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <symbol id="i-chevron" viewBox="0 0 12 12"><path d="M2.5 4.5L6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 12 11"><path d="M11.2217 5.0166C11.4167 5.21188 11.4169 5.52845 11.2217 5.72363L6.20508 10.7402L5.85156 10.3857L5.49805 10.0322L9.66211 5.86719H0V4.86719H9.6582L5.49805 0.707031L6.20508 0L11.2217 5.0166Z" fill="currentColor"/></symbol>
+    <symbol id="i-close" viewBox="0 0 20 20" fill="none"><path d="M5 5L15 15M15 5L5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
     <symbol id="i-bc" viewBox="0 0 20 20"><path d="M14.2929 4.7071C14.9229 4.07714 16 4.52331 16 5.41421V16C16 16.5523 15.5523 17 15 17H4.41421C3.52331 17 3.07714 15.9229 3.70711 15.2929L14.2929 4.7071Z" fill="currentColor"/></symbol>
     <symbol id="i-fdx" viewBox="0 0 20 20"><path d="M8.58579 3.41407C9.36684 2.63302 10.6332 2.63302 11.4142 3.41407L16.5859 8.58572C17.3669 9.36677 17.3669 10.6331 16.5859 11.4141L10 18L1.99993 9.99993L8.58579 3.41407Z" fill="currentColor"/></symbol>
     <symbol id="i-globe" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.94434 15.0002C11.8411 15.0002 15 11.8414 15 7.94458C15 4.04785 11.8411 0.888916 7.94434 0.888916C4.0476 0.888916 0.888672 4.04785 0.888672 7.94458C0.888672 11.8414 4.0476 15.0002 7.94434 15.0002Z"/><path d="M0.888672 7.94458H15"/><path d="M10.6584 7.94458C10.5251 10.5248 9.57473 12.9957 7.94467 15.0002C6.31462 12.9957 5.36425 10.5248 5.23096 7.94458C5.36425 5.36439 6.31462 2.89343 7.94467 0.888916C9.57473 2.89343 10.5251 5.36439 10.6584 7.94458Z"/></symbol>
@@ -57,7 +58,7 @@
           <li><a class="nav-item" href="#"><span class="nav-item__label">Company</span></a></li>
           <li><a class="nav-item" href="#"><span class="nav-item__label">Partners</span></a></li>
         </ul>
-        <a class="btn btn--secondary" href="#"><span>Contact sales</span></a>
+        <a class="btn btn--secondary" href="#" data-open-modal><span>Contact sales</span></a>
       </div>
 
       <!-- Solutions menu -->
@@ -491,7 +492,51 @@
     <a href="#/feedonomics" data-route="feedonomics">Feedonomics</a>
   </div>
 
+  <!-- Contact sales modal (opens from the Contact sales button) -->
+  <div class="modal-root" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-title" aria-hidden="true">
+    <div class="modal__scrim" data-close-modal></div>
+    <div class="modal" tabindex="-1">
+      <button class="modal__close" type="button" data-close-modal aria-label="Close"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+      <div class="modal__top">
+        <h2 class="modal__title" id="contact-title" style="--i:0">How would you like to get started?</h2>
+        <p class="modal__intro" style="--i:1">Two products that work on their own or together. Choose where you would like to start.</p>
+        <div class="modal__cols">
+          <div class="product" data-section="bigcommerce" style="--i:2">
+            <a class="product__head" href="#/bigcommerce" data-route="bigcommerce">
+              <span class="tile"><svg aria-hidden="true"><use href="#i-bc"/></svg></span>
+              <span class="product__text">
+                <span class="product__name">BigCommerce</span>
+                <span class="product__tag">Ecommerce platform for B2C and B2B</span>
+              </span>
+            </a>
+            <ul class="tree">
+              <li><a class="link link--act" href="#"><span class="act__title">Start a trial</span><span class="act__cap">Free for 15 days. No credit card.</span></a></li>
+              <li><a class="link link--act" href="#"><span class="act__title">Get a demo</span><span class="act__cap">See the platform with a product expert.</span></a></li>
+            </ul>
+          </div>
+          <div class="product" data-section="feedonomics" style="--i:3">
+            <a class="product__head" href="#/feedonomics" data-route="feedonomics">
+              <span class="tile"><svg aria-hidden="true"><use href="#i-fdx"/></svg></span>
+              <span class="product__text">
+                <span class="product__name">Feedonomics</span>
+                <span class="product__tag">Product feed management</span>
+              </span>
+            </a>
+            <ul class="tree">
+              <li><a class="link link--act" href="#"><span class="act__title">Get a demo</span><span class="act__cap">See how we optimize and sync your feeds.</span></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal__bar">
+        <p class="modal__bar-text"><span>Not sure where to start?</span><span>Talk to us about which solution fits.</span></p>
+        <a class="btn btn--inverse" href="#/commerce/contact-sales"><span>Contact sales</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </div>
+
   <script src="js/nav.js"></script>
+  <script src="js/modal.js"></script>
   <script src="js/embed.js"></script>
 </body>
 </html>

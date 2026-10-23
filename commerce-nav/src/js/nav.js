@@ -55,7 +55,7 @@
   triggers.forEach((t) => register(sectionOf(t), labelOf(t), t));
 
   // Every placeholder link becomes a real route
-  document.querySelectorAll('.commerce-bar a[href="#"], .sub-bar a[href="#"]').forEach((a) => {
+  document.querySelectorAll('.commerce-bar a[href="#"], .sub-bar a[href="#"], #contact-modal a[href="#"]').forEach((a) => {
     const section = sectionOf(a);
     const label = a.dataset.title || labelOf(a);
     const menu = a.closest('.menu');
@@ -359,5 +359,6 @@
   }
 
   window.addEventListener('hashchange', route);
+  document.addEventListener('modal:open', () => close());
   route();
 })();

@@ -20,6 +20,9 @@ def read(rel):
 
 
 def build_mobile(src):
+    i = src.index('<div class="modal-root"')
+    j = src.index('<script src="js/nav.js">')
+    modal = src[i:j].rstrip()
     """Mobile page markup, generated from the menus in desktop.html so links and content match."""
     def menu_inner(menu_id):
         idx = src.index(f'id="{menu_id}"')
@@ -64,7 +67,7 @@ def build_mobile(src):
                   {link("Customers")}
                   {link("Company")}
                   {link("Partners")}
-                  <div class="m-actions"><a class="btn btn--primary" href="#"><span>Contact sales</span></a></div>
+                  <div class="m-actions"><a class="btn btn--primary" href="#" data-open-modal><span>Contact sales</span></a></div>
                 </div>
     {view("v-solutions", "Solutions", "menu-solutions", "commerce")}
     {view("v-learning", "Learning", "menu-learning", "commerce")}
@@ -170,7 +173,9 @@ def build_mobile(src):
         </nav>
       </div>
 
+      {modal}
       <script src="js/mobile.js"></script>
+      <script src="js/modal.js"></script>
       <script src="js/embed.js"></script>
     </body>
     </html>

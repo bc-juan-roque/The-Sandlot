@@ -863,6 +863,138 @@ body.morph-lift .sub-bar { z-index: 75; }
 }
 
 /* Prototype scaffolding: not part of the design */
+/* ==========================================================================
+   Contact sales modal
+   ========================================================================== */
+.modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 0s linear 0.4s;
+}
+.modal-root.is-open { visibility: visible; pointer-events: auto; transition: visibility 0s; }
+body.modal-open { overflow: hidden; }
+
+.modal__scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+.modal-root.is-open .modal__scrim { opacity: 1; }
+
+.modal {
+  position: relative;
+  width: min(758px, 100%);
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  transform: translateY(14px) scale(0.985);
+  transition: opacity 0.25s var(--ease), transform 0.4s var(--ease-out);
+  outline: none;
+}
+.modal-root.is-open .modal {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.4s var(--ease) 0.05s, transform 0.6s var(--ease-out);
+}
+
+.modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: var(--r-md);
+  background: none;
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.3s var(--ease);
+}
+.modal__close:hover { background: var(--surface-2); }
+.modal__close svg { width: 20px; height: 20px; }
+
+.modal__top { display: flex; flex-direction: column; gap: 32px; padding: 40px; }
+.modal__title {
+  margin: 0;
+  padding-right: 32px;
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: var(--w-medium);
+  letter-spacing: -0.01em;
+}
+.modal__intro { margin: 0; font-size: 18px; line-height: 28px; color: var(--text-tertiary); }
+.modal__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+/* The content rises in one block after another once the modal is up */
+.modal-root.is-open .modal__title,
+.modal-root.is-open .modal__intro,
+.modal-root.is-open .modal__cols > .product {
+  animation: rise 0.6s var(--ease-out) backwards;
+  animation-delay: calc(var(--i, 0) * 70ms + 160ms);
+}
+
+/* Products inside the modal reuse the dropdown's head and connector tree; the head arrow is always showing */
+.modal .product { min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.modal .product__name::after { opacity: 0.45; filter: none; transform: none; }
+.modal .tree { padding-top: 10px; }
+.modal .tree li { padding: 10px 0 10px 44px; }
+.modal .tree li:first-child::before { top: -12px; }
+.modal .link--act { display: flex; flex-direction: column; gap: 2px; min-height: 44px; align-items: flex-start; }
+.act__title { font-size: 16px; line-height: 22px; font-weight: var(--w-medium); color: var(--text); }
+.act__cap { font-size: 14px; line-height: 20px; color: var(--text-tertiary); }
+.link--act .act__title,
+.link--act .act__cap { transition: transform 0.55s var(--ease-out); }
+.link--act:is(:hover, :focus-visible) .act__title,
+.link--act:is(:hover, :focus-visible) .act__cap { transform: translateX(4px); }
+
+.modal__bar {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 40px;
+  background: #000;
+  color: #fff;
+}
+.modal__bar-text {
+  flex: 1;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: var(--w-medium);
+}
+.modal__bar-text span:last-child { color: #8a94a7; }
+.btn--inverse { background: #fff; color: #000; }
+.btn--inverse:hover { background: #e8ecf2; }
+.btn--inverse svg { width: 14px; height: 13px; }
+
+@media (max-width: 640px) {
+  .modal-root { padding: 12px; }
+  .modal__top { padding: 28px 20px; gap: 24px; }
+  .modal__title { font-size: 28px; line-height: 34px; }
+  .modal__intro { font-size: 16px; line-height: 24px; }
+  .modal__cols { grid-template-columns: 1fr; gap: 28px; }
+  .modal__bar { flex-direction: column; padding: 24px 20px; }
+  .modal__bar .btn { width: 100%; }
+}
+
 .proto-switch {
   position: fixed;
   left: 20px;

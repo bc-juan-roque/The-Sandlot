@@ -37,7 +37,7 @@
 
   // Which root row "owns" a link: the row that drills into its view, or the row itself
   const drillRowFor = (viewId) => $(`[data-drill="${viewId}"]`);
-  $$('.m-head a[href="#"]').forEach((a) => {
+  $$('.m-head a[href="#"], #contact-modal a[href="#"]').forEach((a) => {
     const section = sectionOf(a);
     const label = a.dataset.title || labelOf(a);
     const view = a.closest('.m-view--sub');
@@ -204,6 +204,7 @@
     fitProduct();
   }
   window.addEventListener('hashchange', route);
+  document.addEventListener('modal:open', () => closeAll());
 
   const wanted = window.__BOOT ? window.__BOOT.v : new URLSearchParams(location.search).get('v');
   const start = wanted === '2' ? '2' : '1';
