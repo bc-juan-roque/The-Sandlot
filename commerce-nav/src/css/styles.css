@@ -928,7 +928,7 @@ body.modal-open { overflow: hidden; }
 .modal__close:hover { background: var(--surface-2); }
 .modal__close svg { width: 20px; height: 20px; }
 
-.modal__top { display: flex; flex-direction: column; gap: 28px; padding: 32px; }
+.modal__top { display: flex; flex-direction: column; gap: 34px; padding: 32px; }
 .modal__title {
   margin: 0;
   padding-right: 32px;
@@ -937,8 +937,8 @@ body.modal-open { overflow: hidden; }
   font-weight: var(--w-medium);
   letter-spacing: -0.01em;
 }
-/* The intro sits close under the heading (12px) while the rest of the modal keeps its 32px rhythm */
-.modal__intro { margin: -16px 0 0; font-size: 18px; line-height: 28px; color: var(--text-tertiary); }
+/* The intro sits close under the heading (8px) while the sections keep the modal's 34px rhythm */
+.modal__intro { margin: -26px 0 0; font-size: 18px; line-height: 28px; color: var(--text-tertiary); }
 .modal__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
 
 /* The content rises in one block after another once the modal is up */
@@ -988,10 +988,10 @@ body.modal-open { overflow: hidden; }
 
 @media (max-width: 640px) {
   .modal-root { padding: 12px; }
-  .modal__top { padding: 28px 20px; gap: 24px; }
+  .modal__top { padding: 28px 20px; gap: 29px; }
   .modal__title { font-size: 24px; line-height: 30px; }
-  .modal__intro { margin-top: -14px; font-size: 16px; line-height: 24px; }
-  .modal__cols { grid-template-columns: 1fr; gap: 28px; }
+  .modal__intro { margin-top: -21px; font-size: 16px; line-height: 24px; }
+  .modal__cols { grid-template-columns: 1fr; gap: 34px; }
   .modal .strip { flex-direction: column; align-items: flex-start; gap: 10px; }
   .modal .strip__text { flex-wrap: wrap; }
   .modal .strip__dot { display: none; }
