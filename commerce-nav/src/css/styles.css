@@ -976,6 +976,24 @@ body.modal-open { overflow: hidden; }
 }
 .link--act .act__title,
 .link--act .act__cap { transition: transform 0.55s var(--ease-out); }
+/* The hover arrow after the action title, revealed like the dropdown links' */
+.act__title::after {
+  content: "→";
+  display: inline-block;
+  margin-left: 0.45em;
+  opacity: 0;
+  filter: blur(2px);
+  transform: translateX(-30%);
+  transition:
+    opacity 0.4s var(--ease-soft),
+    filter 0.4s var(--ease-soft),
+    transform 0.6s var(--ease-out);
+}
+.link--act:is(:hover, :focus-visible) .act__title::after {
+  opacity: 0.45;
+  filter: blur(0);
+  transform: none;
+}
 .link--act:is(:hover, :focus-visible) .act__title,
 .link--act:is(:hover, :focus-visible) .act__cap { transform: translateX(4px); }
 
