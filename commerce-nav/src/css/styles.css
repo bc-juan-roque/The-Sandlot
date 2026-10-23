@@ -38,7 +38,14 @@
   --r-sm: 2px;                  /* button */
   --r-md: 8px;                  /* nav item fill */
   --r-lg: 12px;                 /* icon tile */
-  --r-xl: 16px;                 /* menu panel, cards */
+  --r-xl: 16px;                 /* (was the menu panel and cards)
+  */
+  /* Dropdown corners, each half of what it was (16 / 16 / 14 / 12 / 24) */
+  --r-menu: 8px;                /* dropdown panels */
+  --r-inner: 8px;               /* side-panel cards and promo cards */
+  --r-strip: 7px;              /* the AI Labs strip */
+  --r-tile: 6px;                /* icon tiles */
+  --r-corner: 12px;             /* the rounded white corner beside a side panel */
 
   /* Layout */
   --gutter: 32px;
@@ -380,7 +387,7 @@ body[data-variant="2"] .nav-item[data-menu][aria-expanded="true"]::after {
   padding: 24px 28px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--r-xl);
+  border-radius: var(--r-menu);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
   font-size: var(--type-s);
   line-height: var(--lh-s);
@@ -605,7 +612,7 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
   place-items: center;
   width: 40px;
   height: 40px;
-  border-radius: var(--r-lg);
+  border-radius: var(--r-tile);
   /* At rest: a subtle gray container with a slightly darker border and a black icon.
      On hover or focus of the link it turns black with a white icon. */
   background: var(--surface-2);
@@ -719,7 +726,7 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
   margin-top: 28px;
   padding: 14px 20px;
   background: var(--surface-2);
-  border-radius: 14px;
+  border-radius: var(--r-strip);
 }
 .strip__text { display: flex; align-items: center; gap: 8px; }
 .strip__title { font-weight: var(--w-medium); font-size: 15px; }
@@ -727,7 +734,7 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
 /* Cards inside menus */
 .card {
   background: var(--surface-2);
-  border-radius: var(--r-xl);
+  border-radius: var(--r-inner);
   padding: 20px;
 }
 /* In a dropdown the card is a flush side panel: it runs to the top, right and bottom edges of the dropdown
@@ -739,7 +746,7 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
   padding: 24px 28px 24px 24px;          /* same top and right inset as the dropdown itself */
   border-radius: 0;
   position: relative;
-  --card-corner: 24px;
+  --card-corner: var(--r-corner);
 }
 /* Where the white meets the gray panel the white has rounded corners (as on clay.com), not a straight edge.
    Two small pieces of gray fill the corner outside each arc, so the white looks like a card laid over the panel. */
@@ -772,7 +779,7 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
   gap: 8px;
   padding: 20px;
   background: var(--surface-2);
-  border-radius: var(--r-xl);
+  border-radius: var(--r-inner);
 }
 .promo .btn { align-self: flex-start; }
 
