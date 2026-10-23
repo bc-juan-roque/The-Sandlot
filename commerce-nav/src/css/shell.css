@@ -236,3 +236,9 @@ button, select { font: inherit; color: inherit; }
   .proto-row { flex-wrap: wrap; }
   .acp-root { bottom: auto; top: 46px; }
 }
+
+/* Consoles hidden unless the address has ?console */
+.no-console .proto,
+.no-console .rv-legend,
+.no-console .acp-root { display: none !important; }
+.no-console .stage[data-mode="mobile"] { padding-bottom: 20px; }

@@ -43,6 +43,8 @@ The gear at the bottom right opens a control panel for animation timing, hover-f
 placeholder content. "Copy changes" lists what you changed so it can be applied back to the source;
 "Reset all" restores the defaults. Defaults live in the `CONTROLS` list in `js/shell.js`.
 
+**Consoles.** By default the page shows **variation 2 only**, with the version / variation panel, the Review notes and the gear hidden. It follows the window: under 700px wide it shows Mobile, otherwise Desktop. Add **`?console`** to the address (for example `commerce-nav/index.html?console#desktop-1`) to bring all three back and to see variation 1 as well.
+
 **Versions and variations.** The bottom-left toolbar has a Version dropdown, Variation buttons (hidden when a version has only one) and a Page switcher. Versions are defined in the `VERSIONS` object in `js/shell.js`; each holds numbered variations.
 
 | Version | Variations | What it is |

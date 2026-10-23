@@ -84,8 +84,19 @@
   /* ---- State, hash, frame --------------------------------------------------- */
   const state = { ver: 'desktop', vari: '1', inner: '' };   // inner like "/bigcommerce/pricing" or ""
 
+  /* The review consoles (version / variation panel, review notes, gear) are hidden by default so the page
+     shows only variation 2. Add ?console to the address to bring them back. */
+  const CONSOLES = /[?&]console(=|&|$)/.test(location.search);
+  document.body.classList.toggle('no-console', !CONSOLES);
+  const narrow = () => window.innerWidth < 700;
+
   function parseHash() {
     const m = /^#(desktop|mobile)-(\d)((?:\/[a-z0-9-]+){0,2})$/.exec(location.hash);
+    if (!CONSOLES) {
+      // Variation 2 only. The version follows the window: a narrow window gets the mobile prototype.
+      const ver = m ? m[1] : (narrow() ? 'mobile' : 'desktop');
+      return { ver, vari: '2', inner: m ? (m[3] || '') : '' };
+    }
     if (!m || !VERSIONS[m[1]].variations[m[2]]) return { ver: 'desktop', vari: '1', inner: '' };
     return { ver: m[1], vari: m[2], inner: m[3] || '' };
   }
