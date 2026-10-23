@@ -191,11 +191,15 @@
       { transform: `translate(${shift + from.left - to.left}px, ${from.top - to.top}px)`, width: `${from.width}px`, height: `${from.height}px` },
       { transform: `translate(${shift}px, 0px)`, width: `${to.width}px`, height: `${to.height}px` },
     ], { duration: morph, easing: ease });
+    // The columns fade in from the side. The gray side panel (card) does not slide: it just fades in, quickly,
+    // once the box has mostly arrived, so it never flashes on while the box is still moving.
     const cols = panel.querySelector('.menu__cols');
-    const fadeIn = cols.animate(
-      [{ opacity: 0, transform: `translateX(${dx * dist}px)` }, { opacity: 1, transform: 'translateX(0)' }],
-      { duration: morph * 0.75, delay: out * 0.45, easing: ease, fill: 'backwards' }
-    );
+    const fadeIn = [...cols.children].map((el) => (el.classList.contains('card')
+      ? el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 160, delay: morph * 0.35, easing: 'ease-out', fill: 'backwards' })
+      : el.animate(
+        [{ opacity: 0, transform: `translateX(${dx * dist}px)` }, { opacity: 1, transform: 'translateX(0)' }],
+        { duration: morph * 0.75, delay: out * 0.45, easing: ease, fill: 'backwards' }
+      )));
     const done = () => {
       panel.style.overflow = '';
       panel.style.zIndex = '';
