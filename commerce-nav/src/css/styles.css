@@ -928,7 +928,7 @@ body.modal-open { overflow: hidden; }
 .modal__close:hover { background: var(--surface-2); }
 .modal__close svg { width: 20px; height: 20px; }
 
-.modal__top { display: flex; flex-direction: column; gap: 32px; padding: 40px; }
+.modal__top { display: flex; flex-direction: column; gap: 28px; padding: 32px; }
 .modal__title {
   margin: 0;
   padding-right: 32px;
@@ -938,7 +938,7 @@ body.modal-open { overflow: hidden; }
   letter-spacing: -0.01em;
 }
 /* The intro sits close under the heading (12px) while the rest of the modal keeps its 32px rhythm */
-.modal__intro { margin: -20px 0 0; font-size: 18px; line-height: 28px; color: var(--text-tertiary); }
+.modal__intro { margin: -16px 0 0; font-size: 18px; line-height: 28px; color: var(--text-tertiary); }
 .modal__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
 
 /* The content rises in one block after another once the modal is up */

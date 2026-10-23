@@ -67,7 +67,7 @@ def build_mobile(src):
                   {link("Customers")}
                   {link("Company")}
                   {link("Partners")}
-                  <div class="m-actions"><a class="btn btn--primary" href="#" data-open-modal><span>Contact sales</span></a></div>
+                  <div class="m-actions"><a class="btn btn--primary" href="#" data-open-modal><span>Get started</span></a></div>
                 </div>
     {view("v-solutions", "Solutions", "menu-solutions", "commerce")}
     {view("v-learning", "Learning", "menu-learning", "commerce")}
