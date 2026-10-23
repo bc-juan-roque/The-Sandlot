@@ -150,6 +150,15 @@
 
     const from = prevPanel.getBoundingClientRect();            // where the dropdown is now
 
+    // The glide brings its own motion, so the usual rise-in of each column is switched off for this open
+    // (and stays off until the menu closes, so it can't restart afterwards and nudge the type)
+    panel.classList.add('no-rise');
+
+    // Menus in the Commerce bar paint above menus in the Solution bar. Going down into a Solution bar menu, lift
+    // that bar for the length of the glide so the old menu's fading contents can't show over the new one.
+    const lift = !!prevPanel.closest('.commerce-bar') && !prevPanel.closest('.sub-bar') && !!panel.closest('.sub-bar');
+    if (lift) body.classList.add('morph-lift');
+
     // Put the new menu in its resting open state to find out where and how big it is
     panel.style.transition = 'none';
     fit(panel);
@@ -191,11 +200,11 @@
       { transform: `translate(${shift + from.left - to.left}px, ${from.top - to.top}px)`, width: `${from.width}px`, height: `${from.height}px` },
       { transform: `translate(${shift}px, 0px)`, width: `${to.width}px`, height: `${to.height}px` },
     ], { duration: morph, easing: ease });
-    // The columns fade in from the side. The gray side panel (card) does not slide: it just fades in, quickly,
-    // once the box has mostly arrived, so it never flashes on while the box is still moving.
+    // The columns fade in from the side. The gray side panel (card) does not slide: it fades in smoothly while the
+    // box arrives, so it never flashes on.
     const cols = panel.querySelector('.menu__cols');
     const fadeIn = [...cols.children].map((el) => (el.classList.contains('card')
-      ? el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 160, delay: morph * 0.35, easing: 'ease-out', fill: 'backwards' })
+      ? el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: morph * 0.8, delay: morph * 0.2, easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'backwards' })
       : el.animate(
         [{ opacity: 0, transform: `translateX(${dx * dist}px)` }, { opacity: 1, transform: 'translateX(0)' }],
         { duration: morph * 0.75, delay: out * 0.45, easing: ease, fill: 'backwards' }
@@ -204,6 +213,7 @@
       panel.style.overflow = '';
       panel.style.zIndex = '';
       panel.style.transition = '';
+      body.classList.remove('morph-lift');
     };
     box.addEventListener('finish', done);
     box.addEventListener('cancel', done);
@@ -226,6 +236,7 @@
     if (prev && body.dataset.variant === '2' && !reduceMotion() && panel.animate) {
       morphSwitch(prev, trigger, panel);
     } else {
+      panel.classList.remove('no-rise');
       // Variation 1: a plain cross-fade between the two menus
       if (prev) {
         prev.setAttribute('aria-expanded', 'false');

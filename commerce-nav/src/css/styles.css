@@ -408,6 +408,10 @@ body[data-variant="2"] .menu:not(.is-morph-out) { border-color: #c3c9d3; }
 
 /* Variation 2, switching menus: the old dropdown's box hands over to the new one (nav.js);
    only its contents fade out */
+/* Opened by gliding from another menu: no column rise-in (the glide has its own motion) */
+.menu.is-open.no-rise .reveal { animation: none; }
+/* While gliding down from a Commerce bar menu into a Solution bar menu, the Solution bar sits above */
+body.morph-lift .sub-bar { z-index: 75; }
 .menu.is-morph-out {
   z-index: 79;
   background: transparent;
