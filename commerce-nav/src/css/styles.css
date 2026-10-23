@@ -932,10 +932,10 @@ body.modal-open { overflow: hidden; }
 .modal__title {
   margin: 0;
   padding-right: 32px;
-  font-size: 28px;
-  line-height: 36px;
+  font-size: 22px;
+  line-height: 30px;
   font-weight: var(--w-medium);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
 }
 /* The intro sits close under the heading (8px) while the sections keep the modal's 34px rhythm */
 .modal__intro { margin: -26px 0 0; font-size: 18px; line-height: 28px; color: var(--text-tertiary); }
@@ -1007,7 +1007,7 @@ body.modal-open { overflow: hidden; }
 @media (max-width: 640px) {
   .modal-root { padding: 12px; }
   .modal__top { padding: 28px 20px; gap: 29px; }
-  .modal__title { font-size: 24px; line-height: 30px; }
+  .modal__title { font-size: 20px; line-height: 26px; }
   .modal__intro { margin-top: -21px; font-size: 16px; line-height: 24px; }
   .modal__cols { grid-template-columns: 1fr; gap: 34px; }
   .modal .strip { flex-direction: column; align-items: flex-start; gap: 10px; }
