@@ -939,7 +939,7 @@ body.modal-open { overflow: hidden; }
 }
 /* The intro sits close under the heading (8px) while the sections keep the modal's 34px rhythm */
 .modal__intro { margin: -26px 0 0; font-size: 18px; line-height: 28px; color: var(--text-tertiary); }
-.modal__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.modal__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 8.5px; }   /* 25% more room under the intro (34px to 42.5px) */
 
 /* The content rises in one block after another once the modal is up */
 .modal-root.is-open .modal__title,
@@ -1009,7 +1009,7 @@ body.modal-open { overflow: hidden; }
   .modal__top { padding: 28px 20px; gap: 29px; }
   .modal__title { font-size: 20px; line-height: 26px; }
   .modal__intro { margin-top: -21px; font-size: 16px; line-height: 24px; }
-  .modal__cols { grid-template-columns: 1fr; gap: 34px; }
+  .modal__cols { grid-template-columns: 1fr; gap: 34px; margin-top: 7px; }
   .modal .strip { flex-direction: column; align-items: flex-start; gap: 10px; }
   .modal .strip__text { flex-wrap: wrap; }
   .modal .strip__dot { display: none; }
