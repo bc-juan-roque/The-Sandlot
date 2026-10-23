@@ -979,23 +979,9 @@ body.modal-open { overflow: hidden; }
 .link--act:is(:hover, :focus-visible) .act__title,
 .link--act:is(:hover, :focus-visible) .act__cap { transform: translateX(4px); }
 
-.modal__bar {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 40px;
-  background: #000;
-  color: #fff;
-}
-.modal__bar-text {
-  flex: 1;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.modal__bar-text span:first-child { font-size: 22px; line-height: 30px; font-weight: var(--w-medium); }
-.modal__bar-text span:last-child { font-size: 18px; line-height: 26px; font-weight: var(--w-regular); color: #8a94a7; }
+/* The Contact sales banner is the AI Labs strip, sized to the modal */
+.modal .strip { margin-top: 0; }
+.modal-root.is-open .modal .strip { animation: rise 0.6s var(--ease-out) backwards; animation-delay: calc(var(--i, 0) * 70ms + 160ms); }
 .btn--inverse { background: #fff; color: #000; }
 .btn--inverse:hover { background: #e8ecf2; }
 .btn--inverse svg { width: 14px; height: 13px; }
@@ -1006,8 +992,9 @@ body.modal-open { overflow: hidden; }
   .modal__title { font-size: 24px; line-height: 30px; }
   .modal__intro { margin-top: -14px; font-size: 16px; line-height: 24px; }
   .modal__cols { grid-template-columns: 1fr; gap: 28px; }
-  .modal__bar { flex-direction: column; padding: 24px 20px; }
-  .modal__bar .btn { width: 100%; }
+  .modal .strip { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .modal .strip__text { flex-wrap: wrap; }
+  .modal .strip__dot { display: none; }
 }
 
 .proto-switch {
