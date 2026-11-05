@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Help Center Footer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500&display=swap">
+<style>
+  /* Tokens from Figma "Catalyst Q4-26" footer (node 40:5529) */
+  :root {
+    --surface-inverse: #000000;          /* Surface/Inverse */
+    --type-inverse: #ffffff;             /* Type/Color/Inverse */
+    --type-inverse-secondary: #d0d5dd;   /* Type/Color/Inverse Secondary */
+    --type-muted: #6d6e7a;               /* Type/Color/300 */
+    --line: rgba(255, 255, 255, .16);    /* derived: mobile accordion dividers */
+    --surface-raised: #26272e;           /* dark fill: social circles + Contact Support */
+    --surface-raised-hover: #373943;
+
+    --font: "Host Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --h6-size: 18px;  --h6-line: 25.2px;  /* Heading 6, Medium */
+    --m-size: 16px;   --m-line: 22.4px;   /* Type M, Regular */
+    --xs-size: 13px;  --xs-line: 18.2px;  /* Type XS, Regular */
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: var(--font); background: #14161a; }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--type-inverse); outline-offset: 3px; border-radius: 3px; }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    background: var(--surface-inverse); color: var(--type-inverse-secondary);
+    font-size: var(--m-size); line-height: var(--m-line); font-weight: 400;
+  }
+  .footer__inner { max-width: 1280px; margin: 0 auto; padding: 72px 32px 0; }
+
+  /* Two zones side by side on desktop */
+  .footer__zones { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .zone__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+  .col__heading { margin: 0 0 28px; font-size: var(--h6-size); line-height: var(--h6-line); font-weight: 500; color: var(--type-inverse); }
+  .col__toggle {
+    all: unset; display: flex; align-items: center; gap: 10px; width: 100%;
+    font: inherit; color: inherit; cursor: default;
+  }
+  .col__toggle:focus-visible { outline: 2px solid var(--type-inverse); outline-offset: 3px; }
+  .col__logo { display: block; flex-shrink: 0; width: 32px; height: 32px; margin: -4px; }
+  .col__chev { display: none; margin-left: auto; transition: transform .2s ease; }
+
+  .col__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+  .col__list a { color: var(--type-inverse-secondary); text-decoration: none; transition: color .15s ease; }
+  .col__list a:hover { color: var(--type-inverse); text-decoration: underline; text-underline-offset: 3px; }
+  .ext { margin-left: 4px; font-size: var(--xs-size); color: var(--type-muted); }
+
+  .support {
+    display: inline-flex; flex-direction: column; margin-block: 8px 0; padding: 10px 18px;
+    background: var(--surface-raised); border-radius: 2px;
+    color: var(--type-inverse) !important; transition: background .15s ease;
+  }
+  .support strong { font-weight: 500; }
+  .support small { font-size: var(--xs-size); line-height: var(--xs-line); color: var(--type-inverse-secondary); }
+  .support:hover { background: var(--surface-raised-hover); text-decoration: none !important; }
+
+  /* Legal row */
+  .legal {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px;
+    margin-top: 72px; padding: 0 0 56px;
+  }
+  .legal__left { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; font-size: var(--xs-size); line-height: var(--xs-line); color: var(--type-muted); }
+  .legal__left a { color: var(--type-inverse); text-decoration: none; }
+  .legal__left a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .wordmark { display: block; height: 32px; width: auto; }
+  .social { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; margin: 0; padding: 0; }
+  .social a {
+    display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px;
+    border-radius: 50%; background: var(--surface-raised); transition: background .15s ease;
+  }
+  .social a:hover { background: var(--surface-raised-hover); }
+  .social img { display: block; width: 18px; height: 18px; }
+
+  /* ---------- Tablet: zones stack, columns stay paired ---------- */
+  @media (max-width: 880px) {
+    .footer__inner { padding-top: 56px; }
+    .footer__zones { grid-template-columns: 1fr; gap: 48px; }
+    .legal { margin-top: 56px; padding-bottom: 40px; }
+  }
+
+  /* ---------- Mobile: single column, accordions ---------- */
+  @media (max-width: 600px) {
+    .footer__inner { padding: 16px 20px 0; }
+    .footer__zones { gap: 8px; }
+    .zone__cols { grid-template-columns: 1fr; gap: 0; }
+
+    .col { border-bottom: 1px solid var(--line); }
+    .col__heading { margin: 0; }
+    .col__toggle { cursor: pointer; padding-block: 16px; min-height: 56px; }
+    .col__chev { display: block; color: var(--type-inverse-secondary); }
+    .col__list { display: none; padding-bottom: 20px; gap: 4px; }
+    .col.is-open .col__list { display: flex; }
+    .col.is-open .col__chev { transform: rotate(180deg); }
+
+    /* "Get Help" is always expanded */
+    .col--static { border-bottom: 0; padding-top: 20px; }
+    .col--static .col__heading { margin-bottom: 20px; }
+    .col--static .col__toggle { cursor: default; padding: 0; min-height: 0; }
+    .col--static .col__list { display: flex; padding-bottom: 8px; }
+
+    .col__list a:not(.support) { display: inline-block; padding-block: 5px; }
+    .support { width: 100%; }
+
+    .legal { flex-direction: column; align-items: flex-start; margin-top: 32px; padding-bottom: 40px; gap: 28px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) { .col__chev, .col__list a, .support, .social a { transition: none; } }
+  @media (max-width: 600px) { .wordmark { height: 28px; } }
+</style>
+</head>
+<body>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__zones">
+
+      <!-- A. Product help (per brand) -->
+      <section class="zone" aria-label="Product help">
+        <div class="zone__cols">
+          <div class="col">
+            <h3 class="col__heading">
+              <button class="col__toggle" type="button" aria-expanded="false">
+                <img class="col__logo" src="assets/logos/bigcommerce.svg" alt="">BigCommerce
+                <svg class="col__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+            </h3>
+            <ul class="col__list">
+              <li><a href="#">Getting Started</a></li>
+              <li><a href="#">Help Articles</a></li>
+              <li><a href="#">Developer Docs</a><span class="ext" aria-hidden="true">↗</span></li>
+              <li><a href="#">Product Updates</a><span class="ext" aria-hidden="true">↗</span></li>
+            </ul>
+          </div>
+          <div class="col">
+            <h3 class="col__heading">
+              <button class="col__toggle" type="button" aria-expanded="false">
+                <img class="col__logo" src="assets/logos/feedonomics.svg" alt="">Feedonomics
+                <svg class="col__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+            </h3>
+            <ul class="col__list">
+              <li><a href="#">Getting Started</a></li>
+              <li><a href="#">Help Articles</a></li>
+              <li><a href="#">Developer Docs</a><span class="ext" aria-hidden="true">↗</span></li>
+              <li><a href="#">Product Updates</a><span class="ext" aria-hidden="true">↗</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- B. Across Commerce (shared) -->
+      <section class="zone" aria-label="Across Commerce">
+        <div class="zone__cols">
+          <div class="col">
+            <h3 class="col__heading">
+              <button class="col__toggle" type="button" aria-expanded="false">
+                Learn &amp; Connect
+                <svg class="col__chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+            </h3>
+            <ul class="col__list">
+              <li><a href="#">Community Forum</a></li>
+              <li><a href="#">Training &amp; Courses</a><span class="ext" aria-hidden="true">↗</span></li>
+              <li><a href="#">Find a Partner</a><span class="ext" aria-hidden="true">↗</span></li>
+              <li><a href="#">Partner Program</a><span class="ext" aria-hidden="true">↗</span></li>
+            </ul>
+          </div>
+          <div class="col col--static">
+            <h3 class="col__heading"><span class="col__toggle">Get Help</span></h3>
+            <ul class="col__list">
+              <li>
+                <a href="https://status.bigcommerce.com/" target="_blank" rel="noopener">System Status</a><span class="ext" aria-hidden="true">↗</span>
+              </li>
+              <li>
+                <a class="support" href="#"><strong>Contact Support</strong><small>Submit a ticket</small></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- C. Legal + social -->
+    <div class="legal">
+      <div class="legal__left">
+        <img class="wordmark" src="assets/logos/commerce.svg" alt="Commerce">
+        <span>© <span id="year">2026</span> Commerce</span>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Settings</a>
+        <a href="#">Accessibility</a>
+      </div>
+      <ul class="social" aria-label="Commerce on social media">
+        <li><a href="#" aria-label="X (formerly Twitter)"><img src="assets/social/x.svg" alt=""></a></li>
+        <li><a href="#" aria-label="Facebook"><img src="assets/social/facebook.svg" alt=""></a></li>
+        <li><a href="#" aria-label="LinkedIn"><img src="assets/social/linkedin.svg" alt=""></a></li>
+        <li><a href="#" aria-label="YouTube"><img src="assets/social/youtube.svg" alt=""></a></li>
+        <li><a href="#" aria-label="Pinterest"><img src="assets/social/pinterest.svg" alt=""></a></li>
+        <li><a href="#" aria-label="Instagram"><img src="assets/social/instagram.svg" alt=""></a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Copyright year updates itself every January (static "2026" is the no-JS fallback)
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Accordion toggles (only active on mobile via CSS)
+  document.querySelectorAll('.col:not(.col--static) .col__toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var col = btn.closest('.col');
+      var open = col.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  });
+</script>
+</body>
+</html>

@@ -12,12 +12,23 @@ Each prototype is self-contained in its own folder:
 | Prototype | Folder |
 |---|---|
 | Consolidated commerce.com navigation | `commerce-nav/` |
+| Help Center footer (dark) | `help-center-footer/` |
 
 ## Adding a prototype
 
 1. Create `<project>/index.html` (keep it self-contained: inline CSS, JS, SVGs). Put working files in `<project>/src/`.
 2. Add a card for it in the root `index.html`.
 3. Commit and push. Pages redeploys in about a minute.
+
+## help-center-footer
+
+`help-center-footer/index.html` is generated. Edit `help-center-footer/src/footer.html` (logos and social icons live in `src/assets/`), then run:
+
+```
+python3 help-center-footer/src/build.py
+```
+
+The build inlines the SVGs as data URIs so the page stays self-contained. The footer is responsive: two zones side by side on desktop, stacked on tablet, and accordions under 600px. The copyright year updates itself.
 
 ## commerce-nav
 
