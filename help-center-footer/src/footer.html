@@ -28,6 +28,72 @@
   a { color: inherit; }
   a:focus-visible, button:focus-visible { outline: 2px solid var(--type-inverse); outline-offset: 3px; border-radius: 3px; }
 
+  /* ---------- Wireframe page (context above the footer; not part of the footer) ---------- */
+  .wf { --box: #e3e6ea; --box-dark: #cfd4da; --wf-line: #e3e6ea; background: #fff; }
+  .wf *, .wf *::before, .wf *::after { box-sizing: border-box; }
+  .wf-wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  .wf i { display: block; background: var(--box); border-radius: 2px; }   /* every rectangle */
+  .wf .l { height: 8px; }                                                 /* text line */
+  .wf .l.t { height: 14px; }                                              /* title line */
+  .wf .w20 { width: 20%; } .wf .w30 { width: 30%; } .wf .w40 { width: 40%; } .wf .w60 { width: 60%; } .wf .w80 { width: 80%; } .wf .w100 { width: 100%; }
+  .wf .dk { background: var(--box-dark); }
+  .wf .dot { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; }
+  .wf-stack { display: grid; gap: 8px; }
+
+  .wf-top { border-bottom: 1px solid var(--wf-line); }
+  .wf-top .wf-wrap { display: flex; align-items: center; gap: 28px; height: 60px; }
+  .wf-top .logo { width: 110px; height: 22px; }
+  .wf-top .nav { width: 60px; height: 8px; }
+  .wf-top .grow { margin-left: auto; display: flex; gap: 12px; align-items: center; }
+  .wf-top .btn { width: 100px; height: 28px; }
+
+  .wf-hero { height: 300px; background: var(--box); display: grid; place-content: center; justify-items: center; gap: 14px; }
+  .wf-hero .t { width: 360px; max-width: 80vw; height: 20px; background: var(--box-dark); }
+  .wf-hero .s { width: 240px; max-width: 60vw; height: 8px; background: var(--box-dark); }
+  .wf-hero .q { width: 440px; max-width: 86vw; height: 40px; background: #fff; margin-top: 10px; }
+
+  .wf-stats .wf-wrap { display: flex; justify-content: space-between; align-items: center; padding-block: 18px; }
+  .wf-stats .row { display: flex; gap: 20px; align-items: center; }
+  .wf-stats .row i { width: 56px; height: 8px; }
+  .wf-stats .row .dot { width: 22px; height: 22px; }
+
+  .wf-section { padding-block: 28px; }
+  .wf-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .wf-tiles i { height: 130px; border-radius: 4px; }
+
+  .wf-spot { display: grid; grid-template-columns: 1fr 2fr; gap: 24px; }
+  .wf-spot > i { height: 170px; border-radius: 4px; }
+  .wf-spot .body { display: grid; gap: 10px; align-content: center; }
+
+  .wf-main { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+  .wf-feed { display: grid; gap: 28px; margin-top: 24px; }
+  .wf-post { display: grid; grid-template-columns: 32px 1fr 140px; gap: 16px; align-items: start; }
+  .wf-post .dot { width: 32px; height: 32px; }
+  .wf-post .thumb { height: 74px; border-radius: 4px; }
+  .wf-post .body { display: grid; gap: 8px; }
+  .wf-side { display: grid; gap: 20px; }
+  .wf-side .card { height: 150px; border-radius: 4px; }
+  .wf-side .tall { height: 220px; }
+
+  .wf-help { display: grid; justify-items: center; gap: 12px; padding: 40px 0 56px; }
+  .wf-help .btn { width: 120px; height: 36px; margin-top: 6px; }
+
+  @media (max-width: 880px) {
+    .wf-main { grid-template-columns: 1fr; }
+    .wf-tiles { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .wf-wrap { padding: 0 20px; }
+    .wf-top .nav { display: none; }
+    .wf-hero { height: 220px; }
+    .wf-tiles { grid-template-columns: 1fr; }
+    .wf-tiles i { height: 100px; }
+    .wf-spot { grid-template-columns: 1fr; }
+    .wf-post { grid-template-columns: 32px 1fr; }
+    .wf-post .thumb { grid-column: 1 / -1; height: 110px; }
+    .wf-stats .row.end { display: none; }
+  }
+
   /* ---------- Footer ---------- */
   .footer {
     background: var(--surface-inverse); color: var(--type-inverse-secondary);
@@ -117,6 +183,43 @@
 </style>
 </head>
 <body>
+
+<!-- Wireframe page context (not part of the footer) -->
+<div class="wf" aria-hidden="true">
+  <header class="wf-top"><div class="wf-wrap">
+    <i class="logo dk"></i><i class="nav"></i><i class="nav"></i><i class="nav"></i>
+    <div class="grow"><i class="btn dk"></i><i class="dot"></i></div>
+  </div></header>
+
+  <section class="wf-hero"><i class="t"></i><i class="s"></i><i class="q"></i></section>
+
+  <div class="wf-stats"><div class="wf-wrap">
+    <div class="row"><i></i><i></i><i></i></div>
+    <div class="row end"><i></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></div>
+  </div></div>
+
+  <section class="wf-section"><div class="wf-wrap"><div class="wf-tiles"><i></i><i></i><i></i><i></i><i></i><i></i></div></div></section>
+
+  <section class="wf-section"><div class="wf-wrap"><div class="wf-spot">
+    <i></i>
+    <div class="body"><i class="l t w60"></i><i class="l w100"></i><i class="l w80"></i></div>
+  </div></div></section>
+
+  <section class="wf-section"><div class="wf-wrap wf-main">
+    <div>
+      <i class="l t w30"></i>
+      <div class="wf-feed">
+      <div class="wf-post"><i class="dot"></i><div class="body"><i class="l w40"></i><i class="l t w80"></i><i class="l w100"></i></div><i class="thumb"></i></div>
+      <div class="wf-post"><i class="dot"></i><div class="body"><i class="l w40"></i><i class="l t w80"></i><i class="l w100"></i></div><i class="thumb"></i></div>
+      <div class="wf-post"><i class="dot"></i><div class="body"><i class="l w40"></i><i class="l t w80"></i><i class="l w100"></i></div><i class="thumb"></i></div>
+      <div class="wf-post"><i class="dot"></i><div class="body"><i class="l w40"></i><i class="l t w80"></i><i class="l w100"></i></div><i class="thumb"></i></div>
+      </div>
+    </div>
+    <aside class="wf-side"><i class="card tall"></i><i class="card"></i><i class="card"></i></aside>
+  </div></section>
+
+  <div class="wf-wrap"><div class="wf-help"><i class="l t" style="width:260px"></i><i class="btn dk"></i></div></div>
+</div>
 
 <footer class="footer">
   <div class="footer__inner">
