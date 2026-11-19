@@ -105,6 +105,8 @@
   .footer__zones { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
   .zone__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
 
+  .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .col--static .col__list { margin-top: calc(var(--h6-line) + 28px); } /* no heading: align with the lists beside it */
   .col__heading { margin: 0 0 28px; font-size: var(--h6-size); line-height: var(--h6-line); font-weight: 500; color: var(--type-inverse); }
   .col__toggle {
     all: unset; display: flex; align-items: center; gap: 10px; width: 100%;
@@ -167,10 +169,8 @@
     .col.is-open .col__chev { transform: rotate(180deg); }
 
     /* "Get Help" is always expanded */
-    .col--static { border-bottom: 0; padding-top: 20px; }
-    .col--static .col__heading { margin-bottom: 20px; }
-    .col--static .col__toggle { cursor: default; padding: 0; min-height: 0; }
-    .col--static .col__list { display: flex; padding-bottom: 8px; }
+    .col--static { border-bottom: 0; padding-top: 24px; }
+    .col--static .col__list { display: flex; margin-top: 0; padding-bottom: 8px; }
 
     .col__list a:not(.support) { display: inline-block; padding-block: 5px; }
     .support { width: 100%; }
@@ -236,10 +236,10 @@
               </button>
             </h3>
             <ul class="col__list">
-              <li><a href="#">Getting Started</a></li>
-              <li><a href="#">Help Articles</a></li>
-              <li><a href="#">Developer Docs</a><span class="ext" aria-hidden="true">↗</span></li>
-              <li><a href="#">Product Updates</a><span class="ext" aria-hidden="true">↗</span></li>
+              <li><a href="https://support.bigcommerce.com/s/article/Getting-Started-Introduction">Getting Started</a></li>
+              <li><a href="https://support.bigcommerce.com/s/article/Getting-Started-with-the-Knowledge-Base" data-href-new="https://docs.commerce.com/bigcommerce/knowledge" data-switch="2026-12-15">Help Articles</a></li>
+              <li><a href="https://docs.bigcommerce.com/developer/docs/overview/quick-start">Developer Docs</a></li>
+              <li><a href="https://commerce-en-community.insided.com/product-updates">Product Updates</a></li>
             </ul>
           </div>
           <div class="col">
@@ -250,10 +250,10 @@
               </button>
             </h3>
             <ul class="col__list">
-              <li><a href="#">Getting Started</a></li>
-              <li><a href="#">Help Articles</a></li>
-              <li><a href="#">Developer Docs</a><span class="ext" aria-hidden="true">↗</span></li>
-              <li><a href="#">Product Updates</a><span class="ext" aria-hidden="true">↗</span></li>
+              <li><a href="https://docs.feedonomics.com/product/introduction">Getting Started</a></li>
+              <li><a href="https://docs.feedonomics.com/product/introduction">Help Articles</a></li>
+              <li><a href="https://docs.feedonomics.com/developer/docs/overview/quick-start" target="_blank" rel="noopener">Developer Docs</a><span class="ext" aria-hidden="true">↗</span></li>
+              <li><a href="#" target="_blank" rel="noopener">Product Updates</a><span class="ext" aria-hidden="true">↗</span></li>
             </ul>
           </div>
         </div>
@@ -271,19 +271,19 @@
             </h3>
             <ul class="col__list">
               <li><a href="#">Community Forum</a></li>
-              <li><a href="#">Training &amp; Courses</a><span class="ext" aria-hidden="true">↗</span></li>
-              <li><a href="#">Find a Partner</a><span class="ext" aria-hidden="true">↗</span></li>
-              <li><a href="#">Partner Program</a><span class="ext" aria-hidden="true">↗</span></li>
+              <li><a href="https://navigator.commerce.com/">Training &amp; Courses</a></li>
+              <li><a href="https://www.bigcommerce.com/partners/#partners" target="_blank" rel="noopener">Find a Partner</a><span class="ext" aria-hidden="true">↗</span></li>
+              <li><a href="https://www.bigcommerce.com/partners/become-a-partner/" target="_blank" rel="noopener">Partner Program</a><span class="ext" aria-hidden="true">↗</span></li>
             </ul>
           </div>
           <div class="col col--static">
-            <h3 class="col__heading"><span class="col__toggle">Get Help</span></h3>
+            <h3 class="visually-hidden">Support</h3>
             <ul class="col__list">
               <li>
                 <a href="https://status.bigcommerce.com/" target="_blank" rel="noopener">System Status</a><span class="ext" aria-hidden="true">↗</span>
               </li>
               <li>
-                <a class="support" href="#"><strong>Contact Support</strong><small>Submit a ticket</small></a>
+                <a class="support" href="https://support.bigcommerce.com/s/?language=en_US#contact" data-href-new="https://support.commerce.com" data-switch="2026-12-15"><strong>Contact Commerce Support</strong></a>
               </li>
             </ul>
           </div>
@@ -316,6 +316,11 @@
 <script>
   // Copyright year updates itself every January (static "2026" is the no-JS fallback)
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Scheduled link swaps: on/after data-switch (YYYY-MM-DD, visitor's clock) use data-href-new
+  document.querySelectorAll('[data-href-new]').forEach(function (a) {
+    if (new Date() >= new Date(a.dataset.switch + 'T00:00:00')) a.href = a.dataset.hrefNew;
+  });
 
   // Accordion toggles (only active on mobile via CSS)
   document.querySelectorAll('.col:not(.col--static) .col__toggle').forEach(function (btn) {
