@@ -180,6 +180,11 @@
 
   @media (prefers-reduced-motion: reduce) { .col__chev, .col__list a, .support, .social a { transition: none; } }
   @media (max-width: 600px) { .wordmark { height: 28px; } }
+
+  /* REVIEW ONLY: flags footer items that still have no link (href="#"). Delete this rule before shipping. */
+  .footer a[href="#"], .footer .col__list a[href="#"]:hover, .footer .legal__left a[href="#"]:hover {
+    color: #ff5a5f; text-decoration: underline dotted; text-underline-offset: 3px;
+  }
 </style>
 </head>
 <body>
